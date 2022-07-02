@@ -9,7 +9,7 @@ export const Product = ({ product }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src='/totem1.png' />
+				<img src={`/totem${product.id}.png`} />
 			</div>
 			<div
 				style={{
@@ -19,9 +19,18 @@ export const Product = ({ product }) => {
 					height: '100%',
 					alignItems: 'center',
 				}}>
-				<div>{product.name}</div>
-				<span>{product.dimensions}</span>
-				<span>{product.price}</span>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '0.2em',
+						alignItems: 'center',
+						paddingBottom: '1em',
+					}}>
+					<h4>{product.name}</h4>
+					<h5>{product.dimensions}</h5>
+					<h5>{product.price}</h5>
+				</div>
 
 				<button>order</button>
 			</div>

@@ -8,25 +8,27 @@ export const Products = ({ products }) => {
 				display: 'grid',
 				gridTemplateRows: 'auto 1fr',
 			}}>
-			<h2>products</h2>
+			<h3>products</h3>
 			<div
 				style={{
-					padding: '0em 0em 1em 0em',
+					padding: '0em 0em 2em 0em',
 
 					gap: '1em',
 					display: 'grid',
-					overflow: 'auto',
+					// overflow: 'auto',
 					gridTemplateRows: 'repeat(auto-fit, minmax(100px, 1fr))',
 				}}>
 				{products?.products.map(product => (
 					<Link href={`/product/${product.id}`}>
 						<a>
-							<Product key={product.id} product={product} />
-							<div
-								style={{
-									height: '1px',
-									backgroundColor: '#ccc',
-								}}></div>
+							<div className={styles.product}>
+								<Product key={product.id} product={product} />
+								<div
+									style={{
+										height: '1px',
+										backgroundColor: '#ccc',
+									}}></div>
+							</div>
 						</a>
 					</Link>
 				))}
