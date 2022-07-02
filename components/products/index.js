@@ -11,7 +11,8 @@ export const Products = ({ products }) => {
 			<h2>products</h2>
 			<div
 				style={{
-					padding: '0em 0.5em 1em 0.5em',
+					padding: '0em 0em 1em 0em',
+
 					gap: '1em',
 					display: 'grid',
 					overflow: 'auto',

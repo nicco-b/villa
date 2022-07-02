@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
 	// Fetch data from external API
 	const id = context.params.id
 	console.log(id)
-	const res = await fetch(`http://localhost:3000/api/products/${id}`)
+	const res = await fetch(`/api/products/${id}`)
 
 	const product = await res.json()
 

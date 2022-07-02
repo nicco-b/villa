@@ -37,7 +37,14 @@ export default function MainLayout({ children }) {
 								<img src='/totem6.png' />
 							</div>
 						</div>
-						{children}
+						<div
+							style={{
+								height: '100%',
+								overflow: 'auto',
+								padding: '0em 1em',
+							}}>
+							{children}
+						</div>
 					</div>
 				</>
 				<div>
