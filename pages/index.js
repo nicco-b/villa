@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css'
 import Home from './home'
 
 export default function Index({ data }) {
+	const env = process.env.NEXT_PUBLIC_VERCEL_URL
+	console.log(env)
 	return <Home data={data} />
 }
 
@@ -15,7 +17,7 @@ export async function getServerSideProps() {
 	// Fetch data from external API
 	const url = process.env.VERCEL_URL
 	console.log(url)
-	const res = await fetch(`${process.env.VERCEL_URL}/api/products/products`)
+	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`)
 
 	const data = await res.json()
 
