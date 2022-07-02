@@ -36,7 +36,7 @@ Home.getLayout = function getLayout(page) {
 }
 export async function getServerSideProps() {
 	// Fetch data from external API
-	const res = await fetch(`/api/products`)
+	const res = await fetch(`${process.env.VERCEL_URL}/api/products`)
 	const data = await res.json()
 
 	// Pass data to the page via props

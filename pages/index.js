@@ -13,7 +13,9 @@ Index.getLayout = function getLayout(page) {
 }
 export async function getServerSideProps() {
 	// Fetch data from external API
-	const res = await fetch(`api/products/products`)
+	const url = process.env.VERCEL_URL
+	console.log(url)
+	const res = await fetch(`${process.env.VERCEL_URL}/api/products/products`)
 
 	const data = await res.json()
 
