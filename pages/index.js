@@ -17,7 +17,7 @@ export async function getServerSideProps() {
 	// Fetch data from external API
 	const url = process.env.VERCEL_URL
 	console.log(url)
-	const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`)
+	const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`)
 
 	const data = await res.json()
 
