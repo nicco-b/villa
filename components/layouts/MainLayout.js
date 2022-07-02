@@ -4,13 +4,13 @@ import styles from '../../styles/Home.module.css'
 import { SideBar } from '../sidebar'
 import { TopBar } from '../topbar'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 export default function MainLayout({ children }) {
 	const size = useWindowSize()
 	const [columns, setColumns] = useState(undefined)
 	// detect window screen width function
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (size.width > 680) {
 			setColumns(2)
 		} else {

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
 export const CartItem = ({ product }) => {
@@ -21,7 +22,7 @@ export const CartItem = ({ product }) => {
 						maxWidth: '50px',
 					}}>
 					<div className={styles.productImg}>
-						<img src={`/totem${product.id}.png`} />
+						<Image src={`/totem${product.id}.png`} width={35} height={35} alt={product.name} />
 					</div>
 				</div>
 				<div

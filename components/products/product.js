@@ -9,7 +9,7 @@ export const Product = ({ product }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src={`/totem${product.id}.png`} />
+				<img src={`/totem${product.id}.png`} alt={'product_image'} />
 			</div>
 			<div
 				style={{
