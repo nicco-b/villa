@@ -216,12 +216,15 @@ button:active {
 }
 .still {
 	transition: opacity 2s;
+	opacity: 1;
 
 	position: absolute;
 	top: 0;
 	z-index: 2;
 }
 .moving {
+	opacity: 1;
+
 	position: absolute;
 	top: 0;
 	left: 0;
