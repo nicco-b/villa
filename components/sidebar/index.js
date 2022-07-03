@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLayoutEffect, useState } from 'react'
+import { useMain } from '../../context/mainContext'
 import styles from '../../styles/Home.module.css'
 import { Cart } from '../cart'
 
@@ -59,6 +60,8 @@ export const SideBar = ({ columns }) => {
 	)
 }
 const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen }) => {
+	const { cartTotal } = useMain()
+
 	return (
 		<div className={cN > 1 ? styles.right : styles.rightClosed}>
 			<div
@@ -118,7 +121,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 					onClick={() => {
 						setCartOpen(!cartOpen)
 					}}>
-					cart 2
+					cart {cartTotal}
 				</div>
 			</div>
 			{children}
@@ -159,25 +162,31 @@ const Information = () => {
 				lineHeight: '1.4em',
 				overflow: 'auto',
 			}}>
-			<div>
+			<div
+				style={{
+					display: 'grid',
+					// padding: '1em 20px 1em 1.2em',
+					gap: '0.3em',
+					fontWeight: '450',
+				}}>
 				<div
 					style={{
+						display: 'grid',
 						padding: '1em 20px 1em 1.2em',
+						gap: '0.3em',
+						// fontWeight: '450',
 					}}>
 					<span>
 						Everything released is designed in-house Please be patient while we pack your order, it may
 						take several days to leave our studio.
 					</span>
-					<br />
 					<span>
 						Shipping costs are calculated by weight at checkout. Please reach out if you have any
 						questions - shop@duairakp.com
 					</span>
-					<br />
 					<span>
 						Each item is handmade one at a time all shipment details will be sent to your email
 					</span>
-					<br />
 					<span>
 						All orders ship in 100% recycled + recyclable packaging. Nothing is wrapped in plastic.
 					</span>
@@ -190,7 +199,7 @@ const Information = () => {
 						gridTemplateColumns: 'auto 1fr',
 						width: '100%',
 						// height: '100%',
-						padding: '0em 0.5em 0em 0.5em',
+						padding: '0em 0.5em 0.5em 0.5em',
 					}}>
 					<div
 						style={{
@@ -201,7 +210,10 @@ const Information = () => {
 							background:
 								'linear-gradient(180deg, #FD5660 0%, rgba(71, 166, 220, 0.72) 49.48%, #FFA800 97.17%)',
 						}}></div>
-					<div>
+					<div
+						style={{
+							display: 'grid',
+						}}>
 						<span>
 							<span
 								style={{
@@ -210,10 +222,11 @@ const Information = () => {
 								}}>
 								PLEASE NOTE
 							</span>
-							- No refunds or exchanges, all sales are final at this time. Please double check your size
-							and address! Measurements are included on every product page.
+							<span>
+								- No refunds or exchanges, all sales are final at this time. Please double check your size
+								and address! Measurements are included on every product page.
+							</span>
 						</span>
-						<br />
 						<span>
 							<span
 								style={{
@@ -224,7 +237,6 @@ const Information = () => {
 							</span>
 							- orders ship via USPS, cost calculated at checkout.
 						</span>
-						<br />
 
 						<span>
 							<span
@@ -240,7 +252,6 @@ const Information = () => {
 						</span>
 					</div>
 				</div>
-				<br />
 				<div
 					style={{
 						padding: '0em 20px 0em 1.2em',

@@ -1,9 +1,10 @@
 import MainLayout from '../components/layouts/MainLayout'
+import { mainContext, MainProvider } from '../context/mainContext'
 import '../styles/globals.css'
 //s
-function MyApp({ Component, pageProps }) {
+function Villa({ Component, pageProps }) {
 	const getLayout = Component.getLayout || (page => page)
-	return getLayout(<Component {...pageProps} />)
+	return <MainProvider>{getLayout(<Component {...pageProps} />)}</MainProvider>
 }
 
-export default MyApp
+export default Villa

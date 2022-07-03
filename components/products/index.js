@@ -8,7 +8,7 @@ export const Products = ({ products }) => {
 				display: 'grid',
 				gridTemplateRows: 'auto 1fr',
 			}}>
-			<h3>products</h3>
+			{/* <h3>products</h3> */}
 			<div
 				style={{
 					padding: '0em 0em 2em 0em',

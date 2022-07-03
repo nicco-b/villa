@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
-export const Product = ({ product }) => {
+export const Product = ({ product, single }) => {
+	const handleClickOrderButton = event => {
+		event.preventDefault()
+		console.log('order button clicked')
+	}
+
 	return (
 		<div
 			style={{
-				// border: '1px solid blue',
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
@@ -32,7 +36,9 @@ export const Product = ({ product }) => {
 					<h5>{product.price}</h5>
 				</div>
 
-				<button>order</button>
+				<button type={'button'} onClick={handleClickOrderButton}>
+					order
+				</button>
 			</div>
 		</div>
 	)
