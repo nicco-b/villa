@@ -82,32 +82,36 @@
 }
 .logoHoverSwap {
 	position: relative;
+	width: 100px;
+	height: 50px;
 }
-.logoHoverSwap .still {
-	opacity: 1;
+.still {
+	transition: opacity 2s;
+
 	position: absolute;
+	top: 0;
+	z-index: 2;
 }
-.logoHoverSwap .moving {
-	opacity: 0;
-}
-.logoHoverSwap .moving:hover {
-	opacity: 1;
+.moving {
+	transition: opacity 2s;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
 .logoHoverSwap .still:hover {
 	opacity: 0;
 }
-.logoHoverSwap .moving:active {
-	opacity: 1;
-}
-.logoHoverSwap .still:active {
-	opacity: 0;
-}
+
 /* animate logoHoverSwap */
-.logoHoverSwap .moving {
-	transition: opacity 1.5s ease-in-out;
+.logoHoverSwap .moving:hover {
+	transition: opacity 2s;
+	animation-iteration-count: 1;
 }
-.logoHoverSwap .still {
-	transition: opacity 1.5s ease-in-out;
+.logoHoverSwap .still:hover {
+	transition: opacity 2s;
+	animation-iteration-count: 1;
 }
 .right {
 	display: grid;

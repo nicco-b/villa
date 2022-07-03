@@ -31,13 +31,11 @@ export const TopBar = ({ children }) => {
 						<Image src='/totem6.png' alt='totem6' height={40} width={40} />
 					</div>
 				</div>
-				<div>
-					<Link href='/'>
-						<a href='/'>
-							<LogoHoverSwap />
-						</a>
-					</Link>
-				</div>
+				<Link href='/'>
+					<a href='/'>
+						<LogoHoverSwap />
+					</a>
+				</Link>
 			</div>
 		</>
 	)
