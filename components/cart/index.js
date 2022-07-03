@@ -4,7 +4,6 @@ import CartItems from '../../pages/api/products/products.json'
 import { CartItem } from './cartItem'
 import { loadStripe } from '@stripe/stripe-js'
 import { useEffect } from 'react'
-import axios from 'axios'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export const Cart = () => {
@@ -19,22 +18,6 @@ export const Cart = () => {
 			console.log('Order canceled -- continue to shop around and checkout when you’re ready.')
 		}
 	}, [])
-	const handleSubmit = async event => {
-		event.preventDefault()
-		const {
-			data: { id },
-		} = await axios.post(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/checkout_sessions`, {
-			items: [
-				{
-					price: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
-					quantity: 2,
-				},
-			],
-		})
-		// const stripe = await getStripe()
-		// await stripe.redirectToCheckout({ sessionId: id })
-	}
-
 	return (
 		<div
 			style={{
@@ -93,7 +76,7 @@ export const Cart = () => {
 					}}>
 					clear all
 				</span>
-				<form onSubmit={handleSubmit}>
+				<form action='/api/checkout_sessions' method='POST'>
 					<section>
 						<button
 							type='submit'
