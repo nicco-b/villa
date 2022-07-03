@@ -26,7 +26,7 @@ export const Products = ({ products }) => {
 								<div
 									style={{
 										height: '1px',
-										backgroundColor: '#ccc',
+										backgroundColor: 'var(--border-color-alt)',
 									}}></div>
 							</div>
 						</a>

@@ -7,34 +7,25 @@ export const Cart = () => {
 		<>
 			<div
 				style={{
-					borderTop: '1px dashed black',
-					padding: '0em 1em',
+					borderTop: 'var(--border-style-dashed) var(--border-color)',
+					padding: '0.5em 1em 0 1em',
 				}}>
 				<h4>Cart</h4>
 			</div>
 
 			<div
 				style={{
-					borderTop: '1px solid black',
-					borderBottom: '1px solid black',
-
+					borderBottom: 'var(--border-style-dashed) var(--border-color)',
 					display: 'grid',
-					padding: '1em 1em 0.5em 1em',
+					padding: '0em 1em 0em 1em',
 					maxHeight: '100%',
 					height: '100%',
-
 					overflow: 'auto',
-
-					// justifyContent: 'space-between',
 				}}>
 				<div
 					style={{
-						// border: '1px solid red',
-
 						display: 'grid',
-
-						padding: '1em 0em 1em 0em',
-						// justifyContent: 'space-between',
+						padding: '0em 0em 1em 0em',
 					}}>
 					{CartItems.map((product, i) => (
 						<>
@@ -56,7 +47,7 @@ export const Cart = () => {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'flex-end',
-					padding: '1em',
+					padding: '0.5em 1em',
 				}}>
 				<span
 					style={{

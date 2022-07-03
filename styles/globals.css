@@ -2,6 +2,13 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+:root {
+	--bg: #f6f2e5;
+	--bgAlt: #e1ddcd;
+	--border-style-dashed: 1px dashed;
+	--border-color: #c2b99e80;
+	--border-color-alt: #c2b99e60;
+}
 @font-face {
 	font-family: 'Inter var';
 	font-style: 'regular';
@@ -141,7 +148,7 @@ body {
 	font-family: 'Inter var';
 	font-style: 'regular';
 	font-weight: 470;
-	background-color: #f6f2e5;
+	background-color: var(--bg);
 }
 h1 {
 	font-size: 2rem;
@@ -187,7 +194,7 @@ a {
 	font-weight: 470;
 }
 button {
-	background: #e1ddcd;
+	background: var(--bgAlt);
 	padding: 0.4em 0.8rem;
 	border-radius: 0.3rem;
 	border: none;

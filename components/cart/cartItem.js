@@ -7,7 +7,6 @@ export const CartItem = ({ product }) => {
 			{' '}
 			<div
 				style={{
-					// border: '1px solid blue',
 					display: 'grid',
 					padding: '0.5em 0em',
 					gap: '0em',
@@ -16,7 +15,6 @@ export const CartItem = ({ product }) => {
 				}}>
 				<div
 					style={{
-						// border: '1px solid blue',
 						display: 'grid',
 						maxHeight: '50px',
 						maxWidth: '50px',
@@ -28,7 +26,6 @@ export const CartItem = ({ product }) => {
 				<div
 					style={{
 						display: 'flex',
-						// flexDirection: 'column',
 						justifyContent: 'space-between',
 						height: '100%',
 						alignItems: 'center',
@@ -36,7 +33,6 @@ export const CartItem = ({ product }) => {
 					<div
 						style={{
 							display: 'flex',
-							// flexDirection: 'column',
 							width: '100%',
 							gap: '0.2em',
 							alignItems: 'center',

@@ -48,12 +48,8 @@ export const SideBar = ({ columns }) => {
 						{cartOpen && <Cart />}
 					</MobileBar>
 					{/* bottom nav on mobile */}
-					<div
-						style={{
-							background: '#F6F2E5',
-						}}>
-						<Footer />
-					</div>
+
+					<Footer />
 				</>
 			)}
 		</>
@@ -74,7 +70,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 				}}>
 				<div
 					style={{
-						background: infoOpen ? '#5A7BAE' : '#F6F2E5',
+						background: infoOpen ? '#5A7BAE' : 'var(--bg)',
 						height: '28px',
 						width: '28px',
 						display: 'flex',
@@ -130,7 +126,13 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 }
 const Footer = () => {
 	return (
-		<div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5em 1em' }}>
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'space-between',
+				padding: '0.5em 1em',
+				borderTop: 'var(--border-style-dashed) var(--border-color)',
+			}}>
 			<span
 				style={{
 					color: '#A93C3E',
