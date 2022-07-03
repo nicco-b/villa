@@ -86,7 +86,7 @@
 	/* grid-template-rows: auto auto 1fr;  */
 	/* overflow: auto;q */
 	grid-column: 2;
-	background-color: #e1ddce;
+	background-color: var(--bgAlt);
 	align-items: end;
 	max-width: 400px;
 	min-width: 400px;
@@ -96,7 +96,7 @@
 	/* grid-template-rows: auto auto 1fr;  */
 	/* overflow: auto;q */
 	/* grid-column: 2; */
-	background-color: #e1ddce;
+	background-color: var(--bgAlt);
 	align-items: end;
 	/* max-width: 400px;
 	min-width: 400px; */
