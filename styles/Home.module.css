@@ -96,6 +96,12 @@
 .logoHoverSwap .still:hover {
 	opacity: 0;
 }
+.logoHoverSwap .moving:active {
+	opacity: 1;
+}
+.logoHoverSwap .still:active {
+	opacity: 0;
+}
 /* animate logoHoverSwap */
 .logoHoverSwap .moving {
 	transition: opacity 1.5s ease-in-out;
