@@ -106,6 +106,9 @@
 .logoHoverSwap .moving {
 	transition: opacity 1.5s ease-in-out;
 }
+.logoHoverSwap .still {
+	transition: opacity 1.5s ease-in-out;
+}
 .right {
 	display: grid;
 	/* grid-template-rows: auto auto 1fr;  */
