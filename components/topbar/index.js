@@ -44,11 +44,11 @@ export const TopBar = ({ children }) => {
 const LogoHoverSwap = ({ children }) => {
 	return (
 		<>
-			<div className={styles.logoHoverSwap}>
-				<div className={styles.still}>
+			<div className={'logoHoverSwap'}>
+				<div className={'still'}>
 					<Image src='/lun.png' alt='logo' width={90} height={40} />
 				</div>
-				<div className={styles.moving}>
+				<div className={'moving'}>
 					<Image src='/logoAnimated.gif' alt='logo' width={90} height={40} />
 				</div>
 			</div>

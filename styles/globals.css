@@ -209,3 +209,34 @@ button {
 button:active {
 	background: #d1cbcb;
 }
+.logoHoverSwap {
+	position: relative;
+	width: 100px;
+	height: 50px;
+}
+.still {
+	transition: opacity 2s;
+
+	position: absolute;
+	top: 0;
+	z-index: 2;
+}
+.moving {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+.logoHoverSwap .still:hover {
+	opacity: 0;
+}
+
+/* animate logoHoverSwap */
+.logoHoverSwap .moving:hover {
+	transition: opacity 2s;
+	animation-iteration-count: 1;
+}
+.logoHoverSwap .still:hover {
+	transition: opacity 2s;
+	animation-iteration-count: 1;
+}
