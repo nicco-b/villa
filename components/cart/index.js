@@ -4,7 +4,13 @@ import CartItems from '../../pages/api/products/products.json'
 import { CartItem } from './cartItem'
 export const Cart = () => {
 	return (
-		<>
+		<div
+			style={{
+				overflow: 'hidden',
+				height: '100%',
+				display: 'grid',
+				backgroundColor: 'var(--bgAlt)',
+			}}>
 			<div
 				style={{
 					borderTop: 'var(--border-style-dashed) var(--border-color)',
@@ -34,8 +40,8 @@ export const Cart = () => {
 							{i !== CartItems.length - 1 && (
 								<div
 									style={{
-										height: '2px',
-										backgroundColor: '#ccc',
+										height: '1px',
+										backgroundColor: 'var(--border-color-alt)',
 									}}></div>
 							)}
 						</>
@@ -55,8 +61,14 @@ export const Cart = () => {
 					}}>
 					clear all
 				</span>
-				<button>checkout</button>
+				<button
+					style={{
+						background: '#F6F2E5',
+						color: '#2b2b2c',
+					}}>
+					checkout
+				</button>
 			</div>
-		</>
+		</div>
 	)
 }

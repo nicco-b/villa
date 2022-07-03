@@ -23,23 +23,28 @@ export const SideBar = ({ columns }) => {
 
 	return (
 		<>
-			{cN > 1 ? (
+			{columns > 1 ? (
 				<>
 					<MobileBar
-						cN={cN}
+						cN={columns}
 						setInfoOpen={setInfoOpen}
 						infoOpen={infoOpen}
 						setCartOpen={setCartOpen}
 						cartOpen={cartOpen}>
 						{infoOpen && <Information />}
 						{cartOpen && <Cart />}
-						<Footer />
+						<div
+							style={{
+								background: 'var(--bgAlt)',
+							}}>
+							<Footer />
+						</div>
 					</MobileBar>
 				</>
 			) : (
 				<>
 					<MobileBar
-						cN={cN}
+						cN={columns}
 						setInfoOpen={setInfoOpen}
 						infoOpen={infoOpen}
 						setCartOpen={setCartOpen}
@@ -59,7 +64,8 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 	const { cartTotal } = useMain()
 
 	return (
-		<div className={cN > 1 ? styles.right : styles.rightClosed}>
+		<div
+			className={`${cN > 1 ? styles.right : styles.rightClosed} ${cartOpen ? styles.darkerBg : ''}`}>
 			<div
 				style={{
 					display: 'flex',
@@ -76,7 +82,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 						display: 'flex',
 						borderRadius: '50%',
 						position: 'relative',
-						cursor: 'pointer',
+						cursor: cN === 1 ? 'pointer' : 'default',
 						userSelect: 'none',
 					}}
 					onClick={() => {
@@ -131,6 +137,7 @@ const Footer = () => {
 				display: 'flex',
 				justifyContent: 'space-between',
 				padding: '0.5em 1em',
+				background: 'inherit',
 				borderTop: 'var(--border-style-dashed) var(--border-color)',
 			}}>
 			<span
@@ -163,6 +170,7 @@ const Information = () => {
 				height: '100%',
 				lineHeight: '1.4em',
 				overflow: 'auto',
+				borderTop: 'var(--border-style-dashed) var(--border-color)',
 			}}>
 			<div
 				style={{

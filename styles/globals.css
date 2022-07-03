@@ -4,9 +4,11 @@
 */
 :root {
 	--bg: #f6f2e5;
-	--bgAlt: #e1ddcd90;
+	--bgAlt: #e1ddcd;
+	--bgAltD: #d5d1c2;
+
 	--border-style-dashed: 1px dashed;
-	--border-color: #c2b99e80;
+	--border-color: #c2b99e60;
 	--border-color-alt: #c2b99e60;
 }
 @font-face {
@@ -119,6 +121,7 @@ nav,
 section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }

@@ -34,9 +34,24 @@ export const TopBar = ({ children }) => {
 				<div>
 					<Link href='/'>
 						<a href='/'>
-							<Image src='/lun.png' alt='logo' width={90} height={40} />
+							<LogoHoverSwap />
 						</a>
 					</Link>
+				</div>
+			</div>
+		</>
+	)
+}
+
+const LogoHoverSwap = ({ children }) => {
+	return (
+		<>
+			<div className={styles.logoHoverSwap}>
+				<div className={styles.still}>
+					<Image src='/lun.png' alt='logo' width={90} height={40} />
+				</div>
+				<div className={styles.moving}>
+					<Image src='/logoAnimated.gif' alt='logo' width={90} height={40} />
 				</div>
 			</div>
 		</>

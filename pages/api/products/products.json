@@ -19,5 +19,19 @@
 		"price": "$20.00",
 		"image": "/product3.png",
 		"dimensions": "20x20"
+	},
+	{
+		"id": "4",
+		"name": "drug rug",
+		"price": "$20.00",
+		"image": "/product4.png",
+		"dimensions": "20x20"
+	},
+	{
+		"id": "5",
+		"name": "rug",
+		"price": "$20.00",
+		"image": "/product5.png",
+		"dimensions": "20x20"
 	}
 ]
