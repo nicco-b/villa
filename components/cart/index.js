@@ -2,7 +2,39 @@ import { Products } from '../products'
 import { Product } from '../products/product'
 import CartItems from '../../pages/api/products/products.json'
 import { CartItem } from './cartItem'
+import { loadStripe } from '@stripe/stripe-js'
+import { useEffect } from 'react'
+import axios from 'axios'
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
 export const Cart = () => {
+	useEffect(() => {
+		// Check to see if this is a redirect back from Checkout
+		const query = new URLSearchParams(window.location.search)
+		if (query.get('success')) {
+			console.log('Order placed! You will receive an email confirmation.')
+		}
+
+		if (query.get('canceled')) {
+			console.log('Order canceled -- continue to shop around and checkout when you’re ready.')
+		}
+	}, [])
+	const handleSubmit = async event => {
+		event.preventDefault()
+		const {
+			data: { id },
+		} = await axios.post(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/checkout_sessions`, {
+			items: [
+				{
+					price: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
+					quantity: 2,
+				},
+			],
+		})
+		// const stripe = await getStripe()
+		// await stripe.redirectToCheckout({ sessionId: id })
+	}
+
 	return (
 		<div
 			style={{
@@ -61,13 +93,19 @@ export const Cart = () => {
 					}}>
 					clear all
 				</span>
-				<button
-					style={{
-						background: '#F6F2E5',
-						color: '#2b2b2c',
-					}}>
-					checkout
-				</button>
+				<form onSubmit={handleSubmit}>
+					<section>
+						<button
+							type='submit'
+							role='link'
+							style={{
+								background: '#F6F2E5',
+								color: '#2b2b2c',
+							}}>
+							checkout
+						</button>
+					</section>
+				</form>
 			</div>
 		</div>
 	)
