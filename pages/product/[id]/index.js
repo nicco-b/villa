@@ -19,9 +19,9 @@ export default function SingleProduct({ product }) {
 				style={{
 					padding: '1em',
 				}}>
-				<button type='text'>
-					<Link href={`/`}>back</Link>
-				</button>
+				<Link href={`/`}>
+					<button type='text'>back</button>
+				</Link>
 			</div>
 			<Product product={product} />
 			<div
