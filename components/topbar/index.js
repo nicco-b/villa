@@ -49,7 +49,7 @@ const LogoHoverSwap = ({ children }) => {
 					<Image src='/lun.png' alt='logo' width={90} height={40} />
 				</div>
 				<div className={'moving'}>
-					<Image src='/logoAnimated.gif' alt='logo' width={90} height={40} />
+					<img src='/logoAnimated.gif' alt='logo' width={90} height={40} />
 				</div>
 			</div>
 		</>
