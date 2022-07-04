@@ -1,66 +1,76 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+	apiVersion: '2020-08-27',
+})
+import { NextApiRequest, NextApiResponse } from 'next'
+const { validateCartItems } = require('use-shopping-cart/utilities')
+const inventory = [
+	{
+		name: 'Bananas',
+		description: 'Yummy yellow fruit',
+		id: 'sku_GBJ2Ep8246qeeT',
+		price: 400,
+		image:
+			'https://images.unsplash.com/photo-1574226516831-e1dff420e562?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=225&q=80',
+		attribution: 'Photo by Priscilla Du Preez on Unsplash',
+		currency: 'USD',
+	},
+	{
+		name: 'Tangerines',
+		id: 'sku_GBJ2WWfMaGNC2Z',
+		price: 100,
+		image:
+			'https://images.unsplash.com/photo-1482012792084-a0c3725f289f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=225&q=80',
+		attribution: 'Photo by Jonathan Pielmayer on Unsplash',
+		currency: 'USD',
+	},
+]
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
+		console.log('ur here')
 		try {
-			// Create Checkout Sessions from body params.
-			const session = await stripe.checkout.sessions.create({
+			// const line_items = await validateCartItems(
+			// 	inventory,
+			// 	{
+			// 		name: 'Tangerines',
+			// 		id: 'sku_GBJ2WWfMaGNC2Z',
+			// 		price: 100,
+			// 		image:
+			// 			'https://images.unsplash.com/photo-1482012792084-a0c3725f289f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=225&q=80',
+			// 		attribution: 'Photo by Jonathan Pielmayer on Unsplash',
+			// 		currency: 'USD',
+			// 	},
+
+			// 	{
+			// 		name: 'Bananas',
+			// 		description: 'Yummy yellow fruit',
+			// 		id: 'sku_GBJ2Ep8246qeeT',
+			// 		price: 400,
+			// 		image:
+			// 			'https://images.unsplash.com/photo-1574226516831-e1dff420e562?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=225&q=80',
+			// 		attribution: 'Photo by Priscilla Du Preez on Unsplash',
+			// 		currency: 'USD',
+			// 	}
+			// )
+			const params = {
+				submit_type: 'pay',
+				payment_method_types: ['card'],
+				billing_address_collection: 'auto',
+				shipping_address_collection: {
+					allowed_countries: ['US', 'CA'],
+				},
 				line_items: [
 					{
-						// Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+						quantity: 1,
 						price: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
-						quantity: 2,
 					},
 				],
-				shipping_options: [
-					{
-						shipping_rate_data: {
-							type: 'fixed_amount',
-							fixed_amount: {
-								amount: 0,
-								currency: 'usd',
-							},
-							display_name: 'Free shipping',
-							// Delivers between 5-7 business days
-							delivery_estimate: {
-								minimum: {
-									unit: 'business_day',
-									value: 5,
-								},
-								maximum: {
-									unit: 'business_day',
-									value: 7,
-								},
-							},
-						},
-					},
-					{
-						shipping_rate_data: {
-							type: 'fixed_amount',
-							fixed_amount: {
-								amount: 1500,
-								currency: 'usd',
-							},
-							display_name: 'Next day air',
-							// Delivers in exactly 1 business day
-							delivery_estimate: {
-								minimum: {
-									unit: 'business_day',
-									value: 1,
-								},
-								maximum: {
-									unit: 'business_day',
-									value: 1,
-								},
-							},
-						},
-					},
-				],
+				success_url: `http://localhost:3000/result?session_id={CHECKOUT_SESSION_ID}`,
+				cancel_url: `http://localhost:3000/`,
 				mode: 'payment',
-				success_url: `${req.headers.origin}/?success=true`,
-				cancel_url: `${req.headers.origin}/?canceled=true`,
-			})
-			res.redirect(303, session.url)
+			}
+			// Create Checkout Sessions from body params.
+			const session = await stripe.checkout.sessions.create(params)
+			res.status(200).json(session)
 		} catch (err) {
 			res.status(err.statusCode || 500).json(err.message)
 		}

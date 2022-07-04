@@ -2,11 +2,17 @@ import { Products } from '../products'
 import { Product } from '../products/product'
 import CartItems from '../../pages/api/products/products.json'
 import { CartItem } from './cartItem'
-import { loadStripe } from '@stripe/stripe-js'
-import { useEffect } from 'react'
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+import { useEffect, useState } from 'react'
+import getStripe from '../../utils/getStripe'
+import { fetchPostJSON } from '../../utils/api-helpers'
+import { useShoppingCart } from 'use-shopping-cart'
 
 export const Cart = () => {
+	const [loading, setLoading] = useState(false)
+	const [cartEmpty, setCartEmpty] = useState(true)
+	const [errorMessage, setErrorMessage] = useState('')
+	const { formattedTotalPrice, cartCount, clearCart, cartDetails, redirectToCheckout } =
+		useShoppingCart()
 	useEffect(() => {
 		// Check to see if this is a redirect back from Checkout
 		const query = new URLSearchParams(window.location.search)
@@ -18,6 +24,24 @@ export const Cart = () => {
 			console.log('Order canceled -- continue to shop around and checkout when you’re ready.')
 		}
 	}, [])
+	const handleCheckout = async event => {
+		event.preventDefault()
+		setLoading(true)
+		setErrorMessage('')
+		const stripe = await getStripe()
+
+		const response = await fetchPostJSON('/api/checkout_sessions', cartDetails)
+
+		if (response.statusCode > 399) {
+			console.error(response.message)
+			setErrorMessage(response.message)
+			setLoading(false)
+			return
+		}
+		console.log(response)
+		stripe.redirectToCheckout({ sessionId: response.id })
+	}
+
 	return (
 		<div
 			style={{
@@ -76,7 +100,7 @@ export const Cart = () => {
 					}}>
 					clear all
 				</span>
-				<form action='/api/checkout_sessions' method='POST'>
+				<form onSubmit={handleCheckout}>
 					<section>
 						<button
 							type='submit'
