@@ -2,14 +2,15 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
 import { NextApiRequest, NextApiResponse } from 'next'
+import { runInNewContext } from 'vm'
 const { validateCartItems } = require('use-shopping-cart/utilities')
 const inventory = [
 	{
 		name: 'Bananas',
 		description: 'Yummy yellow fruit',
-		id: 'poop',
-
-		price: 400,
+		id: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
+		price: 90,
+		price_id: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
 		image:
 			'https://images.unsplash.com/photo-1574226516831-e1dff420e562?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=225&q=80',
 		attribution: 'Photo by Priscilla Du Preez on Unsplash',
@@ -27,17 +28,17 @@ const inventory = [
 ]
 export default async function handler(req, res) {
 	if (req.method === 'POST') {
-		console.log('ur here')
+		console.log(req.body)
 		try {
-			const line_items = await validateCartItems(
-				inventory,
+			// const line_items = await validateCartItems(
+			// 	inventory,
 
-				{
-					poop: {
-						quantity: 1,
-					},
-				}
-			)
+			// 	{
+			// 		price_1LHMVIHFFw3ZIEqv4zXNFN4k: {
+			// 			quantity: 1,
+			// 		},
+			// 	}
+			// )
 			const params = {
 				submit_type: 'pay',
 				payment_method_types: ['card'],
@@ -45,7 +46,7 @@ export default async function handler(req, res) {
 				shipping_address_collection: {
 					allowed_countries: ['US', 'CA'],
 				},
-				line_items,
+				line_items: req.body,
 				success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
 				cancel_url: `${req.headers.origin}/`,
 				mode: 'payment',

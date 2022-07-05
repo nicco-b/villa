@@ -2,6 +2,8 @@ import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 import { Product } from './product'
 export const Products = ({ products }) => {
+	const productList = products.data
+	// console.log(productList)
 	return (
 		<div
 			style={{
@@ -18,7 +20,7 @@ export const Products = ({ products }) => {
 					// overflow: 'auto',
 					gridTemplateRows: 'repeat(auto-fit, minmax(100px, 1fr))',
 				}}>
-				{products?.products.map(product => (
+				{productList?.map(product => (
 					<Link href={`/product/${product.id}`}>
 						<a>
 							<div className={styles.product}>

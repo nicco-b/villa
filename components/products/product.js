@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { formatCurrencyString } from 'use-shopping-cart'
 import styles from '../../styles/Home.module.css'
+import { formatAmountForDisplay } from '../../utils/stripe-helpers'
 
 export const Product = ({ product, single }) => {
 	const handleClickOrderButton = event => {
@@ -13,7 +15,7 @@ export const Product = ({ product, single }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src={`/totem${product.id}.png`} alt={'product_image'} />
+				<img src={`${product.images[0]}`} alt={'product_image'} />
 			</div>
 			<div
 				style={{
@@ -31,9 +33,14 @@ export const Product = ({ product, single }) => {
 						alignItems: 'center',
 						paddingBottom: '1em',
 					}}>
-					<h4>{product.name}</h4>
+					<h>{product.name}</h>
 					<h5>{product.dimensions}</h5>
-					<h5>{product.price}</h5>
+					<h4>
+						{formatCurrencyString({
+							value: product.default_price.unit_amount,
+							currency: 'usd',
+						})}
+					</h4>
 				</div>
 
 				<button type={'button'} onClick={handleClickOrderButton}>

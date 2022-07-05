@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { formatCurrencyString } from 'use-shopping-cart'
 import styles from '../../styles/Home.module.css'
 
 export const CartItem = ({ product }) => {
@@ -41,7 +42,13 @@ export const CartItem = ({ product }) => {
 						}}>
 						<h4>{product.name}</h4>
 						{/* <h5>{product.dimensions}</h5> */}
-						<h5>{product.price}</h5>
+						<h5>
+							{/* {formatCurrencyString({
+								value: product.default_price.unit_amount,
+								currency: 'usd',
+							})} */}
+							int
+						</h5>
 					</div>
 
 					<button>x</button>

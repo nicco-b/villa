@@ -2,14 +2,15 @@
 	{
 		"id": "1",
 		"name": "fish rug",
-		"price": "$10.00",
+		"price": "price_1LHMVIHFFw3ZIEqv4zXNFN4k",
+
 		"image": "/product1.png",
 		"dimensions": "10x10"
 	},
 	{
 		"id": "2",
 		"name": "summer rug",
-		"price": "$20.00",
+		"price": "price_1LHyEzHFFw3ZIEqvLvoekmww",
 		"image": "/product2.png",
 		"dimensions": "12x16"
 	},
