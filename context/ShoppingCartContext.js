@@ -34,7 +34,16 @@ export const ShoppingCartProvider = ({ children }) => {
 	const cartQuantity = () => cart.reduce((quantity, item) => item?.quantity + quantity, 0)
 	//decreaseQuantity
 	//removeItem
+	const removeItem = id => {
+		setCart(currItems => {
+			return currItems.filter(item => item?.id !== id)
+		})
+	}
 	//clearCart
+	const clearCart = () => {
+		setCart([])
+	}
+
 	//addItem
 	//getItemQuantity
 	const getItemQuantity = id => {
@@ -48,6 +57,8 @@ export const ShoppingCartProvider = ({ children }) => {
 				getItemQuantity,
 				increaseQuantity,
 				cartQuantity,
+				removeItem,
+				clearCart,
 				cartTotal: cart.length,
 				cart,
 			}}>

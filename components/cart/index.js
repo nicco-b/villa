@@ -1,6 +1,6 @@
-import { Products } from '../products'
+import { products } from '../../pages/api/products/productList'
 import { Product } from '../products/product'
-import CartItems from '../../pages/api/products/products.json'
+import CartItems from '../../pages/api/products/productList'
 import { CartItem } from './cartItem'
 import { useEffect, useState } from 'react'
 import getStripe from '../../utils/getStripe'
@@ -9,8 +9,8 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
-	const { cart } = useShoppingCart()
-
+	// const { cart } = useShoppingCart()
+	const cart = products
 	const [loading, setLoading] = useState(false)
 	const [cartEmpty, setCartEmpty] = useState(true)
 	const [errorMessage, setErrorMessage] = useState('')
@@ -33,8 +33,10 @@ export const Cart = () => {
 		const stripe = await getStripe()
 		const formattedProducts = cart.map(item => {
 			return {
-				price: item.default_price.id,
-				quantity: item.quantity,
+				name: item.name,
+				quantity: 1,
+				currency: 'usd',
+				amount: item.price,
 			}
 		})
 		const response = await fetchPostJSON('/api/checkout_sessions', formattedProducts)
