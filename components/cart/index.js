@@ -31,17 +31,13 @@ export const Cart = () => {
 		setLoading(true)
 		setErrorMessage('')
 		const stripe = await getStripe()
-
-		const response = await fetchPostJSON('/api/checkout_sessions', [
-			{
-				price_data: {
-					unit_amount: 5000,
-					currency: 'usd',
-					product: 'prod_Lzzp2Z5aPn0zzV',
-				},
-				quantity: 1,
-			},
-		])
+		const formattedProducts = cart.map(item => {
+			return {
+				price: item.default_price.id,
+				quantity: item.quantity,
+			}
+		})
+		const response = await fetchPostJSON('/api/checkout_sessions', formattedProducts)
 
 		if (response.statusCode > 399) {
 			console.error(response.message)
