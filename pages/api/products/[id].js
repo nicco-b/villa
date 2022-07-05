@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import products from './products.json'
+import products from './productList'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
