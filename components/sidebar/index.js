@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useMain } from '../../context/mainContext'
+import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 import { Cart } from '../cart'
 
 export const SideBar = ({ columns }) => {
 	const [cartOpen, setCartOpen] = useState(false)
 	const [infoOpen, setInfoOpen] = useState(false)
+	const { cartQuantity } = useShoppingCart()
 
 	const cN = columns
 	console.log(cN)
@@ -20,49 +22,40 @@ export const SideBar = ({ columns }) => {
 			setInfoOpen(false)
 		}
 	}, [columns])
+	useEffect(() => {
+		if (cartQuantity() > 0) {
+			setCartOpen(true)
+		}
+	}, [cartQuantity])
 
 	return (
 		<>
-			{columns > 1 ? (
-				<>
-					<MobileBar
-						cN={columns}
-						setInfoOpen={setInfoOpen}
-						infoOpen={infoOpen}
-						setCartOpen={setCartOpen}
-						cartOpen={cartOpen}>
-						{infoOpen && <Information />}
-						{cartOpen && <Cart />}
+			<>
+				<MobileBar
+					cN={columns}
+					setInfoOpen={setInfoOpen}
+					infoOpen={infoOpen}
+					setCartOpen={setCartOpen}
+					cartOpen={cartOpen}
+					cartTotal={cartQuantity()}>
+					{infoOpen && <Information />}
+					{cartOpen && <Cart />}
+					{columns > 1 && (
 						<div
 							style={{
 								background: 'var(--bgAlt)',
 							}}>
 							<Footer />
 						</div>
-					</MobileBar>
-				</>
-			) : (
-				<>
-					<MobileBar
-						cN={columns}
-						setInfoOpen={setInfoOpen}
-						infoOpen={infoOpen}
-						setCartOpen={setCartOpen}
-						cartOpen={cartOpen}>
-						{infoOpen && <Information />}
-						{cartOpen && <Cart />}
-					</MobileBar>
-					{/* bottom nav on mobile */}
-
-					<Footer />
-				</>
-			)}
+					)}
+				</MobileBar>
+				{/* bottom nav on mobile */}
+				{columns === 1 && <Footer />}
+			</>
 		</>
 	)
 }
-const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen }) => {
-	const { cartTotal } = useMain()
-
+const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen, cartTotal }) => {
 	return (
 		<div
 			className={`${cN > 1 ? styles.right : styles.rightClosed} ${cartOpen ? styles.darkerBg : ''}`}>
@@ -123,7 +116,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen 
 					onClick={() => {
 						setCartOpen(!cartOpen)
 					}}>
-					cart {cartTotal}
+					cart {cartTotal > 0 && cartTotal}
 				</div>
 			</div>
 			{children}

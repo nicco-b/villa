@@ -21,7 +21,7 @@ export const CartItem = ({ product }) => {
 						maxWidth: '50px',
 					}}>
 					<div className={styles.productImg}>
-						<Image src={`/totem${product.id}.png`} width={35} height={35} alt={product.name} />
+						<img src={`${product?.images[0]}`} width={35} height={35} alt={product.name} />
 					</div>
 				</div>
 				<div
@@ -33,21 +33,26 @@ export const CartItem = ({ product }) => {
 					}}>
 					<div
 						style={{
-							display: 'flex',
+							display: 'grid',
+							gridTemplateColumns: '1fr auto auto',
 							width: '100%',
-							gap: '0.2em',
+							gap: '1em',
 							alignItems: 'center',
 							justifyContent: 'space-between',
 							padding: '0em 1em',
 						}}>
 						<h4>{product.name}</h4>
-						{/* <h5>{product.dimensions}</h5> */}
+						<span
+							style={{
+								fontSize: '0.8em',
+							}}>
+							qty:{product.quantity}
+						</span>
 						<h5>
-							{/* {formatCurrencyString({
-								value: product.default_price.unit_amount,
+							{formatCurrencyString({
+								value: product.default_price.unit_amount * product.quantity,
 								currency: 'usd',
-							})} */}
-							int
+							})}
 						</h5>
 					</div>
 

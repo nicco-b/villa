@@ -5,14 +5,16 @@ import { CartItem } from './cartItem'
 import { useEffect, useState } from 'react'
 import getStripe from '../../utils/getStripe'
 import { fetchPostJSON } from '../../utils/api-helpers'
-import { useShoppingCart } from 'use-shopping-cart'
-
+import { useShoppingCart } from '../../context/ShoppingCartContext'
+import useSWR from 'swr'
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
+	const { cart } = useShoppingCart()
+
 	const [loading, setLoading] = useState(false)
 	const [cartEmpty, setCartEmpty] = useState(true)
 	const [errorMessage, setErrorMessage] = useState('')
-	const { formattedTotalPrice, cartCount, clearCart, cartDetails, redirectToCheckout } =
-		useShoppingCart()
+
 	useEffect(() => {
 		// Check to see if this is a redirect back from Checkout
 		const query = new URLSearchParams(window.location.search)
@@ -32,7 +34,11 @@ export const Cart = () => {
 
 		const response = await fetchPostJSON('/api/checkout_sessions', [
 			{
-				price: 'price_1LHMVIHFFw3ZIEqv4zXNFN4k',
+				price_data: {
+					unit_amount: 5000,
+					currency: 'usd',
+					product: 'prod_Lzzp2Z5aPn0zzV',
+				},
 				quantity: 1,
 			},
 		])
@@ -77,19 +83,27 @@ export const Cart = () => {
 						display: 'grid',
 						padding: '0em 0em 1em 0em',
 					}}>
-					{CartItems.map((product, i) => (
-						<>
-							<CartItem key={product.id} product={product} />
-							{/* if not last item */}
-							{i !== CartItems.length - 1 && (
-								<div
-									style={{
-										height: '1px',
-										backgroundColor: 'var(--border-color-alt)',
-									}}></div>
-							)}
-						</>
-					))}
+					{cart.length ? (
+						cart.map((product, i) => (
+							<CartItem key={product.id} product={product}>
+								{/* if not last item */}
+								{i !== cart.length - 1 && (
+									<div
+										style={{
+											height: '1px',
+											backgroundColor: 'var(--border-color-alt)',
+										}}></div>
+								)}
+							</CartItem>
+						))
+					) : (
+						<div
+							style={{
+								padding: '1em 0em 0',
+							}}>
+							<p>Your cart is empty.</p>
+						</div>
+					)}
 				</div>
 			</div>
 			<div
@@ -102,6 +116,8 @@ export const Cart = () => {
 				<span
 					style={{
 						textDecoration: 'underline',
+						color: cart.length ? 'red' : '#cdcec1',
+						cursor: cart.length ? 'pointer' : 'not-allowed',
 					}}>
 					clear all
 				</span>
@@ -111,8 +127,10 @@ export const Cart = () => {
 							type='submit'
 							role='link'
 							style={{
-								background: '#F6F2E5',
-								color: '#2b2b2c',
+								cursor: cart.length ? 'pointer' : 'not-allowed',
+
+								background: cart.length ? '#F6F2E5' : '#d9d5c3',
+								color: cart.length ? '#2b2b2c' : '#cdcec1',
 							}}>
 							checkout
 						</button>

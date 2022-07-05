@@ -2,7 +2,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
 import { NextApiRequest, NextApiResponse } from 'next'
-import { runInNewContext } from 'vm'
 const { validateCartItems } = require('use-shopping-cart/utilities')
 const inventory = [
 	{

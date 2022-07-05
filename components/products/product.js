@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import { formatCurrencyString } from 'use-shopping-cart'
+import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 import { formatAmountForDisplay } from '../../utils/stripe-helpers'
 
 export const Product = ({ product, single }) => {
+	const { increaseQuantity } = useShoppingCart()
 	const handleClickOrderButton = event => {
 		event.preventDefault()
-		console.log('order button clicked')
+		increaseQuantity(product)
 	}
 
 	return (
@@ -44,7 +46,7 @@ export const Product = ({ product, single }) => {
 				</div>
 
 				<button type={'button'} onClick={handleClickOrderButton}>
-					order
+					add
 				</button>
 			</div>
 		</div>
