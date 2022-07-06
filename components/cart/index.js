@@ -34,7 +34,7 @@ export const Cart = () => {
 		const formattedProducts = cart.map(item => {
 			return {
 				price: item.default_price.id,
-				quantity: 1,
+				quantity: item.quantity,
 			}
 		})
 		const response = await fetchPostJSON('/api/checkout_sessions', formattedProducts)
