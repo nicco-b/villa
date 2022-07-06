@@ -23,7 +23,7 @@ export const CartItem = ({ product }) => {
 						maxWidth: '50px',
 					}}>
 					<div className={styles.productImg}>
-						{/* <img src={`${product?.images[0]}`} width={35} height={35} alt={product.name} /> */}
+						<img src={`${product?.images[0]}`} width={35} height={35} alt={product.name} />
 					</div>
 				</div>
 				<div
@@ -51,10 +51,10 @@ export const CartItem = ({ product }) => {
 							qty:{product.quantity}
 						</span>
 						<h5>
-							{/* {formatCurrencyString({
+							{formatCurrencyString({
 								value: product.default_price.unit_amount * product.quantity,
 								currency: 'usd',
-							})} */}
+							})}
 						</h5>
 					</div>
 

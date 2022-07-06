@@ -9,7 +9,7 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
-	const { cart } = useShoppingCart()
+	const { cart, clearCart } = useShoppingCart()
 	// const cart = products
 	const [loading, setLoading] = useState(false)
 	const [cartEmpty, setCartEmpty] = useState(true)
@@ -112,8 +112,13 @@ export const Cart = () => {
 				<span
 					style={{
 						textDecoration: 'underline',
-						color: cart.length ? 'red' : '#cdcec1',
+						color: cart.length ? '#2b2b2c' : '#cdcec1',
 						cursor: cart.length ? 'pointer' : 'not-allowed',
+					}}
+					onClick={() => {
+						if (cart.length) {
+							clearCart()
+						}
 					}}>
 					clear all
 				</span>
