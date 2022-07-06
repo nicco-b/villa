@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 	const product = await stripe.products.retrieve(id, {
 		expand: ['default_price'],
 	})
-	const p = products.find(product => product.id === id)
-	console.log({ p })
+	// const p = products.find(product => product.id === id)
+	// console.log({ p })
 	res.status(200).json(product)
 }
