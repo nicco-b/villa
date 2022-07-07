@@ -39,8 +39,22 @@ export default function SingleProduct({ product }) {
 SingleProduct.getLayout = function getLayout(page) {
 	return <MainLayout>{page}</MainLayout>
 }
-export async function getServerSideProps(context) {
-	// Fetch data from external API
+// export async function getServerSideProps(context) {
+// 	// Fetch data from external API
+// 	const id = context.params.id
+// 	console.log(id)
+// 	const dev = process.env.NODE_ENV !== 'production'
+
+// 	const res = await fetch(
+// 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${id}`
+// 	)
+
+// 	const product = await res.json()
+
+// 	// Pass data to the page via props
+// 	return { props: { product } }
+// }
+export async function getStaticProps(context) {
 	const id = context.params.id
 	console.log(id)
 	const dev = process.env.NODE_ENV !== 'production'
@@ -48,9 +62,35 @@ export async function getServerSideProps(context) {
 	const res = await fetch(
 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${id}`
 	)
-
 	const product = await res.json()
 
-	// Pass data to the page via props
-	return { props: { product } }
+	return {
+		props: {
+			product,
+		},
+		// Next.js will attempt to re-generate the page:
+		// - When a request comes in
+		// - At most once every 10 seconds
+		revalidate: 10, // In seconds
+	}
+}
+export async function getStaticPaths(context) {
+	// const id = context.params.id
+
+	const dev = process.env.NODE_ENV !== 'production'
+
+	const res = await fetch(
+		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
+	)
+	const { data } = await res.json()
+
+	// Get the paths we want to pre-render based on posts
+	const paths = data.map(product => ({
+		params: { id: product.id },
+	}))
+
+	// We'll pre-render only these paths at build time.
+	// { fallback: blocking } will server-render pages
+	// on-demand if the path doesn't exist.
+	return { paths, fallback: 'blocking' }
 }
