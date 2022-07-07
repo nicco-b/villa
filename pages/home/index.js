@@ -4,7 +4,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 
-export default function Home({ data }) {
+export default function Home(data) {
 	return (
 		<div className={styles.container}>
 			<Head>
