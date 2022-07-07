@@ -21,8 +21,8 @@ export async function getServerSideProps() {
 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
 	)
 
-	const data = await res.json()
-
+	const { products } = await res.json()
+	const { data } = products
 	// Pass data to the page via props
-	return { props: { data } }
+	return { props: { data: products } }
 }
