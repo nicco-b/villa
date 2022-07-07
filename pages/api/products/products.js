@@ -18,6 +18,6 @@ export default async function handler(req, res) {
 
 	// const price = await stripe.prices.retrieve('prod_LzyBdOkrkQPayl')
 
-	console.log(products)
-	res.status(200).json(products)
+	console.log({ products })
+	res.status(200).json({ products })
 }

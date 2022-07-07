@@ -82,8 +82,8 @@ export async function getStaticPaths(context) {
 	const res = await fetch(
 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
 	)
-	const { data } = await res.json()
-
+	const { products } = await res.json()
+	const data = products.data
 	// Get the paths we want to pre-render based on posts
 	const paths = data.map(product => ({
 		params: { id: `${product.id}` },
