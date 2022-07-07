@@ -10,7 +10,7 @@ import useSWR from 'swr'
 import { formatCurrencyString } from 'use-shopping-cart'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
-	const { cart, clearCart, cartTotal, cartQuantity } = useShoppingCart()
+	const { cart, clearCart, cartTotal, cartQuantity, removeItem } = useShoppingCart()
 	const cartTotalPrice = cartTotal()
 	// const cart = products
 	const [loading, setLoading] = useState(false)

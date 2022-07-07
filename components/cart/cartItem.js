@@ -4,7 +4,6 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
 export const CartItem = ({ product }) => {
-	const { removeItem } = useShoppingCart()
 	return (
 		<>
 			{' '}

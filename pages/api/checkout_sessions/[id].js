@@ -20,7 +20,7 @@ router.get(async (req, res) => {
 		const order = await db
 			.collection('orders')
 			.findOne(ObjectId(checkout_session.client_reference_id))
-		// console.log({ order })
+		// console.log({ order }
 		res.status(200).json({ session, order })
 	} catch (err) {
 		res.status(500).json({ statusCode: 500, message: err.message })
