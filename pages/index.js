@@ -24,5 +24,5 @@ export async function getServerSideProps() {
 	const { products } = await res.json()
 	const { data } = products
 	// Pass data to the page via props
-	return { props: { data: products } }
+	return { props: { data: `${data.products}` } }
 }
