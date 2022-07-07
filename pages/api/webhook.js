@@ -23,7 +23,7 @@ router.post(async (req, res) => {
 	const stripe = initStripe(process.env.STRIPE_SECRET_KEY)
 	const signature = req.headers['stripe-signature']
 	const signingSecret = 'we_1LIynSHFFw3ZIEqvLKBCfU7m'
-	const reqBuffer = await buffer(req.body)
+	const reqBuffer = await buffer(req)
 	let event
 
 	try {
