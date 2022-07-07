@@ -19,10 +19,10 @@ import { imageOptimizer } from 'next/dist/server/image-optimizer'
 const router = createRouter()
 
 router.post(async (req, res) => {
-	console.log('why')
+	console.log('why', req.rawBody)
 	const stripe = initStripe(process.env.STRIPE_SECRET_KEY)
 	const signature = req.headers['stripe-signature']
-	const signingSecret = 'whsec_304b21a50db4d65a9eb3d2623be85f09151ca9f885aa99409e344c186313dcf4'
+	const signingSecret = 'we_1LIynSHFFw3ZIEqvLKBCfU7m'
 	const reqBuffer = await buffer(req)
 	let event
 
