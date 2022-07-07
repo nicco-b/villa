@@ -5,6 +5,7 @@ import MainLayout from '../../../components/layouts/MainLayout'
 import styles from '../../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { Product } from '../../../components/products/product'
+
 export default function SingleProduct({ product }) {
 	return (
 		<div>

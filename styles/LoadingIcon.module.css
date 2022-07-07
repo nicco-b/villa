@@ -1,0 +1,66 @@
+.uploadspinnerbox svg {
+	/* animation: 2s linear infinite svg-animation; */
+	max-width: 20px;
+	transform-box: fill-box;
+}
+#spin {
+	transform: rotateZ(270deg);
+}
+/* @keyframes svg-animation {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+} */
+
+.uploadspinnerbox circle {
+	display: block;
+	fill: transparent;
+	stroke: #888888a9;
+	stroke-linecap: round;
+	stroke-dasharray: 354;
+	stroke-dashoffset: 354;
+	stroke-width: 10px;
+	animation: 2s ease-in-out infinite both circle-animation;
+}
+
+@keyframes circle-animation {
+	0% {
+		stroke-dashoffset: 350;
+	}
+
+	50%,
+	100% {
+		stroke-dashoffset: 88;
+	}
+
+	100% {
+		stroke-dashoffset: 350;
+	}
+}
+
+.uploadspinnerbox {
+	display: inline-block;
+	transform-box: fill-box;
+	animation: 2s ease-in-out infinite both box-animation;
+	min-height: 20px;
+	min-width: 20px;
+	max-width: 20px;
+	max-height: 20px;
+}
+@keyframes box-animation {
+	0% {
+		transform: rotate(0);
+	}
+
+	50%,
+	50% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

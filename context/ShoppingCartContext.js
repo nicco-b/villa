@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, useState } from 'react'
+import { formatCurrencyString } from 'use-shopping-cart'
 
 export const ShoppingCartContext = createContext()
 
@@ -49,6 +50,16 @@ export const ShoppingCartProvider = ({ children }) => {
 	const getItemQuantity = id => {
 		return cart.find(item => item.id === id)?.quantity || 0
 	}
+	//totalPrice
+	const cartTotal = () => {
+		const a = cart.reduce((total, item) => total + item.default_price.unit_amount * item.quantity, 0)
+		console.log({ a })
+
+		return formatCurrencyString({
+			value: a,
+			currency: 'usd',
+		})
+	}
 
 	//end functions
 	return (
@@ -59,7 +70,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				cartQuantity,
 				removeItem,
 				clearCart,
-				cartTotal: cart.length,
+				cartTotal,
 				cart,
 			}}>
 			{children}

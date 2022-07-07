@@ -109,7 +109,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen,
 				</div>
 				<div
 					style={{
-						color: cartOpen ? '#DD5859' : '#2b2b2c',
+						color: cartOpen ? '#985255' : '#2b2b2c',
 						fontWeight: cartOpen ? '600' : '500',
 						cursor: 'pointer',
 						userSelect: 'none',

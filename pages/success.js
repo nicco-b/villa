@@ -6,6 +6,9 @@ import axios from 'axios'
 import confetti from 'canvas-confetti'
 import Link from 'next/link'
 import { TopBar } from '../components/topbar'
+import LoadingIcon from '../components/utils/LoadingIcon'
+import styles from '../styles/Summary.module.css'
+import { formatCurrencyString } from 'use-shopping-cart'
 export const fetcher = url => axios.get(url).then(res => res.data)
 export const shootFireworks = () => {
 	const duration = 15 * 100
@@ -57,21 +60,32 @@ const Success = () => {
 	}, [data])
 
 	return (
-		<div className='container xl:max-w-screen-xl mx-auto py-12 px-6 text-center'>
-			<TopBar />
-
-			{error ? (
-				<div>
-					<p>Sorry, something went wrong!</p>
+		<>
+			<div className={styles.summaryWrapper}>
+				<TopBar />
+				<div className={styles.summaryBox}>
+					<div className={styles.summary}>
+						{error ? (
+							<div>
+								<p>Sorry, something went wrong!</p>
+							</div>
+						) : !data ? (
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									alignItems: 'center',
+									paddingTop: '4em',
+								}}>
+								<LoadingIcon />
+							</div>
+						) : (
+							<SuccessInfo data={data} />
+						)}
+					</div>
 				</div>
-			) : !data ? (
-				<div>
-					<p>Loading...</p>
-				</div>
-			) : (
-				<SuccessInfo data={data} />
-			)}
-		</div>
+			</div>
+		</>
 	)
 }
 
@@ -90,9 +104,44 @@ const SuccessInfo = ({ data }) => {
 
 				<h2>Thanks for your order!</h2>
 				<p>Check your inbox for the receipt.</p>
+				<CompletedOrderSummary data={data} />
+
 				<Link href={'/'}>
 					<button>home</button>
 				</Link>
+			</div>
+		</div>
+	)
+}
+
+const CompletedOrderSummary = ({ data }) => {
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				padding: '2em 0',
+				width: '100%',
+				height: '100%',
+			}}>
+			<div>order summary</div>
+			<div
+				style={{
+					margin: '0.5em',
+
+					width: '100%',
+					height: '100%',
+
+					border: 'var(--border-style-dashed) var(--border-color)',
+				}}>
+				<div>
+					total:
+					{formatCurrencyString({
+						value: data.amount_total,
+						currency: data.currency,
+					})}
+				</div>
 			</div>
 		</div>
 	)

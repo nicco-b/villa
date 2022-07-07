@@ -7,9 +7,11 @@ import getStripe from '../../utils/getStripe'
 import { fetchPostJSON } from '../../utils/api-helpers'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import useSWR from 'swr'
+import { formatCurrencyString } from 'use-shopping-cart'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
-	const { cart, clearCart } = useShoppingCart()
+	const { cart, clearCart, cartTotal, cartQuantity } = useShoppingCart()
+	const cartTotalPrice = cartTotal()
 	// const cart = products
 	const [loading, setLoading] = useState(false)
 	const [cartEmpty, setCartEmpty] = useState(true)
@@ -60,9 +62,27 @@ export const Cart = () => {
 			<div
 				style={{
 					borderTop: 'var(--border-style-dashed) var(--border-color)',
-					padding: '0.5em 1em 0 1em',
+					borderBottom: 'var(--border-style-dashed) var(--border-color)',
+
+					padding: '0.5em 1em 0.5em 1em',
+					display: 'flex',
+					justifyContent: 'space-between',
 				}}>
 				<h4>Cart</h4>
+
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						gap: '0.5em',
+						// padding: '0.5em 1em',
+					}}>
+					{cartQuantity() > 0 && ` ${cartQuantity()} ${cartQuantity() > 1 ? 'items' : 'item'}  `}
+					<span>-</span>
+
+					<h4>{cartTotalPrice}</h4>
+				</div>
 			</div>
 
 			<div
@@ -72,12 +92,12 @@ export const Cart = () => {
 					padding: '0em 1em 0em 1em',
 					maxHeight: '100%',
 					height: '100%',
-					overflow: 'auto',
+					overflow: 'hidden',
 				}}>
 				<div
 					style={{
 						display: 'grid',
-						padding: '0em 0em 1em 0em',
+						// padding: '0em 0em 1em 0em',
 					}}>
 					{cart.length ? (
 						cart.map((product, i) => (
@@ -95,13 +115,14 @@ export const Cart = () => {
 					) : (
 						<div
 							style={{
-								padding: '1em 0em 0',
+								padding: '1em 0em 1em',
 							}}>
 							<p>Your cart is empty.</p>
 						</div>
 					)}
 				</div>
 			</div>
+
 			<div
 				style={{
 					display: 'flex',
@@ -127,13 +148,14 @@ export const Cart = () => {
 						<button
 							type='submit'
 							role='link'
+							disabled={!cart.length || loading}
 							style={{
 								cursor: cart.length ? 'pointer' : 'not-allowed',
 
-								background: cart.length ? '#F6F2E5' : '#d9d5c3',
+								background: cart.length ? (!loading ? '#F6F2E5' : '#d9d5c3') : '#d9d5c3',
 								color: cart.length ? '#2b2b2c' : '#cdcec1',
 							}}>
-							checkout
+							{loading ? 'pls wait' : 'checkout'}
 						</button>
 					</section>
 				</form>
