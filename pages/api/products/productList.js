@@ -13,6 +13,7 @@ export const products = [
 		price: 1000,
 		image: '/product2.png',
 		dimensions: '12x16',
+		extra: '12x16',
 	},
 	{
 		id: '3',
