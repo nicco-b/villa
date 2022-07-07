@@ -5,7 +5,15 @@ export default class MyDocument extends Document {
 	render() {
 		return (
 			<Html>
-				<Head />
+				<Head>
+					<link
+						rel='preload'
+						href='https://assets.niccob.com/assets/fonts/Inter/Inter.var.woff2'
+						as='font'
+						crossOrigin=''
+						type='font/woff2'
+					/>
+				</Head>
 				<body>
 					<Main />
 					<NextScript />

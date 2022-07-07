@@ -53,7 +53,7 @@ export const ShoppingCartProvider = ({ children }) => {
 	//totalPrice
 	const cartTotal = () => {
 		const a = cart.reduce((total, item) => total + item.default_price.unit_amount * item.quantity, 0)
-		console.log({ a })
+		// console.log({ a })
 
 		return formatCurrencyString({
 			value: a,

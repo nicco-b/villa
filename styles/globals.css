@@ -210,6 +210,9 @@ button {
 	font-weight: 500;
 	font-size: 1rem;
 }
+button:hover {
+	background: #d1cbcb;
+}
 button:active {
 	background: #d1cbcb;
 }

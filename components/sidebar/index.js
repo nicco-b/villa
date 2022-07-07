@@ -12,7 +12,7 @@ export const SideBar = ({ columns }) => {
 	const { cartQuantity } = useShoppingCart()
 
 	const cN = columns
-	console.log(cN)
+	// console.log(cN)
 	const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 	useIsomorphicLayoutEffect(() => {
 		if (columns === 2) {
@@ -99,8 +99,8 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen,
 							fill='none'
 							xmlns='http://www.w3.org/2000/svg'>
 							<path
-								fill-rule='evenodd'
-								clip-rule='evenodd'
+								fillRule='evenodd'
+								clipRule='evenodd'
 								d='M10.5 8.20005C10.5 6.06054 12.6593 4.20007 15 4.20007C17.3407 4.20007 19.5 6.06054 19.5 8.20005C19.5 10.2285 18.5029 11.1673 17.0048 12.4958L16.9307 12.5615C15.4448 13.8783 13.5 15.6017 13.5 19C13.5 19.8285 14.1716 20.5 15 20.5C15.8284 20.5 16.5 19.8285 16.5 19C16.5 17.0001 17.4897 16.0755 18.9952 14.7404L19.049 14.6927C20.5444 13.3671 22.5 11.6335 22.5 8.20005C22.5 4.01671 18.5821 1.20007 15 1.20007C11.4179 1.20007 7.5 4.01671 7.5 8.20005C7.5 9.02848 8.17157 9.70005 9 9.70005C9.82843 9.70005 10.5 9.02848 10.5 8.20005ZM15 26.715C15.9665 26.715 16.75 25.9315 16.75 24.965C16.75 23.9985 15.9665 23.215 15 23.215C14.0335 23.215 13.25 23.9985 13.25 24.965C13.25 25.9315 14.0335 26.715 15 26.715Z'
 								fill={infoOpen ? '#E1DDCD' : '#2b2b2c'}
 							/>

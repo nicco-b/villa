@@ -36,7 +36,15 @@
 
 	display: grid;
 	grid-template-columns: auto 1fr auto;
-	height: 100vh;
+	height: calc(100vh - env(safe-area-inset-bottom));
+}
+@supports (-webkit-touch-callout: none) {
+	/* CSS specific to iOS devices */
+	.centered {
+		/* max-width: 1200px; */
+
+		height: calc(100vh - env(safe-area-inset-bottom) - 2em);
+	}
 }
 .centered > .sideSpacer {
 	display: grid;

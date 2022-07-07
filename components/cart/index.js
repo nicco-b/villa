@@ -39,7 +39,20 @@ export const Cart = () => {
 				quantity: item.quantity,
 			}
 		})
-		const response = await fetchPostJSON('/api/checkout_sessions', formattedProducts)
+		const order = await {
+			products: cart,
+			cartTotal: cartTotalPrice,
+			cartQuantity: cartQuantity(),
+		}
+		// const orderRes = await fetchPostJSON('/api/orders', order)
+		// console.log({ orderRes, order })
+		const response = await fetchPostJSON('/api/checkout_sessions', {
+			formattedProducts,
+			order,
+		})
+		console.log(response)
+
+		const { session } = response
 
 		if (response.statusCode > 399) {
 			console.error(response.message)
@@ -47,8 +60,9 @@ export const Cart = () => {
 			setLoading(false)
 			return
 		}
-		console.log(response)
-		stripe.redirectToCheckout({ sessionId: response.id })
+
+		//fullfill the order then redirect
+		stripe.redirectToCheckout({ sessionId: session.id })
 	}
 
 	return (
@@ -101,16 +115,48 @@ export const Cart = () => {
 					}}>
 					{cart.length ? (
 						cart.map((product, i) => (
-							<CartItem key={product.id} product={product}>
-								{/* if not last item */}
-								{i !== cart.length - 1 && (
-									<div
-										style={{
-											height: '1px',
-											backgroundColor: 'var(--border-color-alt)',
-										}}></div>
-								)}
-							</CartItem>
+							<div
+								style={{
+									display: 'grid',
+									gridTemplateColumns: '1fr auto',
+								}}>
+								<CartItem key={product.id} product={product}>
+									{/* if not last item */}
+									{i !== cart.length - 1 && (
+										<div
+											style={{
+												height: '1px',
+												backgroundColor: 'var(--border-color-alt)',
+											}}></div>
+									)}
+								</CartItem>
+								<button
+									type='button'
+									style={{
+										padding: '0 1em',
+										margin: '1em 0em 1em 0',
+										display: 'flex',
+										alignItems: 'center',
+										// background: 'red',
+									}}
+									onClick={() => {
+										removeItem(product.id)
+									}}>
+									<svg
+										width='16'
+										height='16'
+										viewBox='0 0 16 16'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'>
+										<path
+											fillRule='evenodd'
+											clipRule='evenodd'
+											d='M5.75 2C5.33579 2 5 2.33579 5 2.75C5 3.16421 5.33579 3.5 5.75 3.5H9.75C10.1642 3.5 10.5 3.16421 10.5 2.75C10.5 2.33579 10.1642 2 9.75 2H5.75ZM3 4.75C3 4.33579 3.33579 4 3.75 4H11.75C12.1642 4 12.5 4.33579 12.5 4.75C12.5 5.16421 12.1642 5.5 11.75 5.5H11.25V13.25C11.25 13.8023 10.8023 14.25 10.25 14.25H5.25C4.69772 14.25 4.25 13.8023 4.25 13.25V5.5H3.75C3.33579 5.5 3 5.16421 3 4.75ZM5.75 5.75V12.75H9.75V5.75H5.75Z'
+											fill='black'
+										/>
+									</svg>
+								</button>
+							</div>
 						))
 					) : (
 						<div
