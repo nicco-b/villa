@@ -62,7 +62,7 @@ export const Cart = () => {
 		}
 
 		//fullfill the order then redirect
-		stripe.redirectToCheckout({ sessionId: session.id })
+		window.location = session.url
 	}
 
 	return (

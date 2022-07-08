@@ -24,9 +24,9 @@ router.post(async (req, res) => {
 			submit_type: 'pay',
 			payment_method_types: ['card'],
 			billing_address_collection: 'auto',
-			shipping_address_collection: {
-				allowed_countries: ['US', 'CA'],
-			},
+			// shipping_address_collection: {
+			// 	allowed_countries: ['US', 'CA'],
+			// },
 			line_items: p,
 			success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${req.headers.origin}/`,
@@ -34,6 +34,7 @@ router.post(async (req, res) => {
 			client_reference_id: `${insertedId}`,
 		}
 		const session = await stripe.checkout.sessions.create(params)
+		console.log(session)
 		res.status(200).json({ session, order })
 	} catch (err) {
 		res.status(err.statusCode || 500).json(err.message)
