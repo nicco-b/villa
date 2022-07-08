@@ -5,6 +5,7 @@ import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 
 export default function Home(data) {
+	console.log('ddd', data)
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -40,7 +41,7 @@ Home.getLayout = function getLayout(page) {
 // 	// Pass data to the page via props
 // 	return { props: { data } }
 // }
-export async function getStaticProps(context) {
+export async function getStaticProps() {
 	const dev = process.env.NODE_ENV !== 'production'
 
 	const res = await fetch(
