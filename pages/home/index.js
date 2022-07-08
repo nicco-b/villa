@@ -58,10 +58,10 @@ export async function getStaticPaths() {
 	// const { products } = await res.json()
 	// const data = products.data
 	// Get the paths we want to pre-render based on posts
-	// const paths = data.map(product => ({
-	// 	params: { id: `${product.id}` },
-	// }))
-	const paths = []
+	const paths = data.map(product => ({
+		params: { id: `${product.id}` },
+	}))
+	// const paths = []
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
