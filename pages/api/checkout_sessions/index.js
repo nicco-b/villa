@@ -26,9 +26,7 @@ router.post(async (req, res) => {
 			billing_address_collection: 'auto',
 			shipping_address_collection: {
 				allowed_countries: [
-					'US',
-					'CA',
-					' AC',
+					'AC',
 					'AD',
 					'AE',
 					'AF',
