@@ -50,7 +50,7 @@ export const Cart = () => {
 			formattedProducts,
 			order,
 		})
-		console.log(response)
+		// console.log(response)
 
 		const { session } = response
 
