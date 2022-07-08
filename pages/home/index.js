@@ -41,7 +41,9 @@ Home.getLayout = function getLayout(page) {
 // 	return { props: { data } }
 // }
 export async function getStaticProps(context) {
-	const res = await fetch(`${process.env.VERCEL_URL}/api/products`)
+	const dev = process.env.NODE_ENV !== 'production'
+
+	const res = await fetch(`${dev ? 'http://' : 'https://'}${process.env.VERCEL_URL}/api/products`)
 	const data = await res.json()
 
 	// Pass data to the page via props
