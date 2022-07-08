@@ -47,24 +47,3 @@ export async function getStaticProps(context) {
 	// Pass data to the page via props
 	return { props: { data } }
 }
-export async function getStaticPaths() {
-	// const id = context.params.id
-
-	// const dev = process.env.NODE_ENV !== 'production'
-
-	// const res = await fetch(
-	// 	`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
-	// )
-	// const { products } = await res.json()
-	// const data = products.data
-	// Get the paths we want to pre-render based on posts
-	const paths = data.map(product => ({
-		params: { id: `${product.id}` },
-	}))
-	// const paths = []
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: blocking } will server-render pages
-	// on-demand if the path doesn't exist.
-	return { paths, fallback: 'blocking' }
-}
