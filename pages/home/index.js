@@ -4,8 +4,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 
-export default function Home(data) {
-	console.log('ddd', data)
+export default function Home({ products }) {
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -23,7 +22,7 @@ export default function Home(data) {
 						display: 'grid',
 						padding: '1em',
 					}}>
-					<Products products={data} />
+					<Products products={products} />
 				</div>
 			</div>
 		</div>
@@ -41,14 +40,3 @@ Home.getLayout = function getLayout(page) {
 // 	// Pass data to the page via props
 // 	return { props: { data } }
 // }
-export async function getStaticProps() {
-	const dev = process.env.NODE_ENV !== 'production'
-
-	const res = await fetch(
-		`${dev ? 'http://' : 'https://'}${process.env.VERCEL_URL}/api/products/products`
-	)
-	const data = await res.json()
-
-	// Pass data to the page via props
-	return { props: { data } }
-}

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 import { Product } from './product'
 export const Products = ({ products }) => {
-	const productList = products.data
+	const productList = products
 	// console.log(productList)
 	return (
 		<div

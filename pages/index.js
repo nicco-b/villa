@@ -4,10 +4,10 @@ import MainLayout from '../components/layouts/MainLayout'
 import styles from '../styles/Home.module.css'
 import Home from './home'
 
-export default function Index({ data }) {
+export default function Index({ products }) {
 	const env = process.env.NEXT_PUBLIC_VERCEL_URL
 	console.log(env)
-	return <Home data={data} />
+	return <Home products={products} />
 }
 
 Index.getLayout = function getLayout(page) {
@@ -21,8 +21,8 @@ export async function getServerSideProps() {
 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
 	)
 
-	const { products } = await res.json()
+	const data = await res.json()
 
 	// Pass data to the page via props
-	return { props: products }
+	return { props: { products: data } }
 }
