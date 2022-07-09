@@ -72,7 +72,7 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			product,
+			product: product,
 		},
 		// Next.js will attempt to re-generate the page:
 		// - When a request comes in

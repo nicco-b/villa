@@ -22,5 +22,6 @@ export async function getProducts(req, res) {
 }
 export default async (req, res) => {
 	const products = await getProducts()
+	console.log(products)
 	res.status(200).json(products)
 }
