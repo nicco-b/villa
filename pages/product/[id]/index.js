@@ -55,15 +55,16 @@ SingleProduct.getLayout = function getLayout(page) {
 // 	return { props: { product } }
 // }
 export async function getStaticPaths() {
-	const dev = process.env.NODE_ENV !== 'production'
+	// const dev = process.env.NODE_ENV !== 'production'
 
-	const res = await fetch(
-		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
-	)
-	const data = await res.json()
-	const paths = data.map(product => ({
-		params: { id: product.id },
-	}))
+	// const res = await fetch(
+	// 	`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
+	// )
+	// const data = await res.json()
+	// const paths = data.map(product => ({
+	// 	params: { id: product.id },
+	// }))
+	const paths = []
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
