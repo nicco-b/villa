@@ -5,7 +5,7 @@ import MainLayout from '../../../components/layouts/MainLayout'
 import styles from '../../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { Product } from '../../../components/products/product'
-
+import { getProducts } from '../../api/products/products'
 export default function SingleProduct({ product }) {
 	const title = `${product.name} | luns shop`
 	return (
@@ -55,12 +55,7 @@ SingleProduct.getLayout = function getLayout(page) {
 // 	return { props: { product } }
 // }
 export async function getStaticPaths() {
-	const dev = process.env.NODE_ENV !== 'production'
-
-	const res = await fetch(
-		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
-	)
-	const data = await res.json()
+	const data = await getProducts()
 	const paths = data.map(product => ({
 		params: { id: product.id.toString() },
 	}))

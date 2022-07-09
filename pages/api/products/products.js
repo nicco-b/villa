@@ -4,7 +4,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 })
 // import products from './products.json'
 
-export default async function handler(req, res) {
+export async function getProducts(req, res) {
 	const data = await stripe.products.list({
 		expand: ['data.default_price'],
 		// limit: 3,
@@ -18,6 +18,9 @@ export default async function handler(req, res) {
 
 	// const price = await stripe.prices.retrieve('prod_LzyBdOkrkQPayl')
 	const p = data.data
-	console.log(p)
-	res.status(200).json(p)
+	return p
+}
+export default async (req, res) => {
+	const products = await getProducts()
+	res.status(200).json(products)
 }
