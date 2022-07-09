@@ -13,7 +13,7 @@ export default function Index({ products }) {
 Index.getLayout = function getLayout(page) {
 	return <MainLayout>{page}</MainLayout>
 }
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	// Fetch data from external API
 	const dev = process.env.NODE_ENV !== 'production'
 
