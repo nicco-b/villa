@@ -74,19 +74,19 @@ export async function getStaticProps(context) {
 		// revalidate: 120, // In seconds
 	}
 }
-// export async function getStaticPaths() {
-// 	const dev = process.env.NODE_ENV !== 'production'
+export async function getStaticPaths() {
+	const dev = process.env.NODE_ENV !== 'production'
 
-// 	const res = await fetch(
-// 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
-// 	)
-// 	const data = await res.json()
-// 	const paths = data.map(product => ({
-// 		params: { id: `${product.id}` },
-// 	}))
+	const res = await fetch(
+		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
+	)
+	const data = await res.json()
+	const paths = data.map(product => ({
+		params: { id: `${product.id}` },
+	}))
 
-// 	// We'll pre-render only these paths at build time.
-// 	// { fallback: blocking } will server-render pages
-// 	// on-demand if the path doesn't exist.
-// 	return { paths, fallback: 'blocking' }
-// }
+	// We'll pre-render only these paths at build time.
+	// { fallback: blocking } will server-render pages
+	// on-demand if the path doesn't exist.
+	return { paths, fallback: 'blocking' }
+}
