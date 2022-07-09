@@ -56,7 +56,7 @@ SingleProduct.getLayout = function getLayout(page) {
 // 	return { props: { product } }
 // }
 export async function getStaticPaths() {
-	const data = await res.json()
+	const data = await getProducts()
 	const paths = data.map(product => ({
 		params: { id: product.id },
 	}))
@@ -64,7 +64,7 @@ export async function getStaticPaths() {
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
-	return { paths, fallback: true }
+	return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {
