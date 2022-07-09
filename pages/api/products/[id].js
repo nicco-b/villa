@@ -15,6 +15,6 @@ export async function getProductById(id) {
 export default async (req, res) => {
 	const { id } = req.query
 
-	const products = await getProductById(id)
-	res.status(200).json(products)
+	const product = await getProductById(id)
+	res.status(200).json(product)
 }
