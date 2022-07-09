@@ -25,5 +25,8 @@ export async function getStaticProps() {
 	const data = await getProducts()
 
 	// Pass data to the page via props
-	return { props: { products: data } }
+	return {
+		props: { products: data },
+		revalidate: false, // In seconds
+	}
 }
