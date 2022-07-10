@@ -22,10 +22,13 @@ export const SideBar = ({ columns }) => {
 		}
 	}, [columns])
 	useEffect(() => {
-		if (cartQuantity() > 0 && !columns > 1) {
+		if (cartQuantity() > 0 && columns > 1) {
 			setCartOpen(true)
 		}
-	}, [cartQuantity])
+		return () => {
+			setCartOpen(false)
+		}
+	}, [cartQuantity, columns])
 
 	return (
 		<>

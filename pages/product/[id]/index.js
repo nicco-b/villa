@@ -58,7 +58,7 @@ SingleProduct.getLayout = function getLayout(page) {
 export async function getStaticPaths() {
 	const data = await getProducts()
 	const paths = data.map(product => ({
-		params: { id: product.id },
+		params: { id: product.id.toString() },
 	}))
 
 	// We'll pre-render only these paths at build time.

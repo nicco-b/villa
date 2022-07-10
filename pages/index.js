@@ -20,11 +20,11 @@ export async function getStaticProps() {
 	// 	`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
 	// )
 
-	const data = await getProducts()
+	const products = await getProducts()
 
 	// Pass data to the page via props
 	return {
-		props: { products: data },
+		props: { products: products },
 		// In seconds
 		revalidate: 60,
 	}

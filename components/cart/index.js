@@ -35,7 +35,9 @@ export const Cart = () => {
 		const stripe = await getStripe()
 		const formattedProducts = cart.map(item => {
 			return {
-				price: item.default_price.id,
+				amount: item.price,
+				name: item.name,
+				currency: 'usd',
 				quantity: item.quantity,
 			}
 		})

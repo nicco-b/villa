@@ -71,7 +71,7 @@ export const CartItem = ({ product }) => {
 							}}>
 							<h5>
 								{formatCurrencyString({
-									value: product.default_price.unit_amount * product.quantity,
+									value: product.price * product.quantity,
 									currency: 'usd',
 								})}
 							</h5>

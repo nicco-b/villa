@@ -2,14 +2,14 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
-// import products from './products.json'
+import { products } from './productList'
+import { connectToDatabase } from '../../../utils/mongodb'
 
 export async function getProducts(req, res) {
-	const data = await stripe.products.list({
-		expand: ['data.default_price'],
-		// limit: 3,
-	})
-	// get stripe price from each products price_id
+	// const data = await stripe.products.list({
+	// 	expand: ['data.default_price'],
+	// 	// limit: 3,
+	// })
 	// const productsWithPrices = await stripe.prices.list({
 	// 	limit: 3,
 	// 	expand: ['data.product'],
@@ -17,7 +17,12 @@ export async function getProducts(req, res) {
 	// console.log(productsWithPrices)
 
 	// const price = await stripe.prices.retrieve('prod_LzyBdOkrkQPayl')
-	const p = data.data
+	const { db } = await connectToDatabase()
+	const data = await db.collection('products').find({}).toArray()
+	// console.log({ order }
+	const p = JSON.parse(JSON.stringify(data))
+
+	console.log(p)
 	return p
 }
 export default async (req, res) => {

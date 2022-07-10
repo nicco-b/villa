@@ -48,7 +48,7 @@ export const Product = ({ product, single }) => {
 					<h5>{product.dimensions}</h5>
 					<h4>
 						{formatCurrencyString({
-							value: product.default_price.unit_amount,
+							value: product.price,
 							currency: 'usd',
 						})}
 					</h4>
