@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import { formatCurrencyString } from 'use-shopping-cart'
-import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
 export const CartItem = ({ product }) => {

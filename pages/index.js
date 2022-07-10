@@ -6,8 +6,6 @@ import { getProducts } from './api/products/products'
 import Home from './home'
 
 export default function Index({ products }) {
-	const env = process.env.NEXT_PUBLIC_VERCEL_URL
-	console.log(env)
 	return <Home products={products} />
 }
 

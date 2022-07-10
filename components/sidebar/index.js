@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { useMain } from '../../context/mainContext'
 import { useShoppingCart } from '../../context/ShoppingCartContext'

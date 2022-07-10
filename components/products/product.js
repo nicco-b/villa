@@ -1,10 +1,7 @@
-import Image from 'next/future/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { formatCurrencyString } from 'use-shopping-cart'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
-import { formatAmountForDisplay } from '../../utils/stripe-helpers'
 
 export const Product = ({ product, single }) => {
 	const [addButtonState, setAddButtonState] = useState('default')
