@@ -22,7 +22,7 @@ export const CartItem = ({ product }) => {
 						minWidth: '50px',
 					}}>
 					<div className={styles.productImg}>
-						<img src={`${product?.images[0]}`} width={35} height={35} alt={product.name} />
+						<img src={`${product?.images[0]}`} alt={product.name} />
 					</div>
 				</div>
 				<div
