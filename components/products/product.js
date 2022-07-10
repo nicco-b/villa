@@ -1,3 +1,4 @@
+import Image from 'next/future/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { formatCurrencyString } from 'use-shopping-cart'
@@ -28,7 +29,7 @@ export const Product = ({ product, single }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src={`${product.images[0]}`} alt={'product_image'} />
+				<Image src={`${product.images[0]}`} alt={'product_image'} layout={'fill'} />
 			</div>
 			<div
 				style={{
