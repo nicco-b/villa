@@ -29,7 +29,7 @@ export const Product = ({ product, single }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<Image src={`${product.images[0]}`} alt={'product_image'} layout={'fill'} />
+				<img src={`${product.images[0]}`} alt={'product_image'} layout={'fill'} />
 			</div>
 			<div
 				style={{
