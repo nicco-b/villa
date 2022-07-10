@@ -65,22 +65,22 @@ export const CartItem = ({ product }) => {
 						<div
 							style={{
 								display: 'flex',
-								gap: '1em',
+								gap: '3em',
 								alignItems: 'center',
 								justifyItems: 'center',
 							}}>
-							<h5>
-								{formatCurrencyString({
-									value: product.price * product.quantity,
-									currency: 'usd',
-								})}
-							</h5>
 							<span
 								style={{
 									fontSize: '0.8em',
 								}}>
 								{product.quantity}x
 							</span>
+							<h5>
+								{formatCurrencyString({
+									value: product.price * product.quantity,
+									currency: 'usd',
+								})}
+							</h5>
 						</div>
 					</div>
 				</div>

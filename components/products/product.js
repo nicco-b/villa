@@ -40,12 +40,12 @@ export const Product = ({ product, single }) => {
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
-						gap: '0.2em',
+						gap: '0.3em',
 						alignItems: 'center',
 						paddingBottom: '1em',
 					}}>
-					<h>{product.name}</h>
-					<h5>{product.dimensions}</h5>
+					<h4>{product.name}</h4>
+					<p>{product.dimensions}</p>
 					<h4>
 						{formatCurrencyString({
 							value: product.price,
