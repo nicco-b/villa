@@ -79,7 +79,7 @@ export const CartItem = ({ product }) => {
 								style={{
 									fontSize: '0.8em',
 								}}>
-								{product.quantity}x
+								qty:{product.quantity}
 							</span>
 						</div>
 					</div>
