@@ -265,6 +265,9 @@ router.post(async (req, res) => {
 					'ZZ',
 				],
 			},
+			phone_number_collection: {
+				enabled: true,
+			},
 			line_items: p,
 			success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: `${req.headers.origin}/`,
