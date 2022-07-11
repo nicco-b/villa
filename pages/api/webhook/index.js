@@ -159,12 +159,6 @@ overflow: hidden;">1 item</span>
 					products: products,
 				},
 			},
-			preview: {
-				open: {
-					app: 'chrome',
-					wait: false,
-				},
-			},
 		})
 		// const mailData = {
 		// 	from: '"Luns Shop" <njbufalino@gmail.com>', // sender address
