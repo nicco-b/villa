@@ -21,7 +21,7 @@ export async function getStaticProps() {
 	// )
 
 	const products = await getProducts()
-
+	console.log({ products })
 	// Pass data to the page via props
 	return {
 		props: { products: products },
