@@ -1,0 +1,2 @@
+check inventory on add to cart button
+

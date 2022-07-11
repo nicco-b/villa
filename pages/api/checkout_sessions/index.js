@@ -275,7 +275,8 @@ router.post(async (req, res) => {
 			client_reference_id: `${insertedId}`,
 		}
 		const session = await stripe.checkout.sessions.create(params)
-		console.log(session)
+		// console.log(session)
+		console.log({ order })
 		res.status(200).json({ session, order })
 	} catch (err) {
 		res.status(err.statusCode || 500).json(err.message)

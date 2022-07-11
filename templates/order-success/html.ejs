@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, 
+        initial-scale=1.0"
+		/>
+	</head>
+
+	<body>
+		<center>
+			<!-- Text from EJS variable 
+            passed from server -->
+			<div
+				style="
+					max-width: 600px;
+					max-height: auto;
+					overflow: hidden;
+					background-color: #f6f2e580;
+					color: #2b2b2c;
+					border: 1px dashed #c2b99e80;
+					font-family: 'Inter', sans-serif;
+					padding: 20px;
+				"
+			>
+				<div><span>Luns Shop Order:</span></div>
+				<br />
+
+				<ul
+					style="
+						border-bottom: 1px dashed #c2b99e80;
+						list-style-type: none;
+						width: auto;
+						padding: 0;
+						margin: 0;
+						overflow: hidden;
+					"
+				>
+					<li style="width: 100%; overflow: hidden">
+						<span style="width: 50%; float: left; overflow: hidden"><%=name%></span>
+						<span style="width: 50%; float: left; overflow: hidden">#<%=order._id%></span>
+					</li>
+				</ul>
+				<br />
+				<ul style="list-style-type: none; width: auto; padding: 0; margin: 0; overflow: hidden">
+					<li style="width: 100%; overflow: hidden">
+						<span style="width: 50%; float: left; overflow: hidden">order summary</span>
+						<span style="width: 50%; float: left; overflow: hidden">1 item</span>
+					</li>
+				</ul>
+				<br />
+			</div>
+		</center>
+
+		<script>
+			let ejs = require('ejs')
+			let people = ['geddy', 'neil', 'alex']
+		</script>
+	</body>
+</html>

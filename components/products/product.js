@@ -53,15 +53,29 @@ export const Product = ({ product, single }) => {
 						})}
 					</h4>
 				</div>
-
-				<button
-					type={'button'}
-					onClick={handleCartAdd}
-					style={{
-						minWidth: '110px',
-					}}>
-					{addButtonState === 'default' ? 'add to cart' : 'added!'}
-				</button>
+				{product.inventory > 0 ? (
+					<button
+						type={'button'}
+						onClick={handleCartAdd}
+						style={{
+							minWidth: '110px',
+						}}>
+						{addButtonState === 'default' ? 'add to cart' : 'added!'}
+					</button>
+				) : (
+					<button
+						type={'button'}
+						onClick={() => {}}
+						style={{
+							minWidth: '110px',
+							backgroundColor: '#D34014',
+							color: '#333',
+							border: 'none',
+							cursor: 'not-allowed',
+						}}>
+						Out of Stock
+					</button>
+				)}
 			</div>
 		</div>
 	)
