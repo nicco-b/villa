@@ -21,7 +21,7 @@ export const Products = ({ products }) => {
 					gridTemplateRows: 'repeat(auto-fit, minmax(100px, 1fr))',
 				}}>
 				{productList?.map(product => (
-					<Link href={`/product/${product.id}`}>
+					<Link href={`/product/${product.id}`} key={product._id}>
 						<a>
 							<div className={styles.product}>
 								<Product key={product.id} product={product} />

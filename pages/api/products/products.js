@@ -22,7 +22,7 @@ export async function getProducts(req, res) {
 	// console.log({ order }
 	const p = JSON.parse(JSON.stringify(data))
 
-	console.log(p)
+	// console.log(p)
 	return p
 }
 export default async (req, res) => {
