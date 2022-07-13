@@ -9,7 +9,6 @@ import { getProducts } from '../../api/products/products'
 import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import axios from 'axios'
-import redloader from '../../../public/redloader.gif'
 export default function SingleProduct({ fallback }) {
 	// if (error) return <div>Failed to load</div>
 	// if (!data) return <div>Loading...</div>
