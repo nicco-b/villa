@@ -8,6 +8,7 @@ import { Product } from '../../../components/products/product'
 import { getProducts } from '../../api/products/products'
 import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
+import axios from 'axios'
 
 export default function SingleProduct({ fallback }) {
 	// const title = `${data?.name} | luns shop`
@@ -19,6 +20,7 @@ export default function SingleProduct({ fallback }) {
 			value={{
 				fallback,
 				revalidate: true,
+				revalidateOnFocus: true,
 				fetcher: (...args) => fetch(...args).then(res => res.json()),
 			}}>
 			<div>
@@ -48,12 +50,13 @@ export default function SingleProduct({ fallback }) {
 		</SWRConfig>
 	)
 }
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+
+const fetcher = (url, id) => axios.get(`${url}/${id}`, {}).then(res => res.data)
 
 const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
-	const { data, error, isValidating } = useSWR(['api', 'products', id], fetcher)
+	const { data, error, isValidating } = useSWR(['/api/products', id], (url, id) => fetcher(url, id))
 	console.log({ data, error, isValidating, id })
 
 	return <Product product={data} />
@@ -98,7 +101,7 @@ export async function getStaticProps({ params }) {
 		props: {
 			fallback: {
 				// unstable_serialize() array style key
-				[unstable_serialize(['api', 'products', params.id])]: product,
+				[unstable_serialize(['/api/products', params.id])]: product,
 			},
 		},
 
