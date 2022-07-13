@@ -64,7 +64,7 @@ const ProductPage = () => {
 				<Link href={`/`}>
 					<button type='text'>back</button>
 				</Link>
-				{isValidating && <Image src={'/redloader.gif'} width={25} height={25} />}
+				{isValidating && <Image src={'/REDloader.gif'} width={25} height={25} />}
 			</div>
 			<Product product={data} isValidating={isValidating} />
 			<div
