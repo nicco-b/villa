@@ -93,7 +93,7 @@ export async function getStaticProps({ params }) {
 		props: {
 			fallback: {
 				// unstable_serialize() array style key
-				[unstable_serialize(['api', 'product', params.id])]: product,
+				[unstable_serialize(['api', 'products', params.id])]: product,
 			},
 		},
 
