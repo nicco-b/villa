@@ -8,19 +8,18 @@ import { Product } from '../../../components/products/product'
 import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import axios from 'axios'
-import { getProducts } from '../../api/products/products'
 
 export async function getStaticPaths() {
-	const data = await getProducts()
+	// const data = await getProducts()
 	// const paths = data.map(product => ({
-	// 	params: { id: `${product.id}` },
+	// 	params: { id: product.id },
 	// }))
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
 	return {
-		paths: [],
+		paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
 		fallback: 'blocking',
 	}
 }
@@ -39,7 +38,7 @@ export async function getStaticProps({ params }) {
 		// Next.js will attempt to re-generate the page:
 		// - When a request comes in
 		// - At most once every 10 seconds
-		// revalidate: 1, // In seconds
+		revalidate: 1, // In seconds
 	}
 }
 export default function SingleProduct({ fallback }) {
@@ -55,7 +54,7 @@ export default function SingleProduct({ fallback }) {
 				fallback,
 				revalidate: false,
 				revalidateOnFocus: false,
-				fetcher: (...args) => fetch(...args).then(res => res.json()),
+				fetcher: (url, id) => axios.get(`${url}/${id}`, {}).then(res => res.data),
 			}}>
 			<div>
 				<Head>
@@ -76,7 +75,7 @@ const fetcher = null
 const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
-	const { data, error, isValidating } = useSWR(['/api/products', id], (url, id) => fetcher(url, id))
+	const { data, error, isValidating } = useSWR(['/api/products', id], fetcher)
 	console.log({ data, error, isValidating, id })
 
 	return (

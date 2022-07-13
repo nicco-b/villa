@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
-
+const fetcher = null
 export default function Home() {
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)
 	return (
