@@ -89,60 +89,7 @@ router.post(async (req, res) => {
 		})
 		//
 		//send email to customer
-		const htmlTemplate = `
-		<div style="max-width: 600px; max-height: auto;
-		overflow: hidden; 
-		background-color:#F6F2E580;
-		color: #2b2b2c;
-		border: 1px dashed #C2B99E80;
-		font-family: 'Inter', sans-serif;
- padding: 20px">
- <div><span>Luns Shop Order:</span></div>
- <br/>
 
-<ul style="
-borderBottom: 1px dashed #C2B99E80;
-list-style-type: none;
-width: auto;
-padding: 0;
-margin: 0;
-overflow: hidden;">
- <li style="
-width: 100%;
-overflow: hidden;">
-<span style="
-width: 50%;
-float: left;
-overflow: hidden;">${customer_details.name}</span>
-<span style="
-width: 50%;
-float: left;
-overflow: hidden;">#${orderDoc.value._id}</span>
-</li>
-</ul>
-<br/>
-<ul style="
-list-style-type: none;
-width: auto;
-padding: 0;
-margin: 0;
-overflow: hidden;">
- <li style="
-width: 100%;
-overflow: hidden;">
-<span style="
-width: 50%;
-float: left;
-overflow: hidden;">order summary</span>
-<span style="
-width: 50%;
-float: left;
-overflow: hidden;">1 item</span>
-</li>
-</ul>
- <br/>
- </div>
- `
 		const email = new Email({
 			message: {
 				from: 'njbufalino@gmail.com',
