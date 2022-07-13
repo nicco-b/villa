@@ -11,8 +11,9 @@ export default function Index({ fallback }) {
 		<SWRConfig
 			value={{
 				fallback,
-				revalidate: true,
-				revalidateOnFocus: true,
+				revalidate: false,
+				revalidateOnFocus: false,
+
 				fetcher: (...args) => fetch(...args).then(res => res.json()),
 			}}>
 			<Home />

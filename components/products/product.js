@@ -3,7 +3,7 @@ import { formatCurrencyString } from 'use-shopping-cart'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
-export const Product = ({ product, single }) => {
+export const Product = ({ product, isValidating }) => {
 	const [addButtonState, setAddButtonState] = useState('default')
 	useEffect(() => {
 		let timer = setTimeout(() => {
@@ -60,7 +60,7 @@ export const Product = ({ product, single }) => {
 						style={{
 							minWidth: '110px',
 						}}>
-						{addButtonState === 'default' ? 'add to cart' : 'added!'}
+						{addButtonState === 'default' ? (isValidating ? 'LOAD' : 'add to cart') : 'added!'}
 					</button>
 				) : (
 					<button
@@ -73,7 +73,7 @@ export const Product = ({ product, single }) => {
 							border: 'none',
 							cursor: 'not-allowed',
 						}}>
-						Out of Stock
+						{isValidating ? 'LOAD' : 'Out of Stock'}
 					</button>
 				)}
 			</div>

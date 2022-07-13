@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 import { Product } from './product'
-export const Products = ({ products }) => {
+import redloader from '../../public/Redloader.gif'
+import Image from 'next/image'
+export const Products = ({ products, isValidating }) => {
 	const productList = products
 	// console.log(productList)
 	return (
@@ -9,6 +11,7 @@ export const Products = ({ products }) => {
 			style={{
 				display: 'grid',
 				gridTemplateRows: 'auto 1fr',
+				position: 'relative',
 			}}>
 			{/* <h3>products</h3> */}
 			<div
@@ -20,11 +23,25 @@ export const Products = ({ products }) => {
 					// overflow: 'auto',
 					gridTemplateRows: 'repeat(auto-fit, minmax(100px, 1fr))',
 				}}>
+				{isValidating && (
+					<div
+						style={{
+							position: 'absolute',
+							display: 'flex',
+							height: '25px',
+							width: '100%',
+							justifyContent: 'end',
+							// zIndex: '-1',
+							// backgroundColor: '#f5f5f5',
+						}}>
+						<Image src={redloader} alt='loading' width={25} height={25} />
+					</div>
+				)}
 				{productList?.map(product => (
 					<Link href={`/product/${product.id}`} key={product._id}>
 						<a>
 							<div className={styles.product}>
-								<Product key={product.id} product={product} />
+								<Product key={product.id} product={product} isValidating={isValidating} />
 								<div
 									style={{
 										height: '1px',
