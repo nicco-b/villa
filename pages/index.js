@@ -6,18 +6,18 @@ import styles from '../styles/Home.module.css'
 import { getProducts } from './api/products/products'
 import Home from './home'
 
-export default function Index({ products }) {
+export default function Index({ fallback }) {
 	return (
-		// <SWRConfig
-		// 	value={{
-		// 		fallback,
-		// 		revalidate: false,
-		// 		revalidateOnFocus: false,
+		<SWRConfig
+			value={{
+				fallback,
+				revalidate: false,
+				revalidateOnFocus: false,
 
-		// 		fetcher: (...args) => fetch(...args).then(res => res.json()),
-		// 	}}>
-		<Home products={products} />
-		// </SWRConfig>
+				fetcher: (...args) => fetch(...args).then(res => res.json()),
+			}}>
+			<Home />
+		</SWRConfig>
 	)
 }
 
@@ -37,9 +37,10 @@ export async function getStaticProps() {
 	// Pass data to the page via props
 	return {
 		props: {
-			products: products,
+			fallback: {
+				'/api/products/products': products,
+			},
 		},
 		// In seconds
-		// revalidate: 1,
 	}
 }
