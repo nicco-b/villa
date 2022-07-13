@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import useSWR from 'swr'
 import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
-
-export default function Home({ products }) {
+const fetcher = url => axios.get(`${url}`, {}).then(res => res.data)
+export default function Home() {
+	const { data } = useSWR('/api/products/products', fetcher)
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -22,7 +24,7 @@ export default function Home({ products }) {
 						display: 'grid',
 						padding: '1em',
 					}}>
-					<Products products={products} />
+					<Products products={data} />
 				</div>
 			</div>
 		</div>
