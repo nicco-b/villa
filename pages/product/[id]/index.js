@@ -12,7 +12,6 @@ import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 export default function SingleProduct({ fallback }) {
 	// const title = `${data?.name} | luns shop`
 
-	// console.log({ data, fallback, id })
 	// if (error) return <div>Failed to load</div>
 	// if (!data) return <div>Loading...</div>
 	return (
@@ -50,6 +49,7 @@ const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
 	const { data, error } = useSWR(['api', 'product', id], fetcher)
+	console.log({ data, id })
 	return <Product product={data} />
 }
 SingleProduct.getLayout = function getLayout(page) {
