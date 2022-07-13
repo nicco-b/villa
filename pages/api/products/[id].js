@@ -20,7 +20,7 @@ export async function getProductById(id) {
 }
 export default async (req, res) => {
 	const { id } = req.query
-	await res.revalidate(`/${id}`)
+	await res.revalidate(`/products/${id}`)
 	const product = await getProductById(id)
 	console.log({ product })
 
