@@ -70,7 +70,7 @@ export default function SingleProduct({ fallback }) {
 	)
 }
 
-const fetcher = (url, id) => axios.get(`${url}/${id}`, {}).then(res => res.data)
+const fetcher = null
 
 const ProductPage = () => {
 	const router = useRouter()
