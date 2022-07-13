@@ -77,10 +77,10 @@ export async function getServerSideProps({ params }) {
 	// Fetch data from external API
 	const dev = process.env.NODE_ENV !== 'production'
 
-	const product = await fetch(
+	const res = await fetch(
 		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${params.id}`
 	)
-
+	const product = await res.json()
 	return {
 		props: {
 			product: product,
