@@ -10,16 +10,16 @@ import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import axios from 'axios'
 
 export async function getStaticPaths() {
-	// const data = await getProducts()
-	// const paths = data.map(product => ({
-	// 	params: { id: product.id },
-	// }))
+	const data = await getProducts()
+	const paths = data.map(product => ({
+		params: { id: product.id },
+	}))
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
 	return {
-		paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+		paths,
 		fallback: 'blocking',
 	}
 }
