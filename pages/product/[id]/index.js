@@ -75,13 +75,7 @@ const fetcher = (url, id) => axios.get(`${url}/${id}`, {}).then(res => res.data)
 const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
-	const { data, error, isValidating } = useSWR(
-		['/api/products', id],
-		(url, id) => fetcher(url, id),
-		{
-			refreshInterval: 30000,
-		}
-	)
+	const { data, error, isValidating } = useSWR(['/api/products', id], (url, id) => fetcher(url, id))
 	console.log({ data, error, isValidating, id })
 
 	return (
