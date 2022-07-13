@@ -81,7 +81,7 @@ export async function getStaticPaths() {
 	// on-demand if the path doesn't exist.
 	return {
 		paths,
-		fallback: false,
+		fallback: 'blocking',
 	}
 }
 export async function getStaticProps({ params }) {
