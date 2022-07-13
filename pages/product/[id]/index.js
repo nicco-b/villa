@@ -71,9 +71,16 @@ SingleProduct.getLayout = function getLayout(page) {
 // }
 
 export async function getServerSideProps({ params }) {
-	console.log('running getStaticProps, params', params)
-	const product = await getProductById(params.id)
-	console.log(product)
+	// console.log('running getStaticProps, params', params)
+	// const product = await getProductById(params.id)
+	// console.log(product)
+	// Fetch data from external API
+	const dev = process.env.NODE_ENV !== 'production'
+
+	const product = await fetch(
+		`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/${params.id}`
+	)
+
 	return {
 		props: {
 			product: product,
