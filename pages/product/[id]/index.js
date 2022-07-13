@@ -12,15 +12,15 @@ import { getProducts } from '../../api/products/products'
 
 export async function getStaticPaths() {
 	const data = await getProducts()
-	const paths = data.map(product => ({
-		params: { id: `${product.id}` },
-	}))
+	// const paths = data.map(product => ({
+	// 	params: { id: `${product.id}` },
+	// }))
 
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
 	return {
-		paths,
+		paths: [],
 		fallback: 'blocking',
 	}
 }
@@ -39,7 +39,7 @@ export async function getStaticProps({ params }) {
 		// Next.js will attempt to re-generate the page:
 		// - When a request comes in
 		// - At most once every 10 seconds
-		revalidate: 1, // In seconds
+		// revalidate: 1, // In seconds
 	}
 }
 export default function SingleProduct({ fallback }) {
