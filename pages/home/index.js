@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Head from 'next/head'
 import Image from 'next/image'
 import useSWR from 'swr'
