@@ -26,7 +26,7 @@ export const Product = ({ product, single }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src={`${product.images[0]}`} alt={'product_image'} layout={'fill'} />
+				<img src={`${product?.images[0]}`} alt={'product_image'} layout={'fill'} />
 			</div>
 			<div
 				style={{
@@ -44,16 +44,16 @@ export const Product = ({ product, single }) => {
 						alignItems: 'center',
 						paddingBottom: '1em',
 					}}>
-					<h4>{product.name}</h4>
-					<p>{product.dimensions}</p>
+					<h4>{product?.name}</h4>
+					<p>{product?.dimensions}</p>
 					<h4>
 						{formatCurrencyString({
-							value: product.price,
+							value: product?.price,
 							currency: 'usd',
 						})}
 					</h4>
 				</div>
-				{product.inventory > 0 ? (
+				{product?.inventory > 0 ? (
 					<button
 						type={'button'}
 						onClick={handleCartAdd}
