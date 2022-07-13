@@ -3,21 +3,21 @@ import Image from 'next/image'
 import { SWRConfig } from 'swr'
 import MainLayout from '../components/layouts/MainLayout'
 import styles from '../styles/Home.module.css'
-import { getProducts } from './api/products/products'
+import products, { getProducts } from './api/products/products'
 import Home from './home'
 
-export default function Index({ fallback }) {
+export default function Index({ products }) {
 	return (
-		<SWRConfig
-			value={{
-				fallback,
-				revalidate: false,
-				revalidateOnFocus: false,
+		// <SWRConfig
+		// 	value={{
+		// 		fallback,
+		// 		revalidate: false,
+		// 		revalidateOnFocus: false,
 
-				fetcher: (...args) => fetch(...args).then(res => res.json()),
-			}}>
-			<Home />
-		</SWRConfig>
+		// 		fetcher: (...args) => fetch(...args).then(res => res.json()),
+		// 	}}>
+		<Home products={products} />
+		// </SWRConfig>
 	)
 }
 
@@ -37,9 +37,7 @@ export async function getStaticProps() {
 	// Pass data to the page via props
 	return {
 		props: {
-			fallback: {
-				'/api/products/products': products,
-			},
+			products: products,
 		},
 		// In seconds
 		revalidate: 1,
