@@ -28,7 +28,7 @@ export default function Home({ products }) {
 						display: 'grid',
 						padding: '1em',
 					}}>
-					<Products products={data} isValidating={isValidating} />
+					<Products products={data} />
 				</div>
 			</div>
 		</div>
