@@ -8,7 +8,7 @@ import { Product } from '../../../components/products/product'
 import { getProducts } from '../../api/products/products'
 import { getProductById } from '../../api/products/[id]'
 export default function SingleProduct({ product }) {
-	const title = `| luns shop`
+	const title = `${product.name} | luns shop`
 	return (
 		<div>
 			<Head>
@@ -31,7 +31,7 @@ export default function SingleProduct({ product }) {
 				style={{
 					padding: '1em',
 				}}>
-				{product?.description}
+				{product.description}
 			</div>
 		</div>
 	)
@@ -55,22 +55,22 @@ SingleProduct.getLayout = function getLayout(page) {
 // 	// Pass data to the page via props
 // 	return { props: { product } }
 // }
-export async function getStaticPaths() {
-	const data = await getProducts()
-	const paths = data.map(product => ({
-		params: { id: product.id },
-	}))
+// export async function getStaticPaths() {
+// 	const data = await getProducts()
+// 	const paths = data.map(product => ({
+// 		params: { id: product.id },
+// 	}))
 
-	// We'll pre-render only these paths at build time.
-	// { fallback: blocking } will server-render pages
-	// on-demand if the path doesn't exist.
-	return {
-		fallback: true,
-		paths: [],
-	}
-}
+// 	// We'll pre-render only these paths at build time.
+// 	// { fallback: blocking } will server-render pages
+// 	// on-demand if the path doesn't exist.
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	}
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	console.log('running getStaticProps, params', params)
 	const product = await getProductById(params.id)
 	console.log(product)
