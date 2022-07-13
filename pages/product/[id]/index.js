@@ -50,8 +50,7 @@ const ProductPage = () => {
 	const { id } = router.query
 	const { data, error, isValidating } = useSWR(() => '/api/products/' + id, fetcher)
 	console.log({ data, error, isValidating, id })
-	if (error) return <div>Failed to load</div>
-	if (!data) return <div>Loading...</div>
+
 	return <Product product={data} />
 }
 SingleProduct.getLayout = function getLayout(page) {
