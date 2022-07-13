@@ -43,13 +43,15 @@ export default function SingleProduct({ fallback }) {
 		</SWRConfig>
 	)
 }
-const ProductPage = () => {
-	const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
+const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
-	const { data, error } = useSWR(['api', 'product', id], fetcher)
-	console.log({ data, id })
+	const { data, error, isValidating } = useSWR(() => '/api/products/' + id, fetcher)
+	console.log({ data, error, isValidating, id })
+	if (error) return <div>Failed to load</div>
+	if (!data) return <div>Loading...</div>
 	return <Product product={data} />
 }
 SingleProduct.getLayout = function getLayout(page) {
