@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 import { Product } from './product'
-import redloader from '../../public/Redloader.gif'
 import Image from 'next/image'
 export const Products = ({ products, isValidating }) => {
 	const productList = products
@@ -34,7 +33,7 @@ export const Products = ({ products, isValidating }) => {
 							// zIndex: '-1',
 							// backgroundColor: '#f5f5f5',
 						}}>
-						<Image src={redloader} alt='loading' width={25} height={25} />
+						<Image src={'/redloader.gif'} alt='loading' width={25} height={25} />
 					</div>
 				)}
 				{productList?.map(product => (
