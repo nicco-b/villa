@@ -77,8 +77,8 @@ router.post(async (req, res) => {
 
 		//get products from updated order and update the inventory
 		const { products } = orderDoc.value
-		products.map(p => {
-		await res.revalidate(`/product/${p.id}`)
+		await products.map(p => {
+			res.revalidate(`/product/${p.id}`)
 
 			db.collection('products').findOneAndUpdate(
 				{ _id: ObjectId(p._id) },
