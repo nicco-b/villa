@@ -21,7 +21,7 @@ export async function getProducts(req, res) {
 	const data = await db.collection('products').find({}).toArray()
 	// console.log({ order }
 	const p = JSON.parse(JSON.stringify(data))
-	res.revalidate(`/api/products/products`)
+	await res.revalidate(`/api/products/products`)
 
 	// console.log(p)
 	return p
