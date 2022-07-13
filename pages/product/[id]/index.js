@@ -65,8 +65,8 @@ export async function getStaticPaths() {
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
 	return {
-		paths,
-		fallback: 'blocking',
+		fallback: true,
+		paths: [],
 	}
 }
 
