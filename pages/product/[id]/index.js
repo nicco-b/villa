@@ -48,7 +48,7 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
-	const { data, error, isValidating } = useSWR(() => '/api/products/' + id, fetcher)
+	const { data, error, isValidating } = useSWR(['api', 'products', id], fetcher)
 	console.log({ data, error, isValidating, id })
 
 	return <Product product={data} />
