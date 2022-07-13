@@ -26,12 +26,12 @@ export default function SingleProduct({ product }) {
 					<button type='text'>back</button>
 				</Link>
 			</div>
-			<Product product={product} />
+			<Product product={product || {}} />
 			<div
 				style={{
 					padding: '1em',
 				}}>
-				{product.description}
+				{product?.description}
 			</div>
 		</div>
 	)
