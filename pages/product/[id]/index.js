@@ -5,8 +5,7 @@ import MainLayout from '../../../components/layouts/MainLayout'
 import styles from '../../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { Product } from '../../../components/products/product'
-import { getProducts } from '../../api/products/products'
-import { getProductById } from '../../api/products/[id]'
+
 export default function SingleProduct({ product }) {
 	const title = `${product.name} | luns shop`
 	return (
