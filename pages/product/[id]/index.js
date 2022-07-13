@@ -8,6 +8,7 @@ import { Product } from '../../../components/products/product'
 import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import axios from 'axios'
+import { getProducts } from '../../api/products/products'
 
 export async function getStaticPaths() {
 	const data = await getProducts()
