@@ -7,7 +7,7 @@ import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 const fetcher = url => axios.get(`${url}`, {}).then(res => res.data)
 export default function Home() {
-	const { data } = useSWR('/api/products/products', fetcher)
+	const { data } = useSWR('/api/products/products', fetcher, { refreshInterval: 15000 })
 	return (
 		<div className={styles.container}>
 			<Head>
