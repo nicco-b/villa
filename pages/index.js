@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { SWRConfig } from 'swr'
 import MainLayout from '../components/layouts/MainLayout'
 import styles from '../styles/Home.module.css'
-import products, { getProducts } from './api/products/products'
+import { getProducts } from './api/products/products'
 import Home from './home'
 
 export default function Index({ products }) {
