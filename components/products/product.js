@@ -56,11 +56,11 @@ export const Product = ({ product, isValidating }) => {
 				{product?.inventory > 0 ? (
 					<button
 						type={'button'}
-						onClick={handleCartAdd}
+						onClick={!isValidating && handleCartAdd}
 						style={{
 							minWidth: '110px',
 						}}>
-						{addButtonState === 'default' ? (isValidating ? 'LOAD' : 'add to cart') : 'added!'}
+						{addButtonState === 'default' ? 'add to cart' : 'added!'}
 					</button>
 				) : (
 					<button
@@ -73,7 +73,7 @@ export const Product = ({ product, isValidating }) => {
 							border: 'none',
 							cursor: 'not-allowed',
 						}}>
-						{isValidating ? 'LOAD' : 'Out of Stock'}
+						{'Out of Stock'}
 					</button>
 				)}
 			</div>

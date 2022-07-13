@@ -47,7 +47,7 @@ const ProductPage = () => {
 		['/api/products', id],
 		(url, id) => fetcher(url, id),
 		{
-			refreshInterval: 1000,
+			refreshInterval: 30000,
 		}
 	)
 	console.log({ data, error, isValidating, id })

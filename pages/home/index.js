@@ -8,7 +8,7 @@ import styles from '../../styles/Home.module.css'
 const fetcher = url => axios.get(`${url}`, {}).then(res => res.data)
 export default function Home() {
 	const { data, isValidating } = useSWR('/api/products/products', fetcher, {
-		refreshInterval: 1000,
+		refreshInterval: 30000,
 	})
 	return (
 		<div className={styles.container}>
