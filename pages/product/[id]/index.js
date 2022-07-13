@@ -15,7 +15,12 @@ export default function SingleProduct({ fallback }) {
 	// if (error) return <div>Failed to load</div>
 	// if (!data) return <div>Loading...</div>
 	return (
-		<SWRConfig value={{ fallback }}>
+		<SWRConfig
+			value={{
+				fallback,
+				revalidate: true,
+				fetcher: (...args) => fetch(...args).then(res => res.json()),
+			}}>
 			<div>
 				<Head>
 					{/* <title>{title}</title> */}
