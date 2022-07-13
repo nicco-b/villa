@@ -49,6 +49,7 @@ router.post(async (req, res) => {
 
 	if (event.type === 'checkout.session.completed') {
 		console.log('checkout.session.completed')
+		await res.revalidate(`/`)
 
 		//update order
 		console.log('update order here', event)
@@ -77,6 +78,8 @@ router.post(async (req, res) => {
 		//get products from updated order and update the inventory
 		const { products } = orderDoc.value
 		products.map(p => {
+		await res.revalidate(`/product/${p.id}`)
+
 			db.collection('products').findOneAndUpdate(
 				{ _id: ObjectId(p._id) },
 				{
