@@ -106,7 +106,10 @@ router.post(async (req, res) => {
 				locals: {
 					name: customer_details.name,
 					order: orderDoc.value,
+					customer: customer_details,
+					shipping: shipping,
 					products: products,
+					date: orderDoc.value.created_at,
 				},
 			},
 		})
@@ -122,6 +125,8 @@ router.post(async (req, res) => {
 		// 	else console.log(info)
 		// })
 		const dir = path.join(process.cwd(), 'templates', 'order-success')
+		//public folder
+		const publicFolder = path.join(process.cwd(), 'public')
 		const templ = dir
 
 		await email.send({
