@@ -15,6 +15,7 @@ import ejs from 'ejs'
 import { createRouter } from 'next-connect'
 import { connectToDatabase } from '../../../utils/mongodb'
 import { dirname } from 'path'
+import { formatCurrencyString } from 'use-shopping-cart'
 const nodemailer = require('nodemailer')
 const Email = require('email-templates')
 const path = require('path')
@@ -109,6 +110,12 @@ router.post(async (req, res) => {
 					customer: customer_details,
 					shipping: shipping,
 					products: products,
+					formatPrice: price => {
+						formatCurrencyString({
+							currency: 'USD',
+							value: price,
+						})
+					},
 					date: orderDoc.value.created_at,
 				},
 			},

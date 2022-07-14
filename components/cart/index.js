@@ -42,7 +42,16 @@ export const Cart = () => {
 			}
 		})
 		const order = await {
-			products: cart,
+			products: cart.map(item => {
+				return {
+					...item,
+					formattedPrice: formatCurrencyString({
+						currency: 'USD',
+						value: item.price,
+					}),
+				}
+			}),
+
 			cartTotal: cartTotalPrice,
 			cartQuantity: cartQuantity(),
 		}

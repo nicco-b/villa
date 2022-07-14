@@ -16,6 +16,7 @@ router.post(async (req, res) => {
 		const { db } = await connectToDatabase()
 		const orderWithDate = {
 			...order,
+
 			created_at: new Date(),
 		}
 		const newOrder = await db.collection('orders').insertOne(orderWithDate)

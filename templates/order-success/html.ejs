@@ -4,6 +4,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Simple Transactional Email</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
 			/* -------------------------------------
           GLOBAL RESETS
@@ -11,9 +17,12 @@
 
 			/*All the styling goes here*/
 			.product {
-				width: 100%;
+				/* width: 100%; */
 				height: 100%;
 				display: flex;
+			}
+			.width-100 {
+				width: 100%;
 			}
 			.product-left {
 			}
@@ -21,8 +30,20 @@
 				width: 100%;
 				margin: auto;
 			}
-			.product-right p {
+			.float-right {
 				float: right;
+			}
+			.text-right {
+				text-align: right;
+			}
+			.flex {
+				display: flex;
+			}
+			.margin-bottom {
+				margin-bottom: 10px;
+			}
+			.margin-left {
+				margin-left: 10px;
 			}
 			img {
 				border: none;
@@ -35,6 +56,7 @@
 				font-family: sans-serif;
 				-webkit-font-smoothing: antialiased;
 				font-size: 14px;
+				font-family: 'Inter', sans-serif;
 				line-height: 1.4;
 				margin: 0;
 				padding: 0;
@@ -367,11 +389,13 @@
 										<tr>
 											<p>Hi <%=name%>, thank you for your order!</p>
 											<p>#<%=order._id%></p>
-
-											<p>order summary</p>
+											<div>&nbsp;</div>
+											<div class="margin-bottom">
+												<h4><b>order summary</b></h4>
+											</div>
 											<% products.map(function(product) { %>
 											<div class="product">
-												<div class="product-left">
+												<div class="product-left flex">
 													<img
 														src="https://shop.duairakp.com/<%=product.images[0]%>"
 														alt="<%=product.name%>"
@@ -379,41 +403,33 @@
 														height="40"
 													/>
 												</div>
-												<div class="product-right">
-													<p><%=product.name%> x <%=product.quantity%> <%=product.price%></p>
+												<div class="product-right flex">
+													<p class="width-100 margin-left"><%=product.name%></p>
+													<div class="text-right flex width-100">
+														<p class="text-right width-100">x<%=product.quantity%></p>
+														<p class="text-right width-100"><%=product.formattedPrice%></p>
+													</div>
 												</div>
 											</div>
 											<% }) %>
+											<div class="product-right margin-bottom">
+												<p class="text-right">shipping: free</p>
+												<p class="text-right">total: <%=order.cartTotal%></p>
+											</div>
+
+											<div class="margin-bottom">
+												<h4>
+													<b>shipping to</b>
+												</h4>
+											</div>
 											<p><%=shipping.name %></p>
 											<p><%=customer.email %></p>
 											<p><%=customer.phone %></p>
-											<p><%=shipping.address.line1 %></p>
-											<p><%=shipping.address.line2 %></p>
+											<p><%=shipping.address.line1 %> <%=shipping.address.line2 %></p>
 											<p><%=shipping.address.city %>, <%=shipping.address.state %></p>
 											<p><%=shipping.address.postal_code %> <%=shipping.address.country%></p>
-											<p>ordered on: <%=date%></p>
-
-											<table
-												role="presentation"
-												border="0"
-												cellpadding="0"
-												cellspacing="0"
-												class="btn btn-primary"
-											>
-												<tbody>
-													<tr>
-														<td align="left">
-															<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-																<tbody>
-																	<tr>
-																		<td><a href="http://htmlemail.io" target="_blank">Call To Action</a></td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
+											<div>&nbsp;</div>
+											<p>ordered on: <%=date.toDateString()%></p>
 										</tr>
 									</table>
 								</td>
@@ -426,12 +442,8 @@
 						<!-- START FOOTER -->
 						<div class="footer">
 							<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td class="content-block">
-										<span class="apple-link">Los Angeles</span>
-										<br />
-									</td>
-								</tr>
+								<img src="https://shop.duairakp.com/lun.png" alt="Lun" width="100" height="50" />
+
 								<tr>
 									<td class="content-block powered-by">luns shop 2022</td>
 								</tr>
