@@ -1,7 +1,5 @@
 import initStripe from 'stripe'
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-	apiVersion: '2020-08-27',
-})
+
 // import fs from 'fs'
 import { ObjectId } from 'mongodb'
 import { buffer } from 'micro'
@@ -11,10 +9,8 @@ export const config = {
 		bodyParser: false,
 	},
 }
-import ejs from 'ejs'
 import { createRouter } from 'next-connect'
 import { connectToDatabase } from '../../../utils/mongodb'
-import { dirname } from 'path'
 import { formatCurrencyString } from 'use-shopping-cart'
 const nodemailer = require('nodemailer')
 const Email = require('email-templates')
