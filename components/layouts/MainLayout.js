@@ -4,7 +4,7 @@ import { TopBar } from '../topbar'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { useLayoutEffect, useEffect, useState } from 'react'
 import { useMain } from '../../context/mainContext'
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, animate }) {
 	const { cartTotal } = useMain()
 	const size = useWindowSize()
 	const [columns, setColumns] = useState(undefined)
@@ -23,7 +23,7 @@ export default function MainLayout({ children }) {
 			<div className={styles.sideSpacer}></div>
 			<div className={styles.twoRow}>
 				<>
-					<TopBar />
+					<TopBar animate={animate} />
 					<div className={styles.twoColumn}>
 						<div>{children}</div>
 						<SideBar columns={columns} />

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../../styles/Home.module.css'
 
-export const TopBar = ({ children }) => {
+export const TopBar = ({ animate }) => {
 	return (
 		<>
 			<div className={styles.topBar}>
@@ -33,7 +33,7 @@ export const TopBar = ({ children }) => {
 				</div>
 				<Link href='/'>
 					<a href='/'>
-						<LogoHoverSwap />
+						<LogoHoverSwap animate={animate} />
 					</a>
 				</Link>
 			</div>
@@ -41,7 +41,7 @@ export const TopBar = ({ children }) => {
 	)
 }
 
-const LogoHoverSwap = ({ children }) => {
+const LogoHoverSwap = ({ animate }) => {
 	return (
 		<>
 			<div className={'logoHoverSwap'}>

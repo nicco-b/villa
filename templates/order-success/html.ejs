@@ -8,7 +8,9 @@
 		<meta name="format-detection" content="email=no" />
 		<meta name="color-scheme" content="light dark" />
 		<meta name="supported-color-schemes" content="light dark" />
-		<title>Simple Transactional Email</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com"> 
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 		<style>
 			/* -------------------------------------
@@ -80,7 +82,6 @@
 				width: 100%;
 			}
 			table td {
-				font-family: sans-serif;
 				font-size: 16px;
 				vertical-align: middle;
 				/* border: 1px solid #f6932a; */
@@ -158,7 +159,6 @@
 			h2,
 			h3,
 			h4 {
-				font-family: sans-serif;
 				font-weight: 400;
 				font-size: 17px;
 				line-height: 1.4;
@@ -176,10 +176,9 @@
 			p,
 			ul,
 			ol {
-				font-family: sans-serif;
 				font-size: 16px;
 				font-weight: normal;
-				font-weight: 400;
+				font-weight: 401;
 
 				margin: 0;
 			}
@@ -409,7 +408,7 @@
 									<table role="presentation" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<p>Hi <%=name%>, thank you for your order!</p>
-											<p><b>#<%=order._id%></b></p>
+											<p><b>#<%=order._id.toString().slice(-5)%></b></p>
 											<div>&nbsp;</div>
 											<div class="margin-bottom">
 												<h4><b>order summary</b></h4>
@@ -453,7 +452,7 @@
 											<div class="flex">
 												<p class="width-100 margin-auto">ordered on: <%=date.toDateString()%></p>
 												<a class="width-100 text-right" href="https://shop.duairakp.com">
-													<img src="https://shop.duairakp.com/lun.png" alt="Lun" width="100" height="50" />
+													<img src="https://shop.duairakp.com/lun.png" alt="Lun" width="62" height="26" />
 												</a>
 											</div>
 										</tr>
@@ -464,19 +463,19 @@
 							<!-- END MAIN CONTENT AREA -->
 						</div>
 						<!-- END CENTERED WHITE CONTAINER -->
+					
 
-						<!-- START FOOTER -->
-						<div class="footer">
-							<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td class="content-block powered-by">luns shop 2022</td>
-								</tr>
-							</table>
-						</div>
-						<!-- END FOOTER -->
 					</div>
 				</td>
+			
 			</tr>
+					<!-- START FOOTER -->
+					<tr class="footer">
+						<td >
+								<p>luns shop 2022</p>
+						</td>
+					</tb>
+					<!-- END FOOTER -->
 		</table>
 	</body>
 </html>

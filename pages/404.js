@@ -39,5 +39,5 @@ export default function Index({ fallback }) {
 }
 
 Index.getLayout = function getLayout(page) {
-	return <MainLayout>{page}</MainLayout>
+	return <MainLayout animate={true}>{page}</MainLayout>
 }
