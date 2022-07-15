@@ -54,7 +54,7 @@ const Success = ({ data }) => {
 	// console.log({ data, error })
 
 	useEffect(() => {
-		if (data) {
+		if (data.order?.customer_details) {
 			shootFireworks()
 			clearCart()
 		}
@@ -74,11 +74,7 @@ const Success = ({ data }) => {
 				<TopBar />
 				<div className={styles.summaryBox}>
 					<div className={styles.summary}>
-						{!data ? (
-							<div>
-								<p>Sorry, something went wrong!</p>
-							</div>
-						) : !data ? (
+						{!data.order ? (
 							<div
 								style={{
 									display: 'flex',
@@ -86,10 +82,10 @@ const Success = ({ data }) => {
 									alignItems: 'center',
 									paddingTop: '4em',
 								}}>
-								<LoadingIcon />
+								<img src='/red_loader.webp' alt='loading' width={60} height={60} />
 							</div>
 						) : (
-							<SuccessInfo data={data.session} order={data.order} />
+							data.order?.customer_details && <SuccessInfo data={data.session} order={data.order} />
 						)}
 					</div>
 				</div>

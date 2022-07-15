@@ -24,9 +24,9 @@ export async function getStaticPaths() {
 	}
 }
 export async function getStaticProps({ params }) {
-	console.log('running getStaticProps, params', params)
+	// console.log('running getStaticProps, params', params)
 	const product = await getProductById(params.id)
-	console.log(product)
+	// console.log(product)
 	return {
 		props: {
 			fallback: {
@@ -76,7 +76,7 @@ const ProductPage = () => {
 	const router = useRouter()
 	const { id } = router.query
 	const { data, error, isValidating } = useSWR(['/api/products', id], fetcher)
-	console.log({ data, error, isValidating, id })
+	// console.log({ data, error, isValidating, id })
 
 	return (
 		<>
@@ -90,7 +90,7 @@ const ProductPage = () => {
 				<Link href={`/`}>
 					<button type='text'>back</button>
 				</Link>
-				{isValidating && <Image src={'/REDloader.gif'} width={25} height={25} />}
+				{isValidating && <Image src={'/red_loader.webp'} width={25} height={25} />}
 			</div>
 			<Product product={data} isValidating={isValidating} />
 			<div

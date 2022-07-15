@@ -14,7 +14,14 @@ router.get(async (req, res) => {
 		const checkout_session = await stripe.checkout.sessions.retrieve(id)
 		//get order from database
 		// console.log('completed order: ', id)
-
+		// console.log(1)
+		// await sleep(1000)
+		// console.log(2)
+		// function sleep(ms) {
+		// 	return new Promise(resolve => {
+		// 		setTimeout(resolve, ms)
+		// 	})
+		// }
 		const { db } = await connectToDatabase()
 		const session = checkout_session
 		const order = await db

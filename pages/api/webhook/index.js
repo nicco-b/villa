@@ -47,6 +47,7 @@ router.post(async (req, res) => {
 		console.log({ error })
 		return res.status(400).send(`Webhook error: ${error.message}`)
 	}
+	console.log(event.type)
 
 	if (event.type === 'checkout.session.completed') {
 		console.log('checkout.session.completed')
@@ -67,6 +68,7 @@ router.post(async (req, res) => {
 		}
 
 		const options = { upsert: false }
+
 		const orderDoc = await db.collection('orders').findOneAndUpdate(
 			{
 				_id: ObjectId(client_reference_id),
@@ -148,7 +150,7 @@ router.post(async (req, res) => {
 			send: true,
 		})
 	}
-	console.log(event.type)
+
 	res.send({ received: true })
 	// Return a 200 response to acknowledge receipt of the event
 })

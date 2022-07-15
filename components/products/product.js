@@ -56,7 +56,7 @@ export const Product = ({ product, isValidating }) => {
 				{product?.inventory > 0 ? (
 					<button
 						type={'button'}
-						onClick={!isValidating && handleCartAdd}
+						onClick={handleCartAdd}
 						style={{
 							minWidth: '110px',
 						}}>
@@ -65,7 +65,6 @@ export const Product = ({ product, isValidating }) => {
 				) : (
 					<button
 						type={'button'}
-						onClick={() => {}}
 						style={{
 							minWidth: '110px',
 							backgroundColor: '#D34014',

@@ -8,6 +8,7 @@ import { fetchPostJSON } from '../../utils/api-helpers'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import useSWR from 'swr'
 import { formatCurrencyString } from 'use-shopping-cart'
+import LoadingIcon from '../utils/LoadingIcon'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
 	const { cart, clearCart, cartTotal, cartQuantity, removeItem } = useShoppingCart()
@@ -220,7 +221,7 @@ export const Cart = () => {
 								background: cart.length ? (!loading ? '#F6F2E5' : '#d9d5c3') : '#d9d5c3',
 								color: cart.length ? '#2b2b2c' : '#cdcec1',
 							}}>
-							{loading ? 'pls wait' : 'checkout'}
+							{loading ? <LoadingIcon /> : 'checkout'}
 						</button>
 					</section>
 				</form>

@@ -33,7 +33,7 @@ export const Products = ({ products, isValidating }) => {
 							// zIndex: '-1',
 							// backgroundColor: '#f5f5f5',
 						}}>
-						<Image src={'/REDloader.gif'} alt='loading' width={25} height={25} />
+						<Image src={'/red_loader.webp'} alt='loading' width={25} height={25} />
 					</div>
 				)}
 				{productList?.map(product => (
