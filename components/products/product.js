@@ -58,29 +58,27 @@ export const Product = ({ product, isValidating }) => {
 						height: '32.2969px',
 						backgroundColor: '#f5f5f5',
 					}}>
-					{!isValidating && product?.inventory > 0 ? (
+					{product?.inventory > 0 ? (
 						<button
 							type={'button'}
-							onClick={handleCartAdd}
+							onClick={!isValidating && handleCartAdd}
 							style={{
 								minWidth: '110px',
 							}}>
 							{addButtonState === 'default' ? 'add to cart' : 'added!'}
 						</button>
 					) : (
-						!isValidating && (
-							<button
-								type={'button'}
-								style={{
-									minWidth: '110px',
-									backgroundColor: '#D34014',
-									color: '#333',
-									border: 'none',
-									cursor: 'not-allowed',
-								}}>
-								{'Out of Stock'}
-							</button>
-						)
+						<button
+							type={'button'}
+							style={{
+								minWidth: '110px',
+								backgroundColor: '#D34014',
+								color: '#333',
+								border: 'none',
+								cursor: 'not-allowed',
+							}}>
+							{'Out of Stock'}
+						</button>
 					)}
 				</div>
 			</div>
