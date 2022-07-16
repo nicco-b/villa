@@ -169,7 +169,7 @@ router.post(async (req, res) => {
 			template: adminTemplate,
 			message: {
 				// from: 'njbufalino@gmail.com', // sender address
-				to: 'njbufalino@gmail.com', // list of receivers
+				to: 'duairak@gmail.com', // list of receivers
 				// subject: 'Order Successful', // Subject line
 				// text: 'order',
 				// html: htmlTemplate, // plain text body
