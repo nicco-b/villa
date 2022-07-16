@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="address=no" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="color-scheme" content="light dark" />
+		<meta name="supported-color-schemes" content="light dark" />
+		<link rel="preconnect" href="https://fonts.googleapis.com"> 
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+		<style>
+			/* -------------------------------------
+			       GLOBAL RESETS
+			   ------------------------------------- */
+
+			/*All the styling goes here*/
+			.product {
+				/* width: 100%; */
+				height: 100%;
+				display: flex;
+				margin: 0 1em 1em 1em;
+				padding: 0.5em 0;
+			}
+			.last-product {
+				border-bottom: 1px solid #ececec;
+			}
+			.width-100 {
+				width: 100%;
+			}
+			.product-left {
+			}
+			.product-right {
+				width: 100%;
+				margin: auto;
+			}
+			.float-right {
+				float: right;
+			}
+			.text-right {
+				text-align: right;
+			}
+			.flex {
+				display: flex;
+			}
+			.margin-auto {
+				margin: auto;
+			}
+			.margin-bottom {
+				margin-bottom: 10px;
+			}
+			.margin-left {
+				margin-left: 10px;
+			}
+			img {
+				border: none;
+				-ms-interpolation-mode: bicubic;
+				max-width: 100%;
+			}
+
+			body {
+				/* background-color: #f6f6f6; */
+				font-family: sans-serif;
+				-webkit-font-smoothing: antialiased;
+				font-size: 16px;
+				font-weight: 500;
+				font-family: 'Inter', sans-serif;
+				line-height: 1.4;
+				margin: 0;
+				padding: 0;
+				-ms-text-size-adjust: 100%;
+				-webkit-text-size-adjust: 100%;
+			}
+
+			table {
+				border-collapse: separate;
+				mso-table-lspace: 0pt;
+				mso-table-rspace: 0pt;
+				width: 100%;
+			}
+			table td {
+				font-size: 16px;
+				vertical-align: middle;
+				/* border: 1px solid #f6932a; */
+			}
+
+			/* -------------------------------------
+			       BODY & CONTAINER
+			   ------------------------------------- */
+
+			.body {
+				/* background-color: #f6f6f6;  */
+				width: 100%;
+			}
+
+			/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+			.container {
+				display: block;
+				margin: 0 auto !important;
+				/* makes it centered */
+				max-width: 580px;
+				margin: 10px;
+				width: 580px;
+			}
+
+			/* This should also be a block element, so that it will fill 100% of the .container */
+			.content {
+				box-sizing: border-box;
+				display: block;
+				margin: 0 auto;
+				max-width: 580px;
+				padding: 10px;
+			}
+
+			/* -------------------------------------
+			       HEADER, FOOTER, MAIN
+			   ------------------------------------- */
+			.main {
+				background: #ced7864f;
+				border: 1px dashed #ececec;
+
+				border-radius: 4px;
+
+				width: 100%;
+			}
+
+			.wrapper {
+				box-sizing: border-box;
+				padding: 20px;
+			}
+
+			.content-block {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+
+			.footer {
+				clear: both;
+				margin-top: 10px;
+				text-align: center;
+				width: 100%;
+			}
+			.footer td,
+			.footer p,
+			.footer span,
+			.footer a {
+				color: #999999;
+				font-size: 12px;
+				text-align: center;
+			}
+
+			/* -------------------------------------
+			       TYPOGRAPHY
+			   ------------------------------------- */
+			h1,
+			h2,
+			h3,
+			h4 {
+				font-weight: 400;
+				font-size: 17px;
+				line-height: 1.4;
+				margin: 0;
+				margin-bottom: 5px;
+			}
+
+			h1 {
+				font-size: 35px;
+				font-weight: 300;
+				text-align: center;
+				text-transform: capitalize;
+			}
+
+			p,
+			ul,
+			ol {
+				font-size: 16px;
+				font-weight: normal;
+				font-weight: 401;
+
+				margin: 0;
+			}
+			p li,
+			ul li,
+			ol li {
+				list-style-position: inside;
+				margin-left: 5px;
+			}
+
+			a {
+				color: #f6932a;
+				text-decoration: underline;
+			}
+
+			/* -------------------------------------
+			       BUTTONS
+			   ------------------------------------- */
+			.btn {
+				box-sizing: border-box;
+				width: 100%;
+			}
+			.btn > tbody > tr > td {
+				padding-bottom: 15px;
+			}
+			.btn table {
+				width: auto;
+			}
+			.btn table td {
+				background-color: #ffffff;
+				border-radius: 5px;
+				text-align: center;
+			}
+			.btn a {
+				background-color: #ffffff;
+				border: solid 1px #f6932a;
+				border-radius: 5px;
+				box-sizing: border-box;
+				color: #f6932a;
+				cursor: pointer;
+				display: inline-block;
+				font-size: 16px;
+				font-weight: bold;
+				margin: 0;
+				padding: 12px 25px;
+				text-decoration: none;
+				text-transform: capitalize;
+			}
+
+			.btn-primary table td {
+				background-color: #f6932a;
+			}
+
+			.btn-primary a {
+				background-color: #f6932a;
+				border-color: #f6932a;
+				color: #ffffff;
+			}
+
+			/* -------------------------------------
+			       OTHER STYLES THAT MIGHT BE USEFUL
+			   ------------------------------------- */
+			.last {
+				margin-bottom: 0;
+			}
+
+			.first {
+				margin-top: 0;
+			}
+
+			.align-center {
+				text-align: center;
+			}
+
+			.align-right {
+				text-align: right;
+			}
+
+			.align-left {
+				text-align: left;
+			}
+
+			.clear {
+				clear: both;
+			}
+
+			.mt0 {
+				margin-top: 0;
+			}
+
+			.mb0 {
+				margin-bottom: 0;
+			}
+
+			.preheader {
+				color: transparent;
+				display: none;
+				height: 0;
+				max-height: 0;
+				max-width: 0;
+				opacity: 0;
+				overflow: hidden;
+				mso-hide: all;
+				visibility: hidden;
+				width: 0;
+			}
+
+			.powered-by a {
+				text-decoration: none;
+			}
+
+			hr {
+				border: 0;
+				border-bottom: 1px solid #f6f6f6;
+				margin: 20px 0;
+			}
+			.img-lineItem {
+				height: 25px !important;
+				max-width: 25px !important;
+				width: auto !important;
+			}
+			/* -------------------------------------
+			       RESPONSIVE AND MOBILE FRIENDLY STYLES
+			   ------------------------------------- */
+			@media (prefers-color-scheme: dark) {
+				.darkmode {
+					color: #f5f5f5;
+
+					background-color: transparent;
+				}
+				.main {
+					border-radius: 4px;
+
+					border: 1px dashed #f6f2e550 !important;
+				}
+			}
+			@media only screen and (max-width: 620px) {
+				table.body h1 {
+					font-size: 28px !important;
+					margin-bottom: 10px !important;
+				}
+				table.body p,
+				table.body ul,
+				table.body ol,
+				table.body td,
+				table.body span,
+				table.body a {
+					font-size: 16px !important;
+				}
+				table.body .wrapper,
+				table.body .article {
+					padding: 10px !important;
+				}
+				table.body .content {
+					/* padding: 0 !important; */
+				}
+				table.body .container {
+					/* padding: 0 !important; */
+					width: 100% !important;
+				}
+
+				table.body .btn table {
+					width: 100% !important;
+				}
+				table.body .btn a {
+					width: 100% !important;
+				}
+				table.body .img-responsive {
+					height: auto !important;
+					max-width: 100% !important;
+					width: auto !important;
+				}
+			}
+
+			/* -------------------------------------
+			       PRESERVE THESE STYLES IN THE HEAD
+			   ------------------------------------- */
+			@media all {
+				.ExternalClass {
+					width: 100%;
+				}
+				.ExternalClass,
+				.ExternalClass p,
+				.ExternalClass span,
+				.ExternalClass font,
+				.ExternalClass td,
+				.ExternalClass div {
+					line-height: 100%;
+				}
+				.apple-link a {
+					color: inherit !important;
+					font-family: inherit !important;
+					font-size: inherit !important;
+					font-weight: inherit !important;
+					line-height: inherit !important;
+					text-decoration: none !important;
+				}
+				#MessageViewBody a {
+					color: inherit;
+					text-decoration: none;
+					font-size: inherit;
+					font-family: inherit;
+					font-weight: inherit;
+					line-height: inherit;
+				}
+				.btn-primary table td:hover {
+					background-color: #34495e !important;
+				}
+				.btn-primary a:hover {
+					background-color: #34495e !important;
+					border-color: #34495e !important;
+				}
+			}
+		</style>
+	</head>
+	<body class="darkmode">
+		<span class="preheader">order #<%=order._id %> placed </span>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+			<tr>
+				<td class="container">
+					<div class="content">
+						<!-- START CENTERED WHITE CONTAINER -->
+						<div class="main">
+							<!-- START MAIN CONTENT AREA -->
+							<div>
+								<div class="wrapper">
+									<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<p><%=name%> placed a new order!</p>
+											<p><b>#<%=order._id.toString().slice(-5)%></b></p>
+											<div>&nbsp;</div>
+											<div class="margin-bottom">
+												<h4><b>order summary</b></h4>
+											</div>
+											<% products.map(function(product, i) { %>
+											<div class="product <%=products.length - 1 !== i ? 'last-product' : ''%>">
+												<div class="product-left flex">
+													<img
+														src="https://shop.duairakp.com/<%=product.images[0]%>"
+														alt="<%=product.name%>"
+														width="40"
+														height="40"
+													/>
+												</div>
+												<div class="product-right flex">
+													<p class="width-100 margin-left"><%=product.name%></p>
+													<div class="text-right flex width-100">
+														<p class="text-right width-100">x<%=product.quantity%></p>
+														<p class="text-right width-100"><%=product.formattedPrice%></p>
+													</div>
+												</div>
+											</div>
+											<% }) %>
+											<div class="product-right margin-bottom">
+												<p class="text-right">shipping: free</p>
+												<p class="text-right">total: <%=order.cartTotal%></p>
+											</div>
+
+											<div class="margin-bottom">
+												<h4>
+													<b>shipping to</b>
+												</h4>
+											</div>
+											<p><%=shipping.name %></p>
+											<p><%=customer.email %></p>
+											<p><%=customer.phone %></p>
+											<p><%=shipping.address.line1 %> <%=shipping.address.line2 %></p>
+											<p><%=shipping.address.city %>, <%=shipping.address.state %></p>
+											<p><%=shipping.address.postal_code %> <%=shipping.address.country%></p>
+											<div>&nbsp;</div>
+											<div class="flex">
+												<p class="width-100 margin-auto">ordered on: <%=date.toDateString()%></p>
+												<a class="width-100 text-right" href="https://shop.duairakp.com">
+													<img src="https://shop.duairakp.com/lun.png" alt="Lun" width="62" height="26" />
+												</a>
+											</div>
+										</tr>
+									</table>
+								</td>
+							</div>
+
+							<!-- END MAIN CONTENT AREA -->
+						</div>
+						<!-- END CENTERED WHITE CONTAINER -->
+					
+
+					</div>
+				</td>
+			
+			</tr>
+					<!-- START FOOTER -->
+					<tr class="footer">
+						<td >
+								<p>luns shop 2022</p>
+						</td>
+					</tb>
+					<!-- END FOOTER -->
+		</table>
+	</body>
+</html>

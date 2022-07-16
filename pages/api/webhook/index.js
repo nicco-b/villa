@@ -1,9 +1,7 @@
 import initStripe from 'stripe'
 
-// import fs from 'fs'
 import { ObjectId } from 'mongodb'
 import { buffer } from 'micro'
-// import products from './products.json'
 export const config = {
 	api: {
 		bodyParser: false,
@@ -44,7 +42,19 @@ router.post(async (req, res) => {
 		return res.status(400).send(`Webhook error: ${error.message}`)
 	}
 	console.log(event.type)
+	if (event.type === 'checkout.session.expired') {
+		console.log('checkout.session.expired')
+		//delete the associeted order from the database
+		const { object } = event.data
+		const { client_reference_id } = object
+		const orderId = new ObjectId(client_reference_id)
+		//findOneAndDelete
+		const { db } = await connectToDatabase()
+		const order = await db.collection('orders').findOneAndDelete({ _id: orderId })
+		console.log(order)
 
+		return res.status(200).send('checkout.session.expired')
+	}
 	if (event.type === 'checkout.session.completed') {
 		console.log('checkout.session.completed')
 		await res.revalidate(`/`)
@@ -62,9 +72,6 @@ router.post(async (req, res) => {
 				updated_at: new Date(),
 			},
 		}
-
-		const options = { upsert: false }
-
 		const orderDoc = await db.collection('orders').findOneAndUpdate(
 			{
 				_id: ObjectId(client_reference_id),
@@ -74,7 +81,7 @@ router.post(async (req, res) => {
 		console.log('orderDoc', orderDoc)
 		//
 
-		//get products from updated order and update the inventory
+		//get products from updated order and update the products inventory
 		const { products } = orderDoc.value
 		await products.map(p => {
 			res.revalidate(`/product/${p.id}`)
@@ -89,10 +96,10 @@ router.post(async (req, res) => {
 				{ returnNewDocument: true }
 			)
 		})
-		//
-		//send email to customer
 
-		const email = new Email({
+		//send email to customer
+		const clientTemplate = path.join(process.cwd(), 'templates', 'order-success', 'client')
+		const customerEmail = new Email({
 			message: {
 				from: 'njbufalino@gmail.com',
 			},
@@ -118,27 +125,51 @@ router.post(async (req, res) => {
 				},
 			},
 		})
-		// const mailData = {
-		// 	from: '"Luns Shop" <njbufalino@gmail.com>', // sender address
-		// 	to: customer_details.email, // list of receivers
-		// 	subject: 'Order Successful', // Subject line
-		// 	text: 'order',
-		// 	html: htmlTemplate, // plain text body
-		// }
-		// transporter.sendMail(mailData, function (err, info) {
-		// 	if (err) console.log(err)
-		// 	else console.log(info)
-		// })
-		const dir = path.join(process.cwd(), 'templates', 'order-success')
-		//public folder
-		const publicFolder = path.join(process.cwd(), 'public')
-		const templ = dir
-
-		await email.send({
-			template: templ,
+		await customerEmail.send({
+			template: clientTemplate,
 			message: {
 				// from: 'njbufalino@gmail.com', // sender address
 				to: customer_details.email, // list of receivers
+				// subject: 'Order Successful', // Subject line
+				// text: 'order',
+				// html: htmlTemplate, // plain text body
+			},
+			send: true,
+		})
+
+		//send email to admin
+		const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
+		const adminEmail = new Email({
+			message: {
+				from: 'njbufalino@gmail.com',
+			},
+			send: true,
+			transport: transporter,
+			views: {
+				options: {
+					extension: 'ejs', // <---- HERE
+				},
+				locals: {
+					name: customer_details.name,
+					order: orderDoc.value,
+					customer: customer_details,
+					shipping: shipping,
+					products: products,
+					formatPrice: price => {
+						formatCurrencyString({
+							currency: 'USD',
+							value: price,
+						})
+					},
+					date: orderDoc.value.created_at,
+				},
+			},
+		})
+		await adminEmail.send({
+			template: adminTemplate,
+			message: {
+				// from: 'njbufalino@gmail.com', // sender address
+				to: 'njbufalino@gmail.com', // list of receivers
 				// subject: 'Order Successful', // Subject line
 				// text: 'order',
 				// html: htmlTemplate, // plain text body
