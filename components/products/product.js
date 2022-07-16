@@ -4,21 +4,25 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
 export const Product = ({ product, isValidating }) => {
+	const { increaseQuantity, message } = useShoppingCart()
+
 	const [addButtonState, setAddButtonState] = useState('default')
 	useEffect(() => {
 		let timer = setTimeout(() => {
 			setAddButtonState('default')
-		}, 500)
+		}, 900)
 		return () => {
 			clearTimeout(timer)
 		}
 	})
-	const handleCartAdd = event => {
+
+	const handleCartAdd = async event => {
 		event.preventDefault()
-		increaseQuantity(product)
-		setAddButtonState('success')
+		setAddButtonState('waiting')
+		await increaseQuantity(product)
+		console.log({ message })
+		setAddButtonState(message === 'added!' ? 'success' : 'error')
 	}
-	const { increaseQuantity } = useShoppingCart()
 
 	return (
 		<div
@@ -61,25 +65,56 @@ export const Product = ({ product, isValidating }) => {
 					{product?.inventory > 0 ? (
 						<button
 							type={'button'}
-							onClick={!isValidating && handleCartAdd}
+							onClick={handleCartAdd}
 							style={{
 								minWidth: '110px',
+
+								fontWeight: '550',
+								color:
+									addButtonState === 'default' || addButtonState === 'waiting'
+										? ''
+										: message === 'added!'
+										? 'green'
+										: message === 'maximum' && '#D33F14',
+								backgroundColor:
+									addButtonState === 'default' || addButtonState === 'waiting'
+										? ''
+										: message === 'added!'
+										? ''
+										: message === 'maximum' && '',
 							}}>
-							{addButtonState === 'default' ? 'add to cart' : 'added!'}
+							{addButtonState === 'default'
+								? 'add to cart'
+								: addButtonState === 'waiting'
+								? 'adding...'
+								: message}
 						</button>
 					) : (
 						<button
 							type={'button'}
 							style={{
 								minWidth: '110px',
-								backgroundColor: '#D34014',
-								color: '#333',
+								backgroundColor: '',
+								color: 'rgba(211, 63, 20, 0.6)',
 								border: 'none',
 								cursor: 'not-allowed',
+								fontWeight: '550',
 							}}>
 							{'Out of Stock'}
 						</button>
 					)}
+				</div>
+				<div
+					style={{
+						padding: '10px',
+						height: '32.2969px',
+					}}>
+					<p
+						style={{
+							color: '#F59F00',
+						}}>
+						{product?.inventory <= 3 && product?.inventory > 0 && 'low stock'}
+					</p>
 				</div>
 			</div>
 		</div>

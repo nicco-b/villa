@@ -13,13 +13,14 @@ router.get(async (req, res) => {
 		//get order from database
 		// console.log('completed order: ', id)
 
-		const { db } = await connectToDatabase()
+		// const { db } = await connectToDatabase()
 
-		const order = await db
-			.collection('orders')
-			.findOne(ObjectId(checkout_session.client_reference_id))
-		// console.log({ order }
-		res.status(200).json({ session, order })
+		// const order = await db
+		// 	.collection('orders')
+		// 	.findOne(ObjectId(checkout_session.client_reference_id))
+		// // console.log({ order }
+
+		res.status(200).json({ 'add to cart': id })
 	} catch (err) {
 		res.status(500).json({ statusCode: 500, message: err.message })
 	}
