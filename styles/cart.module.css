@@ -1,0 +1,40 @@
+.cartItem {
+	display: flex;
+	padding: 0.5em 0em;
+	gap: 0em;
+	align-items: center;
+}
+.cartItemImg {
+	max-height: 50px;
+	max-width: 50px;
+	min-height: 50px;
+	min-width: 50px;
+}
+.cartItemInfo {
+	display: flex;
+	width: 100%;
+	gap: 1em;
+	align-items: center;
+	justify-items: end;
+	justify-content: space-between;
+	padding: 0em 0em 0 1em;
+	height: 100%;
+}
+.pname {
+	maxwidth: 100%;
+	minwidth: 25px;
+	justifyself: start;
+}
+.pname h4 {
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.rightInfo {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
+}

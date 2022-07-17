@@ -133,16 +133,18 @@ export const Cart = () => {
 									gridTemplateColumns: '1fr auto',
 									borderBottom: 'var(--border-style-dashed) var(--border-color)',
 								}}>
-								<CartItem key={product.id} product={product}>
-									{/* if not last item */}
-									{i !== cart.length - 1 && (
-										<div
-											style={{
-												height: '1px',
-												backgroundColor: 'var(--border-color-alt)',
-											}}></div>
-									)}
-								</CartItem>
+								{product && (
+									<CartItem key={product.id} product={product}>
+										{/* if not last item */}
+										{i !== cart.length - 1 && (
+											<div
+												style={{
+													height: '1px',
+													backgroundColor: 'var(--border-color-alt)',
+												}}></div>
+										)}
+									</CartItem>
+								)}
 								<div
 									style={{
 										display: 'grid',

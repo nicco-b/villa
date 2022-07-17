@@ -26,7 +26,7 @@ export const SideBar = ({ columns }) => {
 			setCartOpen(true)
 		}
 		return () => {
-			setCartOpen(false)
+			// setCartOpen(false)
 		}
 	}, [cartQuantity, columns])
 
