@@ -20,7 +20,7 @@ export const Product = ({ product, isValidating }) => {
 		event.preventDefault()
 		setAddButtonState('waiting')
 		await increaseQuantity(product)
-		console.log({ message })
+		console.log('product', { message })
 		setAddButtonState(message === 'added!' ? 'success' : 'error')
 	}
 
@@ -60,7 +60,6 @@ export const Product = ({ product, isValidating }) => {
 				<div
 					style={{
 						height: '32.2969px',
-						backgroundColor: '#f5f5f5',
 					}}>
 					{product?.inventory > 0 ? (
 						<button

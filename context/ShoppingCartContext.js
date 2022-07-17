@@ -7,54 +7,63 @@ export const ShoppingCartProvider = ({ children }) => {
 	const [cart, setCart] = useState([])
 	const [message, setMessage] = useState('added!')
 	//increaseQuantity
-	const getProduct = async product => {
-		const { data } = await axios.get(`/api/products/${product.id}`)
+	const getProduct = async (product, q) => {
+		console.log(q)
+		const data = await axios
+			.post(`/api/cart`, {
+				id: product.id,
+				q,
+			})
+			.then(res => {
+				return res.data
+			})
+			.catch(err => {
+				console.log(err)
+				return err.response.data
+			})
 		return data
 	}
 
 	const increaseQuantity = async product => {
 		const id = product.id
-		console.log(id)
+		const item = await cart.find(item => item.id === id)
+		console.log({ item })
+		const q = item && item.quantity
+
 		//check database for product
 		//fetch product from database
+		const { message, inventory } = await getProduct(product, q)
+		setCart(currItems => {
+			//if not in cart, add one
 
-		const data = await getProduct(product)
-		console.log(data)
-		const productInventory = data.inventory
+			//if product inventory is greater than or equal to current product quantity in cart
+			if (!currItems.find(item => item?.id === id)) {
+				setMessage(message)
 
-		if (productInventory > 0) {
-			setCart(currItems => {
-				//if not in cart, add one
+				return [...currItems, { ...product, quantity: 1 }]
+			} else {
+				const quantity = currItems?.find(item => item?.id === id).quantity
+				const productInventory = inventory
+				const e = productInventory > quantity
+				//if in cart, increase quantity
+				if (e) {
+					return currItems.map(item => {
+						if (item?.id === id) {
+							setMessage(message)
 
-				//if product iventory is grreater than or equal to current product quantity in cart
-				if (!currItems.find(item => item?.id === id)) {
-					setMessage('added!')
+							return { ...item, quantity: item.quantity + 1 }
+						} else {
+							setMessage(message)
 
-					return [...currItems, { ...product, quantity: 1 }]
+							return item
+						}
+					})
 				} else {
-					const quantity = currItems?.find(item => item?.id === id).quantity
-					console.log(productInventory > quantity, quantity, productInventory)
-					const e = productInventory > quantity
-					//if in cart, increase quantity
-					if (e) {
-						return currItems.map(item => {
-							if (item?.id === id) {
-								setMessage('added!')
-
-								return { ...item, quantity: item.quantity + 1 }
-							} else {
-								setMessage('poop')
-
-								return item
-							}
-						})
-					} else {
-						setMessage('maximum')
-						return currItems
-					}
+					setMessage(message)
+					return currItems
 				}
-			})
-		}
+			}
+		})
 	}
 	//cartQuantity
 	const cartQuantity = () => cart?.reduce((quantity, item) => item?.quantity + quantity, 0)

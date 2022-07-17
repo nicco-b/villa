@@ -7,8 +7,10 @@ import { connectToDatabase } from '../../../utils/mongodb'
 // You may want to pass in NextApiRequest and NextApiResponse
 const router = createRouter()
 
-router.get(async (req, res) => {
-	const id = req.query.id
+router.post(async (req, res) => {
+	const id = req.body.id
+	const quantity = req.body.q
+	console.log({ id, quantity })
 	try {
 		//get order from database
 		// console.log('completed order: ', id)
@@ -19,8 +21,19 @@ router.get(async (req, res) => {
 		// 	.collection('orders')
 		// 	.findOne(ObjectId(checkout_session.client_reference_id))
 		// // console.log({ order }
-
-		res.status(200).json({ 'add to cart': id })
+		const { db } = await connectToDatabase()
+		const data = await db.collection('products').findOne({ id: id })
+		console.log({ data })
+		// compare quantity to inventory
+		// if quantity > inventory, throw error
+		const ee = data.inventory - quantity
+		console.log(ee)
+		if (ee === 0) {
+			console.log(ee)
+			res.status(400).json({ message: 'maximum', inventory: data.inventory })
+		} else {
+			res.status(200).json({ message: 'success', inventory: data.inventory })
+		}
 	} catch (err) {
 		res.status(500).json({ statusCode: 500, message: err.message })
 	}

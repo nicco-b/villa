@@ -216,6 +216,10 @@ button:hover {
 button:active {
 	background: #d1cbcb;
 }
+option {
+	all: unset;
+}
+
 .logoHoverSwap {
 	position: relative;
 	width: 100px;

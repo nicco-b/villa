@@ -7,6 +7,54 @@
 .product:hover {
 	background: #e1ddcd40;
 }
+.quantitySelectorWrapper {
+	border: 1px solid var(--border-color);
+	border-radius: 3px;
+	display: grid;
+	position: relative;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 0.2rem;
+	height: 100%;
+	margin: 0 1em;
+}
+.quantitySelectorWrapper button {
+	padding: 0.5rem;
+	height: 100%;
+	border-radius: unset;
+}
+.quantitySelector {
+	display: flex;
+	padding: 0.3em 3px 0.3em 5px;
+	align-items: center;
+	gap: 4px;
+	border-radius: 4px;
+	height: 100%;
+	width: 100%;
+}
+
+.quantitySelector select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	all: unset;
+	cursor: pointer;
+	padding: 0;
+	margin-left: -14px;
+
+	width: auto !important;
+}
+.quantitySelector label {
+	cursor: pointer;
+	padding: 0 1em 0 0;
+
+	width: auto !important;
+}
+.quantitySelector select option {
+	all: unset;
+	color: red;
+	padding: 0;
+	width: auto !important;
+}
 .main {
 	display: grid;
 	grid-template-rows: auto 1fr;

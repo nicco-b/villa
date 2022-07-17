@@ -1,10 +1,16 @@
 import { formatCurrencyString } from 'use-shopping-cart'
 import styles from '../../styles/Home.module.css'
+import { useShoppingCart } from '../../context/ShoppingCartContext'
 
 export const CartItem = ({ product }) => {
+	const { increaseQuantity, message } = useShoppingCart()
+
+	const handleDecrement = async () => {}
+	const handleIncrement = async () => {
+		await increaseQuantity(product)
+	}
 	return (
 		<>
-			{' '}
 			<div
 				style={{
 					display: 'grid',
@@ -44,6 +50,7 @@ export const CartItem = ({ product }) => {
 							justifyItems: 'end',
 							justifyContent: 'space-between',
 							padding: '0em 0em 0 1em',
+							height: '100%',
 						}}>
 						<div
 							style={{
@@ -65,16 +72,18 @@ export const CartItem = ({ product }) => {
 						<div
 							style={{
 								display: 'flex',
-								gap: '3em',
+								width: '100%',
 								alignItems: 'center',
-								justifyItems: 'center',
+								justifyContent: 'space-between',
+								height: '100%',
 							}}>
-							<span
-								style={{
-									fontSize: '0.8em',
-								}}>
-								{product.quantity}x
-							</span>
+							<div className={styles.quantitySelectorWrapper}>
+								<button onClick={handleDecrement}>-</button>
+								<div className={styles.quantitySelector}>
+									<div>{product.quantity}</div>
+								</div>
+								<button onClick={handleIncrement}>+</button>
+							</div>
 							<h5>
 								{formatCurrencyString({
 									value: product.price * product.quantity,
