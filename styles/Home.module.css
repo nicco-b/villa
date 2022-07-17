@@ -22,6 +22,10 @@
 	padding: 0.5rem;
 	height: 100%;
 	border-radius: unset;
+	margin: 0;
+}
+.quantitySelectorWrapper button:hover {
+	background: var(--border-color);
 }
 .quantitySelector {
 	display: flex;

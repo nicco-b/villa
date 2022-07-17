@@ -65,6 +65,34 @@ export const ShoppingCartProvider = ({ children }) => {
 			}
 		})
 	}
+	//decreaseQuantity
+	const decreaseQuantity = async product => {
+		const id = product.id
+		const item = await cart.find(item => item.id === id)
+		console.log({ item })
+		const q = item && item.quantity
+		setCart(currItems => {
+			//if not in cart, return
+			if (!currItems.find(item => item?.id === id)) {
+				return currItems
+			} else {
+				const quantity = currItems?.find(item => item?.id === id).quantity
+				//if in cart, decrease quantity
+				if (quantity > 1) {
+					return currItems.map(item => {
+						if (item?.id === id) {
+							return { ...item, quantity: item.quantity - 1 }
+						} else {
+							return item
+						}
+					})
+				} else {
+					return currItems.filter(item => item?.id !== id)
+				}
+			}
+		})
+	}
+
 	//cartQuantity
 	const cartQuantity = () => cart?.reduce((quantity, item) => item?.quantity + quantity, 0)
 	//decreaseQuantity
@@ -101,6 +129,7 @@ export const ShoppingCartProvider = ({ children }) => {
 			value={{
 				getItemQuantity,
 				increaseQuantity,
+				decreaseQuantity,
 				cartQuantity,
 				removeItem,
 				clearCart,

@@ -4,9 +4,11 @@ import cartStyles from '../../styles/cart.module.css'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 
 export const CartItem = ({ product }) => {
-	const { increaseQuantity, message } = useShoppingCart()
+	const { increaseQuantity, decreaseQuantity, message } = useShoppingCart()
 
-	const handleDecrement = async () => {}
+	const handleDecrement = async () => {
+		await decreaseQuantity(product)
+	}
 	const handleIncrement = async () => {
 		await increaseQuantity(product)
 	}
