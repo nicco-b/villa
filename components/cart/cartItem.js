@@ -2,15 +2,34 @@ import { formatCurrencyString } from 'use-shopping-cart'
 import styles from '../../styles/Home.module.css'
 import cartStyles from '../../styles/cart.module.css'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
+import { useEffect, useState } from 'react'
+import LoadingIcon from '../utils/LoadingIcon'
 
 export const CartItem = ({ product }) => {
 	const { increaseQuantity, decreaseQuantity, message } = useShoppingCart()
 
+	const [addButtonState, setAddButtonState] = useState('default')
+	useEffect(() => {
+		let timer = setTimeout(() => {
+			if (addButtonState !== 'waiting') {
+				setAddButtonState('default')
+			}
+		}, 900)
+		return () => {
+			clearTimeout(timer)
+		}
+	})
+
+	useEffect(() => {
+		console.log({ message })
+	}, [message])
 	const handleDecrement = async () => {
 		await decreaseQuantity(product)
 	}
 	const handleIncrement = async () => {
+		setAddButtonState('waiting')
 		await increaseQuantity(product)
+		setAddButtonState(message)
 	}
 	return (
 		<>
@@ -32,7 +51,15 @@ export const CartItem = ({ product }) => {
 									<div className={styles.quantitySelector}>
 										<div>{product.quantity}</div>
 									</div>
-									<button onClick={handleIncrement}>+</button>
+									<button
+										onClick={handleIncrement}
+										style={{
+											color: addButtonState === 'maximum' ? 'red' : '#000',
+
+											transition: 'all 0.3s ease-out',
+										}}>
+										{addButtonState === 'waiting' ? 'o' : addButtonState === 'success' ? '+' : '+'}
+									</button>
 								</div>
 								<h5>
 									{formatCurrencyString({

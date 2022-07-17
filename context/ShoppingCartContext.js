@@ -5,7 +5,7 @@ export const ShoppingCartContext = createContext()
 
 export const ShoppingCartProvider = ({ children }) => {
 	const [cart, setCart] = useState([])
-	const [message, setMessage] = useState('added!')
+	const [message, setMessage] = useState('')
 	//increaseQuantity
 	const getProduct = async (product, q) => {
 		console.log(q)
@@ -18,7 +18,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				return res.data
 			})
 			.catch(err => {
-				console.log(err)
+				// console.log(err)
 				return err.response.data
 			})
 		return data
@@ -32,6 +32,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		//check database for product
 		//fetch product from database
+		setMessage('.....')
 		const { message, inventory } = await getProduct(product, q)
 		setCart(currItems => {
 			//if not in cart, add one

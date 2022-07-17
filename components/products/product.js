@@ -9,7 +9,9 @@ export const Product = ({ product, isValidating }) => {
 	const [addButtonState, setAddButtonState] = useState('default')
 	useEffect(() => {
 		let timer = setTimeout(() => {
-			setAddButtonState('default')
+			if (addButtonState !== 'waiting') {
+				setAddButtonState('default')
+			}
 		}, 900)
 		return () => {
 			clearTimeout(timer)
@@ -20,10 +22,11 @@ export const Product = ({ product, isValidating }) => {
 		event.preventDefault()
 		setAddButtonState('waiting')
 		await increaseQuantity(product)
-		console.log('product', { message })
-		setAddButtonState(message === 'added!' ? 'success' : 'error')
+		setAddButtonState(message)
 	}
-
+	useEffect(() => {
+		console.log({ message })
+	}, [message])
 	return (
 		<div
 			style={{

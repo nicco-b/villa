@@ -1,6 +1,7 @@
-.uploadspinnerbox svg {
+.uploadspinnerbox {
 	/* animation: 2s linear infinite svg-animation; */
-	max-width: 20px;
+	max-width: 5px;
+	max-height: 5px;
 	transform-box: fill-box;
 }
 #spin {
@@ -15,14 +16,14 @@
   }
 } */
 
-.uploadspinnerbox circle {
+.uploadspinnerbox svg circle {
 	display: block;
 	fill: transparent;
 	stroke: #888888a9;
 	stroke-linecap: round;
 	stroke-dasharray: 354;
 	stroke-dashoffset: 354;
-	stroke-width: 10px;
+	stroke-width: 1px;
 	animation: 2s ease-in-out infinite both circle-animation;
 }
 

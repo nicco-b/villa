@@ -32,10 +32,10 @@ router.post(async (req, res) => {
 			console.log(ee)
 			res.status(400).json({ message: 'maximum', inventory: data.inventory })
 		} else {
-			res.status(200).json({ message: 'success', inventory: data.inventory })
+			res.status(200).json({ message: 'added!', inventory: data.inventory })
 		}
 	} catch (err) {
-		res.status(500).json({ statusCode: 500, message: err.message })
+		res.status(500).json({ statusCode: 500, message: 'svr err', serverMessage: err.message })
 	}
 })
 export default router.handler({

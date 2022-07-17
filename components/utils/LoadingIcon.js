@@ -14,8 +14,8 @@ import styles from '../../styles/LoadingIcon.module.css'
 const LoadingIcon = ({ stroke }) => {
 	return (
 		<div className={styles.uploadspinnerbox}>
-			<svg id='spin' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-				<circle stroke={stroke} cx='50' cy='50' r='42' />
+			<svg id='spin' xmlns='http://www.w3.org/2000/svg'>
+				<circle stroke={stroke} cx='10' cy='10' r='12' />
 			</svg>
 		</div>
 	)
