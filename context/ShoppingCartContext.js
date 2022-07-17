@@ -6,9 +6,14 @@ export const ShoppingCartContext = createContext()
 export const ShoppingCartProvider = ({ children }) => {
 	const [cart, setCart] = useState([])
 	const [message, setMessage] = useState('')
+	const [waiting, setwaitinf] = useState(false)
 	//increaseQuantity
+
 	const getProduct = async (product, q) => {
 		console.log(q)
+
+		//throttle the request
+
 		const data = await axios
 			.post(`/api/cart`, {
 				id: product.id,
@@ -21,6 +26,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				// console.log(err)
 				return err.response.data
 			})
+
 		return data
 	}
 
@@ -32,38 +38,42 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		//check database for product
 		//fetch product from database
-		setMessage('.....')
 		const { message, inventory } = await getProduct(product, q)
 		setCart(currItems => {
 			//if not in cart, add one
 
 			//if product inventory is greater than or equal to current product quantity in cart
-			if (!currItems.find(item => item?.id === id)) {
-				setMessage(message)
-
-				return [...currItems, { ...product, quantity: 1 }]
-			} else {
-				const quantity = currItems?.find(item => item?.id === id).quantity
-				const productInventory = inventory
-				const e = productInventory > quantity
-				//if in cart, increase quantity
-				if (e) {
-					return currItems.map(item => {
-						if (item?.id === id) {
-							setMessage(message)
-
-							return { ...item, quantity: item.quantity + 1 }
-						} else {
-							setMessage(message)
-
-							return item
-						}
-					})
-				} else {
+			//if message is not 'maximum'
+			if (message !== 'maximum') {
+				if (!currItems.find(item => item?.id === id)) {
 					setMessage(message)
-					return currItems
+
+					return [...currItems, { ...product, quantity: 1 }]
+				} else {
+					const quantity = currItems?.find(item => item?.id === id).quantity
+					const productInventory = inventory
+					const e = productInventory > quantity
+					//if in cart, increase quantity
+					if (e) {
+						return currItems.map(item => {
+							if (item?.id === id) {
+								setMessage(message)
+
+								return { ...item, quantity: item.quantity + 1 }
+							} else {
+								setMessage(message)
+
+								return item
+							}
+						})
+					} else {
+						setMessage(message)
+						return currItems
+					}
 				}
 			}
+			setMessage(message)
+			return currItems
 		})
 	}
 	//decreaseQuantity

@@ -68,6 +68,7 @@ export const Product = ({ product, isValidating }) => {
 						<button
 							type={'button'}
 							onClick={handleCartAdd}
+							disabled={addButtonState === 'waiting'}
 							style={{
 								minWidth: '110px',
 

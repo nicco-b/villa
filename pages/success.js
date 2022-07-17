@@ -162,7 +162,9 @@ const CompletedOrderSummary = ({ data, order }) => {
 						borderBottom: 'var(--border-style-dashed) var(--border-color)',
 					}}>
 					<div>{order.customer_details.name}</div>
-					<div>#{order._id}</div>
+					<div>
+						#<b>{order._id.slice(-5)}</b>
+					</div>
 				</div>
 				<div
 					style={{
@@ -189,7 +191,9 @@ const CompletedOrderSummary = ({ data, order }) => {
 						order.products.map((product, i) => (
 							<div
 								style={{
-									margin: '0 0.5em',
+									display: 'grid',
+									gridTemplateColumns: '1fr auto',
+									borderBottom: 'var(--border-style-dashed) var(--border-color)',
 								}}>
 								<CartItem key={product.id} product={product}>
 									{/* if not last item */}
@@ -201,6 +205,17 @@ const CompletedOrderSummary = ({ data, order }) => {
 											}}></div>
 									)}
 								</CartItem>
+								<div
+									style={{
+										padding: '0.5em 0',
+										margin: 'auto',
+									}}>
+									<div className={styles.quantitySelectorWrapper}>
+										<div className={styles.quantitySelector}>
+											<div>x {product.quantity}</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						))}
 				</div>
@@ -212,7 +227,7 @@ const CompletedOrderSummary = ({ data, order }) => {
 						padding: '1em 0',
 						borderTop: 'var(--border-style-dashed) var(--border-color)',
 					}}>
-					<h4>shipping:</h4>
+					<h4>shipping to:</h4>
 					<div
 						style={{
 							display: 'flex',

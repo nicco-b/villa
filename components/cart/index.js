@@ -9,9 +9,42 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import useSWR from 'swr'
 import { formatCurrencyString } from 'use-shopping-cart'
 import LoadingIcon from '../utils/LoadingIcon'
+import styles from '../../styles/Home.module.css'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 export const Cart = () => {
-	const { cart, clearCart, cartTotal, cartQuantity, removeItem } = useShoppingCart()
+	const [addButtonState, setAddButtonState] = useState('default')
+	useEffect(() => {
+		let timer = setTimeout(() => {
+			if (addButtonState !== 'waiting') {
+				setAddButtonState('default')
+			}
+		}, 900)
+		return () => {
+			clearTimeout(timer)
+		}
+	})
+
+	useEffect(() => {
+		console.log({ message })
+	}, [message])
+	const handleDecrement = async product => {
+		await decreaseQuantity(product)
+	}
+	const handleIncrement = async product => {
+		setAddButtonState('waiting')
+		await increaseQuantity(product)
+		setAddButtonState(message)
+	}
+	const {
+		cart,
+		clearCart,
+		cartTotal,
+		cartQuantity,
+		removeItem,
+		increaseQuantity,
+		decreaseQuantity,
+		message,
+	} = useShoppingCart()
 	const cartTotalPrice = cartTotal()
 	// const cart = products
 	const [loading, setLoading] = useState(false)
@@ -147,36 +180,29 @@ export const Cart = () => {
 								)}
 								<div
 									style={{
-										display: 'grid',
-										justifyContent: 'center',
-										alignItems: 'center',
+										padding: '0.5em 0',
 									}}>
-									<button
-										type='button'
-										style={{
-											// padding: '0em 1em',
-											margin: '0em 0em 0em 1em',
-											display: 'flex',
-											alignItems: 'center',
-											// background: 'red',
-										}}
-										onClick={() => {
-											removeItem(product.id)
-										}}>
-										<svg
-											width='16'
-											height='16'
-											viewBox='0 0 16 16'
-											fill='none'
-											xmlns='http://www.w3.org/2000/svg'>
-											<path
-												fillRule='evenodd'
-												clipRule='evenodd'
-												d='M5.75 2C5.33579 2 5 2.33579 5 2.75C5 3.16421 5.33579 3.5 5.75 3.5H9.75C10.1642 3.5 10.5 3.16421 10.5 2.75C10.5 2.33579 10.1642 2 9.75 2H5.75ZM3 4.75C3 4.33579 3.33579 4 3.75 4H11.75C12.1642 4 12.5 4.33579 12.5 4.75C12.5 5.16421 12.1642 5.5 11.75 5.5H11.25V13.25C11.25 13.8023 10.8023 14.25 10.25 14.25H5.25C4.69772 14.25 4.25 13.8023 4.25 13.25V5.5H3.75C3.33579 5.5 3 5.16421 3 4.75ZM5.75 5.75V12.75H9.75V5.75H5.75Z'
-												fill='black'
-											/>
-										</svg>
-									</button>
+									<div className={styles.quantitySelectorWrapper}>
+										<button onClick={() => handleDecrement(product)}>-</button>
+										<div className={styles.quantitySelector}>
+											<div>{product.quantity}</div>
+										</div>
+										<button
+											onClick={() => handleIncrement(product)}
+											disabled={addButtonState === 'waiting'}
+											style={{
+												color:
+													addButtonState === 'maximum'
+														? 'red'
+														: addButtonState === 'waiting'
+														? '#D5D1C1'
+														: '#2b2b2c',
+
+												transition: 'all 0.3s ease-out',
+											}}>
+											{addButtonState === 'waiting' ? '+' : addButtonState === 'success' ? '+' : '+'}
+										</button>
+									</div>
 								</div>
 							</div>
 						))

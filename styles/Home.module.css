@@ -16,7 +16,7 @@
 	align-items: center;
 	gap: 0.2rem;
 	height: 100%;
-	margin: 0 1em;
+	/* margin: 0 1em; */
 }
 .quantitySelectorWrapper button {
 	padding: 0.5rem;

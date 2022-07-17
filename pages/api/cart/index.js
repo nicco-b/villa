@@ -28,7 +28,7 @@ router.post(async (req, res) => {
 		// if quantity > inventory, throw error
 		const ee = data.inventory - quantity
 		console.log(ee)
-		if (ee === 0) {
+		if (ee === 0 || data['max-allowed'] <= quantity) {
 			console.log(ee)
 			res.status(400).json({ message: 'maximum', inventory: data.inventory })
 		} else {
