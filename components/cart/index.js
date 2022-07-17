@@ -188,6 +188,7 @@ export const Cart = () => {
 											<div>{product.quantity}</div>
 										</div>
 										<button
+											key={product.id}
 											onClick={() => handleIncrement(product)}
 											disabled={addButtonState === 'waiting'}
 											style={{

@@ -119,6 +119,7 @@
 	justify-content: space-between;
 	overflow: hidden;
 	max-width: 100%;
+	padding-left: 0.5em;
 }
 .twoRow {
 	overflow: hidden;

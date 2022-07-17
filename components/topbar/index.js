@@ -6,6 +6,11 @@ export const TopBar = ({ animate }) => {
 	return (
 		<>
 			<div className={styles.topBar}>
+				<Link href='/'>
+					<a href='/'>
+						<LogoHoverSwap animate={animate} />
+					</a>
+				</Link>
 				<div
 					style={{
 						display: 'flex',
@@ -31,11 +36,6 @@ export const TopBar = ({ animate }) => {
 						<Image src='/totem6.png' alt='totem6' height={40} width={40} />
 					</div>
 				</div>
-				<Link href='/'>
-					<a href='/'>
-						<LogoHoverSwap animate={animate} />
-					</a>
-				</Link>
 			</div>
 		</>
 	)
