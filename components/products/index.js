@@ -36,16 +36,20 @@ export const Products = ({ products, isValidating }) => {
 						<Image src={'/red_loader.webp'} alt='loading' width={25} height={25} />
 					</div>
 				)}
-				{productList?.map(product => (
+				{productList?.map((product, i) => (
 					<Link href={`/product/${product.id}`} key={product._id}>
 						<a>
 							<div className={styles.product}>
 								<Product key={product.id} product={product} isValidating={isValidating} />
-								<div
-									style={{
-										height: '1px',
-										backgroundColor: 'var(--border-color-alt)',
-									}}></div>
+								{/* if not last item */}
+
+								{productList.length - 1 !== i && (
+									<div
+										style={{
+											height: '1px',
+											backgroundColor: 'var(--border-color-alt)',
+										}}></div>
+								)}
 							</div>
 						</a>
 					</Link>
