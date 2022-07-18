@@ -6,7 +6,7 @@ export const ShoppingCartContext = createContext()
 export const ShoppingCartProvider = ({ children }) => {
 	const [cart, setCart] = useState([])
 	const [message, setMessage] = useState('')
-	const [waiting, setwaitinf] = useState(false)
+	const [status, setStatus] = useState(null)
 	//increaseQuantity
 
 	const getProduct = async (product, q) => {
@@ -20,13 +20,21 @@ export const ShoppingCartProvider = ({ children }) => {
 				q,
 			})
 			.then(res => {
-				return res.data
+				console.log(res)
+
+				return {
+					data: res.data,
+					status: res.status,
+				}
 			})
 			.catch(err => {
-				// console.log(err)
-				return err.response.data
-			})
+				console.log(err)
 
+				return {
+					data: err.response.data,
+					status: err.response.status,
+				}
+			})
 		return data
 	}
 
@@ -38,13 +46,17 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		//check database for product
 		//fetch product from database
-		const { message, inventory } = await getProduct(product, q)
+		const { data, status } = await getProduct(product, q)
+		setStatus(status)
+
 		setCart(currItems => {
+			const message = data.message
+			const inventory = data.inventory
 			//if not in cart, add one
 
 			//if product inventory is greater than or equal to current product quantity in cart
 			//if message is not 'maximum'
-			if (message !== 'maximum') {
+			if (status === 200) {
 				if (!currItems.find(item => item?.id === id)) {
 					setMessage(message)
 
@@ -147,6 +159,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				cartTotal,
 				cart,
 				message,
+				status,
 			}}>
 			{children}
 		</ShoppingCartContext.Provider>

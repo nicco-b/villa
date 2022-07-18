@@ -4,7 +4,7 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
 export const Product = ({ product, isValidating }) => {
-	const { increaseQuantity, message } = useShoppingCart()
+	const { increaseQuantity, message, status } = useShoppingCart()
 
 	const [addButtonState, setAddButtonState] = useState('default')
 	useEffect(() => {

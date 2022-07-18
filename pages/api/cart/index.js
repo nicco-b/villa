@@ -31,6 +31,8 @@ router.post(async (req, res) => {
 		if (ee === 0 || data['max-allowed'] <= quantity) {
 			console.log(ee)
 			res.status(400).json({ message: 'maximum', inventory: data.inventory })
+		} else if (data.inventory === 0) {
+			res.status(400).json({ message: 'no stock', inventory: data.inventory })
 		} else {
 			res.status(200).json({ message: 'added!', inventory: data.inventory })
 		}
