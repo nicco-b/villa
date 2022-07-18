@@ -46,16 +46,6 @@ export const TopBar = ({ animate }) => {
 					<div className={styles.totemBox}>
 						<Image src='/totems/cloudtotem.png' alt='totem6' height={40} width={40} />
 					</div>
-					<div
-						className={styles.totemBox}
-						style={{
-							cursor: 'pointer',
-							padding: '0 0 0 10px',
-						}}>
-						<Link href='https://duairakp.com'>
-							<Image src='/portfolio_favicon.ico' alt='totem2' height={29} width={29} />
-						</Link>
-					</div>
 				</div>
 			</div>
 		</>
