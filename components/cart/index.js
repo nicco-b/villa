@@ -250,7 +250,7 @@ export const Cart = () => {
 								background: cart.length ? (!loading ? '#F6F2E5' : '#d9d5c3') : '#d9d5c3',
 								color: cart.length ? '#2b2b2c' : '#cdcec1',
 							}}>
-							{loading ? <LoadingIcon /> : 'checkout'}
+							{loading ? '. . .' : 'checkout'}
 						</button>
 					</section>
 				</form>

@@ -6,7 +6,7 @@
 	display: grid;
 
 	width: 100%;
-	justify-content: center;
+	justify-items: center;
 }
 .summary {
 	max-width: 500px;
@@ -16,12 +16,12 @@
 @media (max-width: 500px) {
 	.summaryWrapper {
 		padding: 0.5em;
-		justify-content: unset;
+		justify-items: unset;
 		align-items: unset;
 	}
 	.summary {
 		max-width: 100%;
-		min-width: 100%;
+		/* min-width: 400px; */
 	}
 }
 @media (min-width: 500px) {

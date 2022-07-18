@@ -154,7 +154,7 @@ const CompletedOrderSummary = ({ data, order }) => {
 				}}>
 				<div
 					style={{
-						fontSize: '0.9em',
+						fontSize: '1em',
 						display: 'flex',
 						flexDirection: 'row',
 						justifyContent: 'space-between',
@@ -163,7 +163,7 @@ const CompletedOrderSummary = ({ data, order }) => {
 					}}>
 					<div>{order.customer_details.name}</div>
 					<div>
-						#<b>{order._id.slice(-5)}</b>
+						#<b style={{ fontWeight: 'bold' }}>{order._id.slice(-5)}</b>
 					</div>
 				</div>
 				<div
@@ -192,30 +192,30 @@ const CompletedOrderSummary = ({ data, order }) => {
 							<div
 								style={{
 									display: 'grid',
-									gridTemplateColumns: '1fr auto',
-									borderBottom: 'var(--border-style-dashed) var(--border-color)',
+									gridTemplateRows: '1fr auto',
 								}}>
 								<CartItem key={product.id} product={product}>
 									{/* if not last item */}
-									{i !== order.products.length - 1 && (
-										<div
-											style={{
-												height: '1px',
-												backgroundColor: 'var(--border-color-alt)',
-											}}></div>
-									)}
-								</CartItem>
-								<div
-									style={{
-										padding: '0.5em 0',
-										margin: 'auto',
-									}}>
-									<div className={styles.quantitySelectorWrapper}>
-										<div className={styles.quantitySelector}>
-											<div>x {product.quantity}</div>
+									<div
+										style={{
+											padding: '0.5em 0',
+											margin: 'auto',
+										}}>
+										<div className={styles.quantitySelectorWrapper}>
+											<div className={styles.quantitySelector}>
+												<div>x {product.quantity}</div>
+											</div>
 										</div>
 									</div>
-								</div>
+								</CartItem>
+
+								{i !== order.products.length - 1 && (
+									<div
+										style={{
+											height: '1px',
+											borderBottom: 'var(--border-style-dashed) var(--border-color)',
+										}}></div>
+								)}
 							</div>
 						))}
 				</div>

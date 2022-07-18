@@ -17,9 +17,6 @@ export const TopBar = ({ animate }) => {
 						alignItems: 'center',
 					}}>
 					<div className={styles.totemBox}>
-						<Image src='/totems/totem1.png' alt='totem1' height={40} width={40} />
-					</div>
-					<div className={styles.totemBox}>
 						<Image src='/totems/totem3.png' alt='totem2' height={40} width={40} />
 					</div>
 					<div className={styles.totemBox}>
@@ -48,6 +45,16 @@ export const TopBar = ({ animate }) => {
 					</div>
 					<div className={styles.totemBox}>
 						<Image src='/totems/cloudtotem.png' alt='totem6' height={40} width={40} />
+					</div>
+					<div
+						className={styles.totemBox}
+						style={{
+							cursor: 'pointer',
+							padding: '0 0 0 10px',
+						}}>
+						<Link href='https://duairakp.com'>
+							<Image src='/portfolio_favicon.ico' alt='totem2' height={29} width={29} />
+						</Link>
 					</div>
 				</div>
 			</div>
