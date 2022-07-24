@@ -13,8 +13,8 @@ const router = createRouter()
 router.post(async (req, res) => {
 	const { db } = await connectToDatabase()
 	if (req.method === 'POST') {
-		const orders = await db.collection('orders').insertOne(req.body)
-		res.status(200).json(orders)
+		// const orders = await db.collection('orders').insertOne(req.body)
+		res.status(200).json({})
 	} else {
 		res.setHeader('Allow', 'POST')
 		res.status(405).end('Method Not Allowed')

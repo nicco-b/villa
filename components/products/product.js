@@ -52,7 +52,19 @@ export const Product = ({ product, isValidating }) => {
 						paddingBottom: '1em',
 					}}>
 					<h4>{product?.name}</h4>
-					<p>{product?.dimensions}</p>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							gap: '0.3em',
+						}}>
+						<p>{product?.dimensions.length}</p>x<p>{product?.dimensions.width}</p>x
+						<p>{product?.dimensions.height}</p>
+						<p>{product?.dimensions.unit}</p>
+					</div>
+
 					<h4>
 						{formatCurrencyString({
 							value: product?.price,

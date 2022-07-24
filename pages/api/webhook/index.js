@@ -67,9 +67,18 @@ router.post(async (req, res) => {
 		const updateDoc = {
 			$set: {
 				customer_details: customer_details,
+				session_id: object.id,
 				shipping: shipping,
 				shipping: shipping,
 				updated_at: new Date(),
+				completed_at: new Date(),
+				status: 'paid',
+			},
+			$addToSet: {
+				status_history: {
+					status: 'paid',
+					date: new Date(),
+				},
 			},
 		}
 		const orderDoc = await db.collection('orders').findOneAndUpdate(
@@ -169,7 +178,7 @@ router.post(async (req, res) => {
 			template: adminTemplate,
 			message: {
 				// from: 'njbufalino@gmail.com', // sender address
-				to: 'duairak@gmail.com', // list of receivers
+				to: 'njbufalino@gmail.com', // list of receivers
 				// subject: 'Order Successful', // Subject line
 				// text: 'order',
 				// html: htmlTemplate, // plain text body

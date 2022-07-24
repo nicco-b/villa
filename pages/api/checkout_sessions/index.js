@@ -1,6 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
+import { ObjectId } from 'mongodb'
 import { createRouter } from 'next-connect'
 import { connectToDatabase } from '../../../utils/mongodb'
 
@@ -14,11 +15,55 @@ router.post(async (req, res) => {
 	try {
 		// Create Checkout Sessions from body params.
 		const { db } = await connectToDatabase()
+
 		const orderWithDate = {
 			...order,
 
+			session: '',
+			customer_details: {
+				name: '',
+				email: '',
+				phone: '',
+				tax_exempt: '',
+				tax_ids: [],
+				address: {
+					city: '',
+					country: '',
+					line1: '',
+					line2: '',
+					postal_code: '',
+					state: '',
+				},
+			},
+			tracking: {
+				carrier: '',
+				tracking_number: '',
+			},
+			shipping_label: '',
+			notes: '',
+			shipping: {
+				address: {
+					city: '',
+					country: '',
+					line1: '',
+					line2: '',
+					postal_code: '',
+					state: '',
+				},
+				name: '',
+			},
+			status: 'created',
+			status_history: [
+				{
+					status: 'created',
+					date: new Date(),
+				},
+			],
 			created_at: new Date(),
+			updated_at: '',
+			completed_at: '',
 		}
+
 		const newOrder = await db.collection('orders').insertOne(orderWithDate)
 		const { insertedId } = newOrder
 		const params = {
@@ -111,6 +156,7 @@ router.post(async (req, res) => {
 			client_reference_id: `${insertedId}`,
 		}
 		const session = await stripe.checkout.sessions.create(params)
+
 		console.log('o', { order })
 		res.status(200).json({ session, order })
 	} catch (err) {
