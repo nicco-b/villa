@@ -13,13 +13,13 @@ export default function Home() {
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)
 	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
 	const [countdownFinished, setCountdownFinished] = useState()
-	// useEffect(() => {
-	// 	if (countdownFinished) {
-	// 		//fetch scheduled_sales
-	// 		// console.log('fetching scheduled_sales')
-	// 		mutate('/api/schedule')
-	// 	}
-	// }, [countdownFinished])
+	useEffect(() => {
+		if (countdownFinished) {
+			//fetch scheduled_sales
+			// console.log('fetching scheduled_sales')
+			mutate('/api/schedule', fetcher, false)
+		}
+	}, [countdownFinished])
 
 	return (
 		<div className={styles.container}>
