@@ -7,9 +7,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
-const fetcher = axios
-	.get(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/schedule`)
-	.then(res => res.data)
+const fetcher = url => axios.get(url).then(res => res.data)
 export default function Home() {
 	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)
