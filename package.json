@@ -1,35 +1,35 @@
 {
-  "name": "villa",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@stripe/react-stripe-js": "^1.9.0",
-    "@stripe/stripe-js": "^1.32.0",
-    "axios": "^0.27.2",
-    "canvas-confetti": "^1.5.1",
-    "ejs": "^3.1.8",
-    "email-templates": "^10.0.0",
-    "micro": "^9.3.4",
-    "moment": "^2.29.4",
-    "mongodb": "^4.7.0",
-    "nanoid": "^4.0.0",
-    "next": "^12.2.0",
-    "next-connect": "^1.0.0-next.2",
-    "nodemailer": "^6.7.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "stripe": "^9.11.0",
-    "swr": "^1.3.0",
-    "use-shopping-cart": "^3.1.2"
-  },
-  "devDependencies": {
-    "eslint": "8.18.0",
-    "eslint-config-next": "12.2.0"
-  }
+	"name": "villa",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@stripe/react-stripe-js": "^1.9.0",
+		"@stripe/stripe-js": "^1.32.0",
+		"axios": "^0.27.2",
+		"canvas-confetti": "^1.5.1",
+		"ejs": "^3.1.8",
+		"email-templates": "^10.0.0",
+		"micro": "^9.3.4",
+		"moment": "^2.29.4",
+		"mongodb": "^4.7.0",
+		"nanoid": "^4.0.0",
+		"next": "^12.2.0",
+		"next-connect": "^1.0.0-next.2",
+		"nodemailer": "^6.7.7",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"stripe": "^9.11.0",
+		"swr": "^1.3.0",
+		"use-shopping-cart": "^3.1.2"
+	},
+	"devDependencies": {
+		"eslint": "8.18.0",
+		"eslint-config-next": "12.2.0"
+	}
 }

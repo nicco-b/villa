@@ -1,6 +1,4 @@
-import axios from 'axios'
 import moment from 'moment'
-import useSWR from 'swr'
 import { useCountdown } from '../../hooks/useCountdown'
 
 export const CountdownTimer = ({ date, setCountdownFinished, sale }) => {
