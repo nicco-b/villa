@@ -7,19 +7,19 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
-const fetcher = null
+const fetcher = axios.get('/api/schedule').then(res => res.data)
 export default function Home() {
 	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)
 	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
 	const [countdownFinished, setCountdownFinished] = useState()
-	useEffect(() => {
-		if (countdownFinished) {
-			//fetch scheduled_sales
-			// console.log('fetching scheduled_sales')
-			mutate('/api/schedule')
-		}
-	}, [countdownFinished])
+	// useEffect(() => {
+	// 	if (countdownFinished) {
+	// 		//fetch scheduled_sales
+	// 		// console.log('fetching scheduled_sales')
+	// 		mutate('/api/schedule')
+	// 	}
+	// }, [countdownFinished])
 
 	return (
 		<div className={styles.container}>
