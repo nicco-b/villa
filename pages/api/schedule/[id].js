@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
-import { connectToDb } from '../../../lib/mongodb'
+import { connectToDb } from '../../../utils/mongodb'
 import { getToken } from 'next-auth/jwt'
 import { ObjectId } from 'mongodb'
 
