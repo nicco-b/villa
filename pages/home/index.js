@@ -7,7 +7,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
-const fetcher = axios.get('/api/schedule').then(res => res.data)
+const fetcher = null
 export default function Home() {
 	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)

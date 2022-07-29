@@ -10,7 +10,6 @@ import LoadingIcon from '../components/utils/LoadingIcon'
 import styles from '../styles/Summary.module.css'
 import { formatCurrencyString } from 'use-shopping-cart'
 import { CartItem } from '../components/cart/cartItem'
-export const fetcher = url => axios.get(url).then(res => res.data)
 export const shootFireworks = () => {
 	const duration = 15 * 100
 	const animationEnd = Date.now() + duration
