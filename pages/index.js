@@ -31,7 +31,7 @@ export async function getStaticProps() {
 		return {
 			props: {
 				fallback: {
-					'api/schedule': ss,
+					'/api/schedule': ss,
 					'/api/products/products': products,
 				},
 			},
