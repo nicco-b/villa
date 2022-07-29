@@ -1,11 +1,11 @@
 check inventory on add to cart button
 
-$project to remove undesireed fields
+# $project to remove undesireed fields
 
 
 
 
 
 luns account
-pk_test_51LCRU1HFFw3ZIEqvhU8JmL5ssCnh2FLMBncyjPtgE0e2JV33C6lo4dAPqQ03szs5gajTAPqwKODAyDsGEtgc3wcJ00DsVnHRyA
-sk_test_51LCRU1HFFw3ZIEqvT5H9Nqm46vvdNKu6RUopMw2z8H0qS9B3q2N5mBlAgnCfsUcmjzwFG4h4KlFSqeXLCltmPx2600Fh9EVx0O
+# pk_test_51LCRU1HFFw3ZIEqvhU8JmL5ssCnh2FLMBncyjPtgE0e2JV33C6lo4dAPqQ03szs5gajTAPqwKODAyDsGEtgc3wcJ00DsVnHRyA
+# sk_test_51LCRU1HFFw3ZIEqvT5H9Nqm46vvdNKu6RUopMw2z8H0qS9B3q2N5mBlAgnCfsUcmjzwFG4h4KlFSqeXLCltmPx2600Fh9EVx0O
