@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
-import { connectToDb } from '../../../utils/mongodb'
+import { connectToDatabase } from '../../../utils/mongodb'
 import { ObjectId } from 'mongodb'
 
 // Default Req and Res are IncomingMessage and ServerResponse
@@ -8,7 +8,7 @@ import { ObjectId } from 'mongodb'
 const router = createRouter()
 
 export const getScheduledSale = async id => {
-	const { db } = await connectToDb()
+	const { db } = await connectToDatabase()
 	const collection = db.collection('scheduled_sales')
 	// const scheduled_sale = await db.collection('scheduled_sales').findOne({
 	// 	_id: new ObjectId(id),
@@ -63,7 +63,7 @@ router.get(async (req, res) => {
 	}
 })
 router.put(async (req, res) => {
-	const { db } = await connectToDb()
+	const { db } = await connectToDatabase()
 	const { _id, ...rest } = req.body
 	const id = _id
 	console.log(id)
