@@ -7,20 +7,17 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
-const fetcher = null
-const fetcher2 = axios.get('/api/products/products').then(res => res.data)
-
+const fetcher = axios.get('/api/schedule').then(res => res.data)
 export default function Home() {
 	const { mutate } = useSWRConfig()
-	const { data, isValidating } = useSWR('/api/products/products', fetcher2)
+	const { data, isValidating } = useSWR('/api/products/products', fetcher)
 	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
 	const [countdownFinished, setCountdownFinished] = useState()
 	useEffect(() => {
 		if (countdownFinished) {
 			//fetch scheduled_sales
-			//
 			// console.log('fetching scheduled_sales')
-			mutate('/api/schedule', fetcher, false)
+			mutate('/api/schedule')
 		}
 	}, [countdownFinished])
 
@@ -69,19 +66,18 @@ export default function Home() {
 													sale={sale}
 												/>
 											</div>
-											{
-												<Products
-													products={sale?.included_products?.length > 0 ? sale.included_products : []}
-													isValidating={isValidating}
-												/>
-											}
+
+											<Products
+												products={sale?.included_products?.length > 0 ? sale.included_products : []}
+												isValidating={isValidating}
+											/>
 										</>
 									)
 								})}
 							</div>
 						)}
 					</div>
-					{<Products products={data} isValidating={isValidating} />}
+					<Products products={data} isValidating={isValidating} />
 				</div>
 			</div>
 		</div>
