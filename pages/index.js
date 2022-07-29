@@ -4,6 +4,7 @@ import { SWRConfig } from 'swr'
 import MainLayout from '../components/layouts/MainLayout'
 import styles from '../styles/Home.module.css'
 import { getProducts } from './api/products/products'
+import { getScheduledSales } from './api/schedule'
 import Home from './home'
 
 export default function Index({ fallback }) {
@@ -30,8 +31,23 @@ export async function getStaticProps() {
 	// const res = await fetch(
 	// 	`${dev ? 'http://' : 'https://'}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/products/products`
 	// )
-
+	//first check scheduled_sales
+	const scheduled_sales = await getScheduledSales()
 	const products = await getProducts()
+	// console.log('ss', scheduled_sales?.included_products)
+	const ss = JSON.parse(JSON.stringify(scheduled_sales))
+
+	if (scheduled_sales.length > 0) {
+		return {
+			props: {
+				fallback: {
+					'api/schedule': ss,
+					'/api/products/products': products,
+				},
+			},
+		}
+	}
+
 	// console.log({ products })
 	// Pass data to the page via props
 	return {

@@ -6,6 +6,8 @@
 }
 .product:hover {
 	background: #e1ddcd40;
+	border-radius: 9px;
+	transition: border-radius 0.3s ease-out;
 }
 .quantitySelectorWrapper {
 	border: 1px solid var(--border-color);

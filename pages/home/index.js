@@ -1,13 +1,26 @@
 import axios from 'axios'
 import Head from 'next/head'
 import Image from 'next/image'
-import useSWR from 'swr'
+import { useEffect, useState } from 'react'
+import useSWR, { useSWRConfig } from 'swr'
 import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
-const fetcher = null
+import { CountDown, CountdownTimer } from './Countdown'
+const fetcher = axios.get('/api/schedule').then(res => res.data)
 export default function Home() {
+	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher)
+	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
+	const [countdownFinished, setCountdownFinished] = useState()
+	useEffect(() => {
+		if (countdownFinished) {
+			//fetch scheduled_sales
+			// console.log('fetching scheduled_sales')
+			mutate('/api/schedule')
+		}
+	}, [countdownFinished])
+
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -25,7 +38,47 @@ export default function Home() {
 						display: 'grid',
 						padding: '1em',
 					}}>
-					<Products products={data} isValidating={isValidating} />
+					<div
+						style={
+							{
+								// padding: '2em',
+							}
+						}>
+						{scheduled_sales && (
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									gap: '1.5em',
+								}}>
+								{scheduled_sales.map(sale => {
+									return (
+										<>
+											<div
+												style={{
+													display: 'flex',
+													flexDirection: 'column',
+													lineHeight: '1.5',
+												}}>
+												<CountdownTimer
+													date={sale.start_date}
+													setCountdownFinished={setCountdownFinished}
+													sale={sale}
+												/>
+											</div>
+											{sale?.included_products?.length > 0 && (
+												<Products
+													products={sale?.included_products?.length > 0 ? sale.included_products : []}
+													isValidating={isValidating}
+												/>
+											)}
+										</>
+									)
+								})}
+							</div>
+						)}
+					</div>
+					{data.length > 0 && <Products products={data} isValidating={isValidating} />}
 				</div>
 			</div>
 		</div>

@@ -10,7 +10,7 @@ export async function getProductById(id) {
 	// 	expand: ['default_price'],
 	// })
 	const { db } = await connectToDatabase()
-	const data = await db.collection('products').findOne({ id: id })
+	const data = await db.collection('products').findOne({ id: id, 'status.published': true })
 	// console.log({ order }
 	const product = JSON.parse(JSON.stringify(data))
 	// const product = products.find(product => product.id == id)
@@ -22,7 +22,6 @@ export default async (req, res) => {
 	const { id } = req.query
 	await res.revalidate(`/product/${id}`)
 	const product = await getProductById(id)
-	console.log({ product })
 
 	res.status(200).json(product)
 }

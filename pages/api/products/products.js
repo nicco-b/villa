@@ -18,7 +18,13 @@ export async function getProducts(req, res) {
 
 	// const price = await stripe.prices.retrieve('prod_LzyBdOkrkQPayl')
 	const { db } = await connectToDatabase()
-	const data = await db.collection('products').find({}).toArray()
+	const data = await db
+		.collection('products')
+		.find({
+			'status.published': true,
+			'status.schedule_id': '',
+		})
+		.toArray()
 	// console.log({ order }
 	const p = JSON.parse(JSON.stringify(data))
 

@@ -3,8 +3,6 @@ import styles from '../../styles/Home.module.css'
 import { Product } from './product'
 import Image from 'next/image'
 export const Products = ({ products, isValidating }) => {
-	const productList = products
-	// console.log(productList)
 	return (
 		<div
 			style={{
@@ -36,21 +34,21 @@ export const Products = ({ products, isValidating }) => {
 						<Image src={'/red_loader.webp'} alt='loading' width={25} height={25} />
 					</div>
 				)}
-				{productList?.map((product, i) => (
+				{products?.map((product, i) => (
 					<Link href={`/product/${product.id}`} key={product._id}>
 						<a>
 							<div className={styles.product}>
 								<Product key={product.id} product={product} isValidating={isValidating} />
 								{/* if not last item */}
-
-								{productList.length - 1 !== i && (
-									<div
-										style={{
-											height: '1px',
-											backgroundColor: 'var(--border-color-alt)',
-										}}></div>
-								)}
 							</div>
+							{products.length - 1 !== i && (
+								<div
+									style={{
+										margin: ' 1em 0 0 0',
+										height: '1px',
+										backgroundColor: 'var(--border-color-alt)',
+									}}></div>
+							)}
 						</a>
 					</Link>
 				))}
