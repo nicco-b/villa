@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
 import { connectToDb } from '../../../utils/mongodb'
-import { getToken } from 'next-auth/jwt'
 import { ObjectId } from 'mongodb'
 
 // Default Req and Res are IncomingMessage and ServerResponse
@@ -54,9 +53,8 @@ export const getScheduledSale = async id => {
 	return scheduled_sale[0]
 }
 router.get(async (req, res) => {
-	const token = await getToken({ req })
 	const { id } = req.query
-	if (token && req.method === 'GET') {
+	if (req.method === 'GET') {
 		const scheduled_sale = await getScheduledSale(id)
 		res.status(200).json(scheduled_sale)
 	} else {
@@ -66,11 +64,10 @@ router.get(async (req, res) => {
 })
 router.put(async (req, res) => {
 	const { db } = await connectToDb()
-	const token = await getToken({ req })
 	const { _id, ...rest } = req.body
 	const id = _id
 	console.log(id)
-	if (token && req.method === 'PUT') {
+	if (req.method === 'PUT') {
 		const collection = db.collection('scheduled_sales')
 		//try to update
 		try {
