@@ -81,7 +81,7 @@ export default function Home() {
 							</div>
 						)}
 					</div>
-					{data?.length > 0 && <Products products={data} isValidating={isValidating} />}
+					{<Products products={data} isValidating={isValidating} />}
 				</div>
 			</div>
 		</div>
