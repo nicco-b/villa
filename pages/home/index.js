@@ -7,7 +7,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
-const fetcher = axios.get('/api/schedule').then(res => res.data)
+const fetcher = null
 const fetcher2 = axios.get('/api/products/products').then(res => res.data)
 
 export default function Home() {
