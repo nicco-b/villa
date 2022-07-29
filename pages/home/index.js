@@ -67,19 +67,19 @@ export default function Home() {
 													sale={sale}
 												/>
 											</div>
-											{sale?.included_products?.length > 0 && (
+											{
 												<Products
 													products={sale?.included_products?.length > 0 ? sale.included_products : []}
 													isValidating={isValidating}
 												/>
-											)}
+											}
 										</>
 									)
 								})}
 							</div>
 						)}
 					</div>
-					{data.length > 0 && <Products products={data} isValidating={isValidating} />}
+					{<Products products={data} isValidating={isValidating} />}
 				</div>
 			</div>
 		</div>
