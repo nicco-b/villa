@@ -74,7 +74,8 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				<DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} />
 			</div>
 			<div>
-				{moment(sale.start_date).format('LLLL')}{' '}
+				{new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })}
+				{new Date(sale.start_date).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles' })}
 				{new Date(sale.start_date).getTimezoneOffset() === 420 ? 'PDT' : 'PST'}
 			</div>
 		</div>
