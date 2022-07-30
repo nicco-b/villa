@@ -27,21 +27,21 @@ const DateTimeDisplay = ({ value, type, isDanger }) => {
 export default DateTimeDisplay
 
 const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
-	var abbrs = {
-		EST: 'Eastern Standard Time',
-		EDT: 'Eastern Daylight Time',
-		CST: 'Central Standard Time',
-		CDT: 'Central Daylight Time',
-		MST: 'Mountain Standard Time',
-		MDT: 'Mountain Daylight Time',
-		PST: 'Pacific Standard Time',
-		PDT: 'Pacific Daylight Time',
-	}
+	// var abbrs = {
+	// 	EST: 'Eastern Standard Time',
+	// 	EDT: 'Eastern Daylight Time',
+	// 	CST: 'Central Standard Time',
+	// 	CDT: 'Central Daylight Time',
+	// 	MST: 'Mountain Standard Time',
+	// 	MDT: 'Mountain Daylight Time',
+	// 	PST: 'Pacific Standard Time',
+	// 	PDT: 'Pacific Daylight Time',
+	// }
 
-	moment.fn.zoneName = function () {
-		var abbr = this.zoneAbbr()
-		return abbrs[abbr] || abbr
-	}
+	// moment.fn.zoneName = function () {
+	// 	var abbr = this.zoneAbbr()
+	// 	return abbrs[abbr] || abbr
+	// }
 	const mDate = moment(sale.start_date)
 
 	return (
@@ -95,7 +95,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				{/* {new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).getTimezoneOffset() === 420 ? 'PDT' : 'PST'} */}
-				{mDate.tz('America/Los_Angeles').format('LLLL zz')}
+				{mDate.tz('America/New_York').format('LLLL z')}
 			</div>
 		</div>
 	)
