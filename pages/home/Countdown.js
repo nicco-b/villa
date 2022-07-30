@@ -60,7 +60,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				style={{
 					display: 'flex',
 					gap: '2px',
-					border: '2px solid #369662',
+					border: '2px solid #36966280',
 					padding: '10px 1.5em',
 					width: 'fit-content',
 					borderRadius: '99999px',
@@ -95,7 +95,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				{/* {new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).getTimezoneOffset() === 420 ? 'PDT' : 'PST'} */}
-				{mDate.tz('America/New_York').format('LLLL z')}
+				{mDate.tz('America/Los_Angeles').format('LLLL z')}
 			</div>
 		</div>
 	)
