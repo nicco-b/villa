@@ -57,6 +57,7 @@ export default function Home() {
 									return (
 										<>
 											<div
+												key={sale._id}
 												style={{
 													display: 'flex',
 													flexDirection: 'column',

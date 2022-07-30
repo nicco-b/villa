@@ -3,11 +3,10 @@ import { tz } from 'moment-timezone'
 import { useCountdown } from '../../hooks/useCountdown'
 
 export const CountdownTimer = ({ date, setCountdownFinished, sale }) => {
-	const [days, hours, minutes, seconds] = useCountdown(new Date(date).getTime())
+	const [days, hours, minutes, seconds] = useCountdown(date)
 	if (days + hours + minutes + seconds <= 0) {
 		return setCountdownFinished(true)
 	} else {
-		//id in here fixed hydration error
 		return (
 			<ShowCounter
 				key={sale._id}
