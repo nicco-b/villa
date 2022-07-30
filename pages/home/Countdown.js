@@ -7,7 +7,17 @@ export const CountdownTimer = ({ date, setCountdownFinished, sale }) => {
 	if (days + hours + minutes + seconds <= 0) {
 		return setCountdownFinished(true)
 	} else {
-		return <ShowCounter days={days} hours={hours} minutes={minutes} seconds={seconds} sale={sale} />
+		//id in here fixed hydration error
+		return (
+			<ShowCounter
+				key={sale._id}
+				days={days}
+				hours={hours}
+				minutes={minutes}
+				seconds={seconds}
+				sale={sale}
+			/>
+		)
 	}
 }
 const DateTimeDisplay = ({ value, type, isDanger }) => {
