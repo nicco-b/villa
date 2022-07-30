@@ -95,7 +95,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				{/* {new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles' })} */}
 				{/* {new Date(sale.start_date).getTimezoneOffset() === 420 ? 'PDT' : 'PST'} */}
-				{mDate.tz('America/Los_Angeles').format('LLLL z')}
+				{mDate.tz('America/Los_Angeles').format('LLL z')}
 			</div>
 		</div>
 	)
