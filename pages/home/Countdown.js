@@ -1,11 +1,19 @@
 import moment from 'moment'
 import { tz } from 'moment-timezone'
+import { useEffect } from 'react'
 import { useCountdown } from '../../hooks/useCountdown'
 
 export const CountdownTimer = ({ date, setCountdownFinished, sale }) => {
-	const [days, hours, minutes, seconds] = useCountdown(date)
+	const [days, hours, minutes, seconds, countdownFinished] = useCountdown(date)
+	useEffect(() => {
+		if (countdownFinished) {
+			setCountdownFinished(true)
+		} else {
+			setCountdownFinished(false)
+		}
+	}, [countdownFinished])
 	if (days + hours + minutes + seconds <= 0) {
-		return setCountdownFinished(true)
+		return
 	} else {
 		return (
 			<ShowCounter
@@ -15,6 +23,7 @@ export const CountdownTimer = ({ date, setCountdownFinished, sale }) => {
 				minutes={minutes}
 				seconds={seconds}
 				sale={sale}
+				countdownFinished={countdownFinished}
 			/>
 		)
 	}

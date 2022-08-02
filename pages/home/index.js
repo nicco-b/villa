@@ -13,13 +13,16 @@ const fetcher2 = () => axios.get('/api/products/products').then(res => res.data)
 export default function Home() {
 	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher2)
-	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
+	const { data: scheduled_sales, isValidating: scheduleValidating } = useSWR(
+		'/api/schedule',
+		fetcher
+	)
 	const [countdownFinished, setCountdownFinished] = useState(false)
 	useEffect(() => {
 		if (countdownFinished) {
 			//fetch scheduled_sales
-			// console.log('fetching scheduled_sales')
-			mutate('/api/schedule')
+			console.log('fetching scheduled_sales')
+			mutate('/api/schedule', fetcher, false)
 		}
 	}, [countdownFinished])
 
@@ -72,7 +75,7 @@ export default function Home() {
 
 											<Products
 												products={sale?.included_products?.length > 0 ? sale.included_products : []}
-												isValidating={isValidating}
+												isValidating={scheduleValidating}
 											/>
 										</>
 									)
