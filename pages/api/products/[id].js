@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { ObjectId } from 'mongodb'
 import { connectToDatabase } from '../../../utils/mongodb'
 import { products } from './productList'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
@@ -10,7 +11,9 @@ export async function getProductById(id) {
 	// 	expand: ['default_price'],
 	// })
 	const { db } = await connectToDatabase()
-	const data = await db.collection('products').findOne({ id: id, 'status.published': true })
+	const data = await db
+		.collection('products')
+		.findOne({ _id: ObjectId(id), 'status.published': true })
 	// console.log({ order }
 	const product = JSON.parse(JSON.stringify(data))
 	// const product = products.find(product => product.id == id)

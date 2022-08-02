@@ -35,7 +35,7 @@ export const Products = ({ products, isValidating }) => {
 					</div>
 				)}
 				{products?.map((product, i) => (
-					<Link href={`/product/${product.id}`} key={product._id}>
+					<Link href={`/product/${product._id}`} key={product._id}>
 						<a>
 							<div className={styles.product}>
 								<Product key={product.id} product={product} isValidating={isValidating} />

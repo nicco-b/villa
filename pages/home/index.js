@@ -14,7 +14,7 @@ export default function Home() {
 	const { mutate } = useSWRConfig()
 	const { data, isValidating } = useSWR('/api/products/products', fetcher2)
 	const { data: scheduled_sales } = useSWR('/api/schedule', fetcher)
-	const [countdownFinished, setCountdownFinished] = useState()
+	const [countdownFinished, setCountdownFinished] = useState(false)
 	useEffect(() => {
 		if (countdownFinished) {
 			//fetch scheduled_sales
