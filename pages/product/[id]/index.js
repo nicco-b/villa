@@ -8,18 +8,29 @@ import { Product } from '../../../components/products/product'
 import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import axios from 'axios'
+import { getScheduledSales } from '../../api/schedule'
+import { getProducts } from '../../api/products/products'
 
 export async function getStaticPaths() {
 	// const data = await getProducts()
 	// const paths = data.map(product => ({
 	// 	params: { id: product.id },
 	// }))
-
+	const scheduled_sales = await getScheduledSales()
+	//
+	const products = await getProducts()
+	const ss = JSON.parse(JSON.stringify(scheduled_sales))
+	const all_s_products = ss.map(sale => sale?.included_products)?.flat()
+	const prods = [...products, ...all_s_products]
+	console.log(prods, 'sdsd')
+	const paths = prods.map(product => ({
+		params: { id: product._id },
+	}))
 	// We'll pre-render only these paths at build time.
 	// { fallback: blocking } will server-render pages
 	// on-demand if the path doesn't exist.
 	return {
-		paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+		paths,
 		fallback: 'blocking',
 	}
 }
