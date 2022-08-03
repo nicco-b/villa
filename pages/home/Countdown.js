@@ -34,9 +34,9 @@ const DateTimeDisplay = ({ value, type, isDanger }) => {
 			<p
 				style={{
 					fontSize: '2rem',
-					color: '#369662',
+					color: value === 0 ? '#36966280' : '#369662',
 				}}>
-				{value}
+				{value.toLocaleString('en-US', { minimumIntegerDigits: 2 })}
 			</p>
 		</div>
 	)
@@ -78,36 +78,43 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				style={{
 					display: 'flex',
 					gap: '2px',
-					border: '2px solid #36966280',
+					border: '2px solid #36966230',
 					padding: '10px 1.5em',
-					width: 'fit-content',
+					width: '250px',
 					borderRadius: '99999px',
 				}}>
-				<DateTimeDisplay value={days} type={'Days'} isDanger={days <= 3} />
-				<p
+				<div
 					style={{
-						color: '#369662',
-						fontSize: '2rem',
+						display: 'flex',
+						gap: '2px',
+						width: '250px',
 					}}>
-					:
-				</p>
-				<DateTimeDisplay value={hours} type={'Hours'} isDanger={false} />
-				<p
-					style={{
-						color: '#369662',
-						fontSize: '2rem',
-					}}>
-					:
-				</p>
-				<DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} />
-				<p
-					style={{
-						color: '#369662',
-						fontSize: '2rem',
-					}}>
-					:
-				</p>
-				<DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} />
+					<DateTimeDisplay value={days} type={'Days'} isDanger={days <= 3} />
+					<p
+						style={{
+							color: '#369662',
+							fontSize: '2rem',
+						}}>
+						:
+					</p>
+					<DateTimeDisplay value={hours} type={'Hours'} isDanger={false} />
+					<p
+						style={{
+							color: '#369662',
+							fontSize: '2rem',
+						}}>
+						:
+					</p>
+					<DateTimeDisplay value={minutes} type={'Mins'} isDanger={false} />
+					<p
+						style={{
+							color: '#369662',
+							fontSize: '2rem',
+						}}>
+						:
+					</p>
+					<DateTimeDisplay value={seconds} type={'Seconds'} isDanger={false} />
+				</div>
 			</div>
 			<div>
 				{/* {new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })} */}
