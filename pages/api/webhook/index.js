@@ -57,7 +57,6 @@ router.post(async (req, res) => {
 	}
 	if (event.type === 'checkout.session.completed') {
 		console.log('checkout.session.completed')
-		await res.revalidate(`/`)
 
 		//update order
 		console.log('update order here', event)
