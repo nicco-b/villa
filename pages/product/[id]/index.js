@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 	const ss = JSON.parse(JSON.stringify(scheduled_sales))
 	const all_s_products = ss.map(sale => sale?.included_products)?.flat()
 	const prods = [...products, ...all_s_products]
-	console.log(prods, 'sdsd')
+	// console.log(prods, 'sdsd')
 	const paths = prods.map(product => ({
 		params: { id: product._id },
 	}))
@@ -104,7 +104,7 @@ const ProductPage = () => {
 					alignItems: 'center',
 				}}>
 				<Link href={`/`}>
-					<button type='text'>back</button>
+					<button type='button'>back</button>
 				</Link>
 				{isValidating && <Image src={'/red_loader.webp'} width={25} height={25} />}
 			</div>

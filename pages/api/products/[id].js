@@ -11,15 +11,51 @@ export async function getProductById(id) {
 	// 	expand: ['default_price'],
 	// })
 	const { db } = await connectToDatabase()
-	const data = await db
-		.collection('products')
-		.findOne({ _id: ObjectId(id), 'status.published': true })
-	// console.log({ order }
-	const product = JSON.parse(JSON.stringify(data))
+	const collection = db.collection('products')
+	// const data = await db
+	// 	.collection('products')
+	// 	.findOne({ _id: ObjectId(id), 'status.published': true })
+	// // console.log({ order }
+	// console.log('wtf')
+	// const product = JSON.parse(JSON.stringify(data))
 	// const product = products.find(product => product.id == id)
 	// const p = products.find(product => product.id === id)
 	// console.log({ p })
-	return product
+	const agg = [
+		{
+			$match: {
+				_id: ObjectId(id),
+				'status.published': true,
+			},
+		},
+		{
+			$addFields: {
+				pid: {
+					$convert: {
+						input: '$_id',
+						to: 'string',
+						onError: '',
+						onNull: '',
+					},
+				},
+			},
+		},
+		{
+			$lookup: {
+				from: 'product_variants',
+				localField: 'pid',
+				foreignField: 'product_id',
+				as: 'variants',
+			},
+		},
+		{
+			$unset: ['pid', 'status_history'],
+		},
+	]
+	const data = await collection.aggregate(agg).toArray()
+	const product = JSON.parse(JSON.stringify(data))
+
+	return product[0]
 }
 export default async (req, res) => {
 	const { id } = req.query

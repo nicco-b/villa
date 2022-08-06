@@ -70,7 +70,7 @@ export const Cart = () => {
 		const formattedProducts = cart.map(item => {
 			return {
 				amount: item.price,
-				name: item.name,
+				name: item.attributes.color,
 				currency: 'usd',
 				quantity: item.quantity,
 			}
@@ -183,11 +183,14 @@ export const Cart = () => {
 										padding: '0.5em 0',
 									}}>
 									<div className={styles.quantitySelectorWrapper}>
-										<button onClick={() => handleDecrement(product)}>-</button>
+										<button className='smallButton' onClick={() => handleDecrement(product)}>
+											-
+										</button>
 										<div className={styles.quantitySelector}>
 											<div>{product.quantity}</div>
 										</div>
 										<button
+											className='smallButton'
 											key={product.id}
 											onClick={() => handleIncrement(product)}
 											disabled={addButtonState === 'waiting'}

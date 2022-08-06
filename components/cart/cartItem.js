@@ -12,7 +12,7 @@ export const CartItem = ({ product }) => {
 				<div className={cartStyles.cartItem}>
 					<div className={cartStyles.cartItemImg}>
 						<div className={styles.productImg}>
-							<img src={`${product?.images[0]}`} width={35} height={35} alt={product.name} />
+							<img src={`${product?.featured_image}`} width={35} height={35} alt={product.name} />
 						</div>
 					</div>
 

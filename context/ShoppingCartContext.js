@@ -16,7 +16,8 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		const data = await axios
 			.post(`/api/cart`, {
-				id: product.id,
+				id: product.product_id,
+				vid: product._id,
 				q,
 			})
 			.then(res => {
@@ -39,36 +40,37 @@ export const ShoppingCartProvider = ({ children }) => {
 	}
 
 	const increaseQuantity = async product => {
-		const id = product.id
-		const item = await cart.find(item => item.id === id)
+		console.log('pp', product)
+		const id = product._id
+		const item = await cart.find(item => item._id === id)
 		console.log({ item })
 		const q = item && item.quantity
 
 		//check database for product
 		//fetch product from database
-		const { data, status } = await getProduct(product, q)
+		const { data, status } = await getProduct(product, q, id)
 		setStatus(status)
 
 		setCart(currItems => {
 			const message = data.message
 			const inventory = data.inventory
 			//if not in cart, add one
-
+			console.log({ data })
 			//if product inventory is greater than or equal to current product quantity in cart
 			//if message is not 'maximum'
 			if (status === 200) {
-				if (!currItems.find(item => item?.id === id)) {
+				if (!currItems.find(item => item?._id === id)) {
 					setMessage(message)
 
 					return [...currItems, { ...product, quantity: 1 }]
 				} else {
-					const quantity = currItems?.find(item => item?.id === id).quantity
+					const quantity = currItems?.find(item => item?._id === id).quantity
 					const productInventory = inventory
 					const e = productInventory > quantity
 					//if in cart, increase quantity
 					if (e) {
 						return currItems.map(item => {
-							if (item?.id === id) {
+							if (item?._id === id) {
 								setMessage(message)
 
 								return { ...item, quantity: item.quantity + 1 }

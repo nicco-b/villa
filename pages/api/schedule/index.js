@@ -51,7 +51,31 @@ export const getScheduledSales = async query => {
 										'$$id',
 									],
 								},
+								'status.published': true,
 							},
+						},
+						{
+							$addFields: {
+								pid: {
+									$convert: {
+										input: '$_id',
+										to: 'string',
+										onError: '',
+										onNull: '',
+									},
+								},
+							},
+						},
+						{
+							$lookup: {
+								from: 'product_variants',
+								localField: 'pid',
+								foreignField: 'product_id',
+								as: 'variants',
+							},
+						},
+						{
+							$unset: ['pid', 'status_history'],
 						},
 					],
 					as: 'included_products',

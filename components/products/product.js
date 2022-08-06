@@ -4,6 +4,7 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 
 export const Product = ({ product, isValidating }) => {
+	const [currentVariant, setCurrentVariant] = useState(0)
 	const { increaseQuantity, message, status } = useShoppingCart()
 
 	const [addButtonState, setAddButtonState] = useState('default')
@@ -21,7 +22,7 @@ export const Product = ({ product, isValidating }) => {
 	const handleCartAdd = async event => {
 		event.preventDefault()
 		setAddButtonState('waiting')
-		await increaseQuantity(product)
+		await increaseQuantity(product.variants[currentVariant])
 		setAddButtonState(message)
 	}
 	useEffect(() => {
@@ -51,32 +52,58 @@ export const Product = ({ product, isValidating }) => {
 						alignItems: 'center',
 						paddingBottom: '1em',
 					}}>
-					<h4>{product?.name}</h4>
-					<div
+					<h3
 						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							alignItems: 'center',
-							gap: '0.3em',
+							fontWeight: '500',
 						}}>
-						<p>{product?.dimensions.length}</p>x<p>{product?.dimensions.width}</p>x
-						<p>{product?.dimensions.height}</p>
-						<p>{product?.dimensions.unit}</p>
-					</div>
+						{product?.name}
+					</h3>
 
-					<h4>
+					<h4
+						style={{
+							fontWeight: '500',
+						}}>
 						{formatCurrencyString({
-							value: product?.price,
+							value: product?.variants[currentVariant].price,
 							currency: 'usd',
 						})}
 					</h4>
 				</div>
 				<div
 					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						gap: '0.3em',
+					}}>
+					size
+					<p>{product?.variants[currentVariant].dimensions.length}</p>x
+					<p>{product?.variants[currentVariant].dimensions.width}</p>x
+					<p>{product?.variants[currentVariant].dimensions.height}</p>
+					<p>{product?.variants[currentVariant].dimensions.unit}</p>
+				</div>
+				<div>
+					colors:
+					{product?.variants
+						.filter(v => !v.is_default)
+						.map((variant, index) => (
+							<div key={index}>
+								<input
+									type='radio'
+									name='color'
+									value={index}
+									onChange={event => setCurrentVariant(parseInt(event.target.value) + 1)}
+									checked={currentVariant === index + 1}
+								/>
+							</div>
+						))}
+				</div>
+				<div
+					style={{
 						height: '32.2969px',
 					}}>
-					{product?.inventory > 0 ? (
+					{product?.variants[currentVariant].inventory > 0 ? (
 						<button
 							type={'button'}
 							onClick={handleCartAdd}
@@ -111,7 +138,7 @@ export const Product = ({ product, isValidating }) => {
 								minWidth: '110px',
 								backgroundColor: '',
 								color: 'rgba(211, 63, 20, 0.6)',
-								border: 'none',
+								borderColor: 'rgba(211, 63, 20, 0.2)',
 								cursor: 'not-allowed',
 								fontWeight: '550',
 							}}>

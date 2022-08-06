@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 	host: 'smtp.gmail.com',
 	auth: {
 		user: 'njbufalino@gmail.com',
-		pass: 'thlwovicmktyosmi',
+		pass: 'tvnjnymctbhsfukq',
 	},
 	secure: true,
 })
@@ -91,17 +91,17 @@ router.post(async (req, res) => {
 
 		//get products from updated order and update the products inventory
 		const { products } = orderDoc.value
-		await products.map(p => {
-			db.collection('products').findOneAndUpdate(
-				{ _id: ObjectId(p._id) },
-				{
-					$inc: {
-						inventory: -p.quantity,
-					},
-				},
-				{ returnNewDocument: true }
-			)
-		})
+		// await products.map(p => {
+		// 	db.collection('products').findOneAndUpdate(
+		// 		{ _id: ObjectId(p._id) },
+		// 		{
+		// 			$inc: {
+		// 				inventory: -p.quantity,
+		// 			},
+		// 		},
+		// 		{ returnNewDocument: true }
+		// 	)
+		// })
 
 		//send email to customer
 		const clientTemplate = path.join(process.cwd(), 'templates', 'order-success', 'client')
@@ -131,19 +131,6 @@ router.post(async (req, res) => {
 				},
 			},
 		})
-		await customerEmail.send({
-			template: clientTemplate,
-			message: {
-				// from: 'njbufalino@gmail.com', // sender address
-				to: customer_details.email, // list of receivers
-				// subject: 'Order Successful', // Subject line
-				// text: 'order',
-				// html: htmlTemplate, // plain text body
-			},
-			send: true,
-		})
-
-		//send email to admin
 		const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
 		const adminEmail = new Email({
 			message: {
@@ -171,20 +158,33 @@ router.post(async (req, res) => {
 				},
 			},
 		})
-		await adminEmail.send({
-			template: adminTemplate,
-			message: {
-				// from: 'njbufalino@gmail.com', // sender address
-				to: 'njbufalino@gmail.com', // list of receivers
-				// subject: 'Order Successful', // Subject line
-				// text: 'order',
-				// html: htmlTemplate, // plain text body
-			},
-			send: true,
-		})
-	}
+		try {
+			await customerEmail.send({
+				message: {
+					to: customer_details.email, // list of receivers
+				},
+				send: true,
+			})
 
+			// await adminEmail.send({
+			// 	template: adminTemplate,
+			// 	message: {
+			// 		// from: 'njbufalino@gmail.com', // sender address
+			// 		to: 'njbufalino@gmail.com', // list of receivers
+			// 		// subject: 'Order Successful', // Subject line
+			// 		// text: 'order',
+			// 		// html: htmlTemplate, // plain text body
+			// 	},
+			// 	send: true,
+			// })
+
+			res.send({ received: true })
+		} catch (err) {
+			console.log(err)
+		}
+	}
 	res.send({ received: true })
+
 	// Return a 200 response to acknowledge receipt of the event
 })
 export default router.handler({
