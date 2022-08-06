@@ -71,7 +71,7 @@ export const Cart = () => {
 			const itemName = item?.attributes && `- ${Object.values(item?.attributes).join(', ')}`
 			return {
 				amount: item.price,
-				name: `${item.name} ${itemName && itemName}`,
+				name: `${item.name} ${itemName ? itemName : ''}`,
 				currency: 'usd',
 				quantity: item.quantity,
 			}
