@@ -98,6 +98,7 @@ export const Product = ({ product, isValidating }) => {
 					justifyContent: 'space-between',
 					height: '100%',
 					alignItems: 'center',
+					paddingTop: '0.5em',
 				}}>
 				<div
 					style={{
@@ -121,9 +122,8 @@ export const Product = ({ product, isValidating }) => {
 							alignItems: 'center',
 							gap: '0.3em',
 							padding: '0em 0 0em 0',
-							fontSize: '1em',
+							fontSize: '1.125rem',
 						}}>
-						size
 						<p>{product?.variants[currentVariant]?.dimensions.length}"</p>x
 						<p>{product?.variants[currentVariant]?.dimensions.width}"</p>
 					</div>
