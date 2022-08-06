@@ -5,7 +5,7 @@ export async function getProductById(id) {
 	const { db } = await connectToDatabase()
 	const collection = db.collection('products')
 
-	console.log('wtf', id)
+	// console.log('wtf', id)
 	if (id !== 'undefined') {
 		const agg = [
 			{
@@ -71,7 +71,7 @@ export default async (req, res) => {
 			const { db } = await connectToDatabase()
 			const collection = db.collection('products')
 
-			console.log('wtf', id)
+			// console.log('wtf', id)
 			if (id !== 'undefined') {
 				const agg = [
 					{

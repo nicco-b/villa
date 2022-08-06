@@ -70,7 +70,7 @@ export const Cart = () => {
 		const formattedProducts = cart.map(item => {
 			return {
 				amount: item.price,
-				name: item.attributes.color,
+				name: `${item.name} - ${Object.values(item.attributes).join(', ')}`,
 				currency: 'usd',
 				quantity: item.quantity,
 			}

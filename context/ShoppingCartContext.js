@@ -18,7 +18,7 @@ export const ShoppingCartProvider = ({ children }) => {
 			.post(`/api/cart`, {
 				id: product.product_id,
 				vid: product._id,
-				q,
+				q: !q ? 0 : q,
 			})
 			.then(res => {
 				console.log(res)
@@ -48,7 +48,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		//check database for product
 		//fetch product from database
-		const { data, status } = await getProduct(product, q, id)
+		const { data, status } = await getProduct(product, getItemQuantity(item?.product_id), id)
 		setStatus(status)
 
 		setCart(currItems => {
@@ -135,7 +135,9 @@ export const ShoppingCartProvider = ({ children }) => {
 	//addItem
 	//getItemQuantity
 	const getItemQuantity = id => {
-		return cart.find(item => item.id === id)?.quantity || 0
+		return cart.reduce(function (acc, obj) {
+			return acc + obj.quantity
+		}, 0)
 	}
 	//totalPrice
 	const cartTotal = () => {

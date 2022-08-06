@@ -154,9 +154,9 @@ export const Product = ({ product, isValidating }) => {
 							aria-label='View density'
 							onValueChange={value => setCurrentVariant(value)}>
 							{product?.variants.map((variant, index) => {
-								console.log({ variant })
+								// console.log({ variant })
 								const name = Object.values(variant.attributes).join(', ')
-								console.log(name)
+								// console.log(name)
 								return (
 									<ColorAttribute
 										index={index}

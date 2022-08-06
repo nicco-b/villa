@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
 import { connectToDatabase } from '../../../utils/mongodb'
 var moment = require('moment')
@@ -131,7 +130,6 @@ export const getScheduledSales = async query => {
 			},
 		])
 		.toArray()
-	console.log(scheduled_sales)
 
 	return scheduled_sales
 }

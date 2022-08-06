@@ -49,7 +49,6 @@ export const getScheduledSale = async id => {
 		},
 	]
 	const scheduled_sale = await collection.aggregate(agg).toArray()
-	console.log(scheduled_sale)
 	return scheduled_sale[0]
 }
 router.get(async (req, res) => {
@@ -66,7 +65,6 @@ router.put(async (req, res) => {
 	const { db } = await connectToDatabase()
 	const { _id, ...rest } = req.body
 	const id = _id
-	console.log(id)
 	if (req.method === 'PUT') {
 		const collection = db.collection('scheduled_sales')
 		//try to update

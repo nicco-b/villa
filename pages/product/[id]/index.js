@@ -8,6 +8,7 @@ import { getProductById } from '../../api/products/[id]'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 import { getScheduledSales } from '../../api/schedule'
 import { getProducts } from '../../api/products/products'
+import { useShoppingCart } from '../../../context/ShoppingCartContext'
 
 export async function getStaticPaths() {
 	const scheduled_sales = await getScheduledSales()
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 	const all_s_products = ss.map(sale => sale?.included_products)?.flat()
 	const prods = [...products, ...all_s_products]
 	const paths = prods.map(product => {
-		if (product) {
+		if (product._id) {
 			return { params: { id: product?._id } }
 		}
 	})
@@ -80,6 +81,8 @@ const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export const ProductPage = () => {
 	const router = useRouter()
+	const { getItemQuantity } = useShoppingCart()
+	console.log(getItemQuantity(router.query.id))
 	const id = router.query.id
 	const { data, error, isValidating } = useSWR(['/api/products', id], fetcher)
 	// console.log({ data, error, isValidating, id })
