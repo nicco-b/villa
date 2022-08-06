@@ -105,15 +105,28 @@ export const Product = ({ product, isValidating }) => {
 						flexDirection: 'column',
 						gap: '0.3em',
 						alignItems: 'center',
-						paddingBottom: '1em',
+						paddingBottom: '0.6em',
 					}}>
-					<h3
+					<h4
 						style={{
 							fontWeight: '500',
 						}}>
 						{product?.name}
-					</h3>
-
+					</h4>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+							gap: '0.3em',
+							padding: '0em 0 0em 0',
+							fontSize: '1em',
+						}}>
+						size
+						<p>{product?.variants[currentVariant]?.dimensions.length}"</p>x
+						<p>{product?.variants[currentVariant]?.dimensions.width}"</p>
+					</div>
 					<h4
 						style={{
 							fontWeight: '500',
@@ -123,19 +136,6 @@ export const Product = ({ product, isValidating }) => {
 							currency: 'usd',
 						})}
 					</h4>
-				</div>
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						gap: '0.3em',
-						padding: '1em',
-					}}>
-					size
-					<p>{product?.variants[currentVariant]?.dimensions.length}"</p>x
-					<p>{product?.variants[currentVariant]?.dimensions.width}"</p>
 				</div>
 
 				{product.variants.length > 1 && (

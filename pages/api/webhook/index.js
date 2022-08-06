@@ -117,7 +117,8 @@ router.post(async (req, res) => {
 
 			//send email to customer
 			const clientTemplate = path.join(process.cwd(), 'templates', 'order-success', 'client')
-			console.log('clientTemplate', clientTemplate)
+			console.log('clientTemplate', products)
+
 			const customerEmail = await new Email({
 				message: {
 					from: 'njbufalino@gmail.com',
@@ -133,6 +134,7 @@ router.post(async (req, res) => {
 						customer: customer_details,
 						shipping: shipping,
 						products: products,
+
 						formatPrice: price => {
 							formatCurrencyString({
 								currency: 'USD',

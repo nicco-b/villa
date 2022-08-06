@@ -424,7 +424,10 @@
 													/>
 												</div>
 												<div class="product-right flex">
-													<p class="width-100 margin-left"><%=product.name%></p>
+													<div class="flex">
+														<p class="width-100 margin-left"><%=product.name%></p>
+													    <p class="width-100 margin-left"><%=product?.attributes && Object.values(product.attributes).join(', ')%></p>
+													</div>
 													<div class="text-right flex width-100">
 														<p class="text-right width-100">x<%=product.quantity%></p>
 														<p class="text-right width-100"><%=product.formattedPrice%></p>
