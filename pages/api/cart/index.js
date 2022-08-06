@@ -18,7 +18,7 @@ router.post(async (req, res) => {
 		console.log({ product })
 		const variant = product.variants.find(variant => variant._id === variant_id)
 		console.log({ variant })
-		const variant_name = Object.values(variant.attributes).join(',')
+		const variant_name = variant?.attributes && Object.values(variant.attributes).join(',')
 		console.log({ quantity }, product.max_allowed)
 
 		if (quantity < product.max_allowed) {
