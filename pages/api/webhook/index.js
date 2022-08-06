@@ -179,7 +179,7 @@ router.post(async (req, res) => {
 				.send({
 					template: adminTemplate,
 					message: {
-						to: 'njbufalino@gmail.com', // list of receivers
+						to: 'duairak@gmail.com', // list of receivers
 					},
 				})
 				.then(() => {
