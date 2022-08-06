@@ -13,20 +13,30 @@ import { formatCurrencyString } from 'use-shopping-cart'
 const nodemailer = require('nodemailer')
 const Email = require('email-templates')
 const path = require('path')
-const transporter = nodemailer.createTransport({
-	port: 465, // true for 465, false for other ports
-	host: 'smtp.gmail.com',
-	auth: {
-		user: 'njbufalino@gmail.com',
-		pass: 'tvnjnymctbhsfukq',
+let aws = require('@aws-sdk/client-ses')
+process.env.AWS_ACCESS_KEY_ID = 'AKIA5Q535WPJT3QNTVXY'
+process.env.AWS_SECRET_ACCESS_KEY = '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'
+const ses = new aws.SES({
+	apiVersion: '2010-12-01',
+	region: 'us-east-1',
+	credentials: {
+		accessKeyId: 'AKIA5Q535WPJT3QNTVXY',
+		secretAccessKey: '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',
 	},
-	secure: true,
 })
 
 // Default Req and Res are IncomingMessage and ServerResponse
 // You may want to pass in NextApiRequest and NextApiResponse
 const router = createRouter()
-
+let transporter = nodemailer.createTransport({
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
+	auth: {
+		user: 'njbufalino@gmail.com',
+		pass: 'tvnjnymctbhsfukq',
+	},
+})
 router.post(async (req, res) => {
 	console.log('why', req.rawBody)
 	const stripe = initStripe(process.env.STRIPE_SECRET_KEY)
@@ -91,21 +101,23 @@ router.post(async (req, res) => {
 
 		//get products from updated order and update the products inventory
 		const { products } = orderDoc.value
-		// await products.map(p => {
-		// 	db.collection('products').findOneAndUpdate(
-		// 		{ _id: ObjectId(p._id) },
-		// 		{
-		// 			$inc: {
-		// 				inventory: -p.quantity,
-		// 			},
-		// 		},
-		// 		{ returnNewDocument: true }
-		// 	)
-		// })
+		await products.map(p => {
+			db.collection('products').findOneAndUpdate(
+				{ _id: ObjectId(p._id) },
+				{
+					$inc: {
+						inventory: -p.quantity,
+					},
+				},
+				{ returnNewDocument: true }
+			)
+		})
 
 		//send email to customer
 		const clientTemplate = path.join(process.cwd(), 'templates', 'order-success', 'client')
+		console.log('clientTemplate', clientTemplate)
 		const customerEmail = new Email({
+			from: 'njbufalino@gmail.com',
 			message: {
 				from: 'njbufalino@gmail.com',
 			},
@@ -131,57 +143,57 @@ router.post(async (req, res) => {
 				},
 			},
 		})
-		const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
-		const adminEmail = new Email({
-			message: {
-				from: 'njbufalino@gmail.com',
-			},
-			send: true,
-			transport: transporter,
-			views: {
-				options: {
-					extension: 'ejs', // <---- HERE
-				},
-				locals: {
-					name: customer_details.name,
-					order: orderDoc.value,
-					customer: customer_details,
-					shipping: shipping,
-					products: products,
-					formatPrice: price => {
-						formatCurrencyString({
-							currency: 'USD',
-							value: price,
-						})
-					},
-					date: orderDoc.value.created_at,
-				},
-			},
-		})
-		try {
-			await customerEmail.send({
+		// await transporter.sendMail(
+		// 	{
+		// 		from: 'njbufalino@gmail.com',
+		// 		to: 'njbufalino@gmail.com',
+		// 		subject: 'Message',
+		// 		text: 'I hope this message gets sent!',
+		// 		ses: {
+		// 			// optional extra arguments for SendRawEmail
+		// 			Tags: [
+		// 				{
+		// 					Name: 'tag_name',
+		// 					Value: 'tag_value',
+		// 				},
+		// 			],
+		// 		},
+		// 	},
+		// 	(err, info) => {
+		// 		console.log(err, info)
+		// 	}
+		// )
+
+		const t = await customerEmail
+			.send({
+				template: clientTemplate,
 				message: {
-					to: customer_details.email, // list of receivers
+					to: 'njbufalino@gmail.com',
 				},
-				send: true,
+				locals: {
+					name: customer_details.name,
+					order: orderDoc.value,
+					customer: customer_details,
+					shipping: shipping,
+					products: products,
+					formatPrice: price => {
+						formatCurrencyString({
+							currency: 'USD',
+							value: price,
+						})
+					},
+					date: orderDoc.value.created_at,
+				},
 			})
-
-			// await adminEmail.send({
-			// 	template: adminTemplate,
-			// 	message: {
-			// 		// from: 'njbufalino@gmail.com', // sender address
-			// 		to: 'njbufalino@gmail.com', // list of receivers
-			// 		// subject: 'Order Successful', // Subject line
-			// 		// text: 'order',
-			// 		// html: htmlTemplate, // plain text body
-			// 	},
-			// 	send: true,
-			// })
-
-			res.send({ received: true })
-		} catch (err) {
-			console.log(err)
-		}
+			.then(() => {
+				console.log('email sent')
+			})
+			.catch(err => {
+				console.log(err)
+			})
+		console.log({ t })
+		//send email to admin
+		res.send({ received: true })
 	}
 	res.send({ received: true })
 

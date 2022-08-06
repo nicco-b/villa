@@ -59,7 +59,6 @@ export async function getProductById(id) {
 }
 export default async (req, res) => {
 	const { id } = req.query
-	await res.revalidate(`/product/${id}`)
 	const product = await getProductById(id)
 
 	res.status(200).json(product)
