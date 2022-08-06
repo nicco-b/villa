@@ -428,7 +428,7 @@
 												<div class="product-right flex">
 													<div class="flex">
 														<p class="width-100 margin-left"><%=product.name%></p>
-													    <p class="width-100 margin-left"><%=product?.attributes && `(${Object.values(product.attributes).join(', ')})`%></p>
+													    <p class="width-100 margin-left"><%=product?.attributes && `${Object.values(product.attributes).join(', ')}`%></p>
 													</div>
 
 													<div class="text-right flex width-100">

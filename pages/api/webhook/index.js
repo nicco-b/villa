@@ -29,8 +29,8 @@ const transporter = nodemailer.createTransport({
 	port: 465,
 	secure: true,
 	auth: {
-		user: 'njbufalino@gmail.com',
-		pass: 'tvnjnymctbhsfukq',
+		user: 'shop.duairak@gmail.com',
+		pass: 'itwmzqesqblsblih',
 	},
 })
 // Default Req and Res are IncomingMessage and ServerResponse
@@ -121,7 +121,7 @@ router.post(async (req, res) => {
 
 			const customerEmail = await new Email({
 				message: {
-					from: 'njbufalino@gmail.com',
+					from: 'shop.duairak@gmail.com',
 				},
 				transport: transporter,
 				views: {
@@ -151,7 +151,7 @@ router.post(async (req, res) => {
 			const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
 			const adminEmail = new Email({
 				message: {
-					from: 'njbufalino@gmail.com',
+					from: 'shop.duairak@gmail.com',
 				},
 
 				transport: transporter,
