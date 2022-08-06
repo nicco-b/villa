@@ -44,9 +44,11 @@ export const SideBar = ({ columns }) => {
 					{cartOpen && <Cart />}
 					{columns > 1 && (
 						<div
-							style={{
-								background: 'var(--bgAlt)',
-							}}>
+							style={
+								{
+									// background: 'var(--bgAlt)',
+								}
+							}>
 							<Footer />
 						</div>
 					)}
@@ -131,7 +133,7 @@ const Footer = () => {
 				display: 'flex',
 				justifyContent: 'space-between',
 				padding: '0.5em 1em',
-				background: 'inherit',
+				// background: '#e9d6bf90',
 				borderTop: 'var(--border-style-dashed) var(--border-color)',
 			}}>
 			<span
@@ -251,6 +253,8 @@ const Information = () => {
 					}}>
 					<span>We accept no responsibility for any loss or damage to goods occurring in transit.</span>
 					<br />
+					<br />
+
 					<span
 						style={{
 							color: '#DD5859',

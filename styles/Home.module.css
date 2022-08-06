@@ -152,7 +152,7 @@
 	/* grid-template-rows: auto auto 1fr;  */
 	/* overflow: auto;q */
 	grid-column: 2;
-	background-color: #e9d6bf;
+	background-color: #e9d6bf90;
 	align-items: end;
 	max-width: 400px;
 	border-left: var(--border-style-dashed) var(--border-color);
