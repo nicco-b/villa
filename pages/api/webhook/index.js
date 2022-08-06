@@ -118,7 +118,6 @@ router.post(async (req, res) => {
 			const clientTemplate = path.join(process.cwd(), 'templates', 'order-success', 'client')
 			console.log('clientTemplate', clientTemplate)
 			const customerEmail = await new Email({
-				from: 'njbufalino@gmail.com',
 				message: {
 					from: 'njbufalino@gmail.com',
 				},
@@ -142,38 +141,63 @@ router.post(async (req, res) => {
 						date: orderDoc.value.created_at,
 					},
 				},
+				preview: false,
 				send: true,
 			})
-			// await transporter.sendMail(
-			// 	{
-			// 		from: 'njbufalino@gmail.com',
-			// 		to: 'njbufalino@gmail.com',
-			// 		subject: 'Message',
-			// 		text: 'I hope this message gets sent!',
-			// 		ses: {
-			// 			// optional extra arguments for SendRawEmail
-			// 			Tags: [
-			// 				{
-			// 					Name: 'tag_name',
-			// 					Value: 'tag_value',
-			// 				},
-			// 			],
-			// 		},
-			// 	},
-			// 	(err, info) => {
-			// 		console.log(err, info)
-			// 	}
-			// )
+			//send email to admin
+			const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
+			const adminEmail = new Email({
+				message: {
+					from: 'njbufalino@gmail.com',
+				},
 
+				transport: transporter,
+				views: {
+					options: {
+						extension: 'ejs', // <---- HERE
+					},
+					locals: {
+						name: customer_details.name,
+						order: orderDoc.value,
+						customer: customer_details,
+						shipping: shipping,
+						products: products,
+						formatPrice: price => {
+							formatCurrencyString({
+								currency: 'USD',
+								value: price,
+							})
+						},
+						date: orderDoc.value.created_at,
+					},
+				},
+				preview: false,
+				send: true,
+			})
+
+			const a = await adminEmail
+				.send({
+					template: adminTemplate,
+					message: {
+						to: 'njbufalino@gmail.com', // list of receivers
+					},
+				})
+				.then(() => {
+					console.log('admin email sent')
+				})
+				.catch(err => {
+					console.log(err)
+				})
+			console.log({ a })
 			const t = await customerEmail
 				.send({
 					template: clientTemplate,
 					message: {
-						to: 'njbufalino@gmail.com',
+						to: customer_details.email, // list of receivers
 					},
 				})
 				.then(() => {
-					console.log('email sent')
+					console.log('client email sent')
 				})
 				.catch(err => {
 					console.log(err)
