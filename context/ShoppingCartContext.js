@@ -48,7 +48,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		//check database for product
 		//fetch product from database
-		const { data, status } = await getProduct(product, getItemQuantity(item?.product_id), id)
+		const { data, status } = await getProduct(product, q, id)
 		setStatus(status)
 
 		setCart(currItems => {
