@@ -68,9 +68,10 @@ export const Cart = () => {
 		setErrorMessage('')
 		const stripe = await getStripe()
 		const formattedProducts = cart.map(item => {
+			const itemName = item?.attributes && `- ${Object.values(item?.attributes).join(', ')}`
 			return {
 				amount: item.price,
-				name: `${item.name} ${item?.attributes && `- ${Object.values(item?.attributes).join(', ')}`}`,
+				name: `${item.name} ${itemName && itemName}`,
 				currency: 'usd',
 				quantity: item.quantity,
 			}
