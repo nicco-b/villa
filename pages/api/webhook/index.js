@@ -99,6 +99,7 @@ router.post(async (req, res) => {
 			)
 			console.log('orderDoc', orderDoc)
 			//
+			//log sale in scheduled sale
 
 			//get products from updated order and update the products inventory
 			const { products } = orderDoc.value
