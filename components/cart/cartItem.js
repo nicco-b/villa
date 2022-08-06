@@ -19,7 +19,7 @@ export const CartItem = ({ product }) => {
 					<div className={cartStyles.cartItemInfo}>
 						<div className={cartStyles.pname}>
 							<h4>{product.name}</h4>
-							<div>{Object.values(product.attributes).join(', ')}</div>
+							<div>{product?.attributes && Object.values(product.attributes).join(', ')}</div>
 						</div>
 						<div className={cartStyles.rightInfo}>
 							<h5>
