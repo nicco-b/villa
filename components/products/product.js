@@ -63,10 +63,10 @@ export const Product = ({ product, isValidating }) => {
 						style={{
 							fontWeight: '500',
 						}}>
-						{formatCurrencyString({
+						{/* {formatCurrencyString({
 							value: product?.variants[currentVariant].price,
 							currency: 'usd',
-						})}
+						})} */}
 					</h4>
 				</div>
 				<div
