@@ -137,16 +137,16 @@ const Footer = () => {
 			<span
 				style={{
 					color: '#A93C3E',
-					fontWeight: '600',
+					fontWeight: '500',
 				}}>
-				© 2020 Duairak P
+				© 2022 duiarak p
 			</span>
 			<span
 				style={{
 					color: '#5A7BAE',
-					fontWeight: '600',
+					fontWeight: '500',
 				}}>
-				@duck.ruai
+				<a href='https://www.instagram.com/duck.ruai'>@duck.ruai</a>
 			</span>
 		</div>
 	)
@@ -181,18 +181,13 @@ const Information = () => {
 						// fontWeight: '450',
 					}}>
 					<span>
-						Everything released is designed in-house Please be patient while we pack your order, it may
-						take several days to leave our studio.
+						Each item is handmade one at a time so please allow slight differences from the images. Be
+						patient while the product is being made as this is one person production. The product may take
+						up to 4 weeks to be complete depending on the amout of orders I receive at the time.
 					</span>
 					<span>
-						Shipping costs are calculated by weight at checkout. Please reach out if you have any
-						questions - shop@duairakp.com
-					</span>
-					<span>
-						Each item is handmade one at a time all shipment details will be sent to your email
-					</span>
-					<span>
-						All orders ship in 100% recycled + recyclable packaging. Nothing is wrapped in plastic.
+						You will receive update emails while the product is being made and when it’s ready to be ship
+						out to you.
 					</span>
 				</div>
 
@@ -224,23 +219,14 @@ const Information = () => {
 									color: '#F29B4E',
 									fontWeight: '700',
 								}}>
-								PLEASE NOTE
+								PLEASE NOTE - {''}
 							</span>
 							<span>
-								- No refunds or exchanges, all sales are final at this time. Please double check your size
+								No refunds or exchanges, all sales are final at this time. Please double check your items
 								and address! Measurements are included on every product page.
 							</span>
 						</span>
-						<span>
-							<span
-								style={{
-									color: '#DD5859',
-									fontWeight: '700',
-								}}>
-								U.S. SHIPPPING
-							</span>
-							- orders ship via USPS, cost calculated at checkout.
-						</span>
+						<br />
 
 						<span>
 							<span
@@ -248,11 +234,14 @@ const Information = () => {
 									color: '#5A7BAE',
 									fontWeight: '700',
 								}}>
-								INTERNATIONAL SHIPPING
+								SHIPPING -{' '}
 							</span>
-							- cost calculated at checkout. Packages may be subject to delays and fees at your local
-							customs office. Please reach out to them directly to resolve. If your order gets sent back to
-							us due to lack of claim, you will have to pay for a reship.
+							The shipping prices are included. International shipping may take around 2 weeks to arrive,
+							so if you paln to purchase it as a gift please plan ahead. Packages may be subject to delays
+							and fees at your local customs office. Reach out to them directly to resolve.
+							<br />
+							If your order gets sent back to us due to lack of claim, you will have to pay for a reship.
+							You will receive tracking number through your email once your order has been shipped.
 						</span>
 					</div>
 				</div>
@@ -262,8 +251,14 @@ const Information = () => {
 					}}>
 					<span>We accept no responsibility for any loss or damage to goods occurring in transit.</span>
 					<br />
-
-					<span>Please email us at shop@duairakp.com if you have questions about your purchase.</span>
+					<span
+						style={{
+							color: '#DD5859',
+							fontWeight: '700',
+						}}>
+						CONTACT -{' '}
+					</span>
+					<span>Please reach out if you have any questions! duairak@gmail.com.</span>
 				</div>
 			</div>
 		</div>
