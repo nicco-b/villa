@@ -69,7 +69,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				justifyItems: 'center',
 				justifyContent: 'center',
 				gap: '0.5rem',
-				color: '#369662',
+				color: '#2b2b2c',
 				padding: '3em 0 0 0',
 				userSelect: 'none',
 			}}>
@@ -77,7 +77,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				style={{
 					fontSize: '1.23rem',
 					fontWeight: '600',
-					color: '#369662',
+					color: '#494A4D',
 				}}>
 				{sale.callout}
 			</div>
@@ -85,7 +85,8 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				style={{
 					fontSize: '1.1rem',
 					fontWeight: '450',
-					color: '#36966290',
+					color: '#494A4D',
+
 					padding: '0em 0 1em 0',
 				}}>
 				{/* {new Date(sale.start_date).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })} */}
@@ -96,7 +97,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 					style={{
 						fontSize: '1.1rem',
 						fontWeight: '600',
-						color: '#36966290',
+						color: '#494A4D',
 					}}>
 					{mDate.tz('America/Los_Angeles').format('z')}
 				</span>
@@ -106,7 +107,7 @@ const ShowCounter = ({ days, hours, minutes, seconds, sale }) => {
 				style={{
 					display: 'flex',
 					gap: '2px',
-					border: '2px solid #36966230',
+					border: '2px solid #2b2b2c30',
 					padding: '10px 1.5em',
 					width: '250px',
 					borderRadius: '99999px',
