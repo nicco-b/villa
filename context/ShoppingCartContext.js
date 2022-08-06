@@ -62,7 +62,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				if (!currItems.find(item => item?._id === id)) {
 					setMessage(message)
 
-					return [...currItems, { ...product, quantity: 1 }]
+					return [...currItems, { ...product, ...data, quantity: 1 }]
 				} else {
 					const quantity = currItems?.find(item => item?._id === id).quantity
 					const productInventory = inventory
@@ -73,7 +73,7 @@ export const ShoppingCartProvider = ({ children }) => {
 							if (item?._id === id) {
 								setMessage(message)
 
-								return { ...item, quantity: item.quantity + 1 }
+								return { ...item, ...data, quantity: item.quantity + 1 }
 							} else {
 								setMessage(message)
 
@@ -92,27 +92,27 @@ export const ShoppingCartProvider = ({ children }) => {
 	}
 	//decreaseQuantity
 	const decreaseQuantity = async product => {
-		const id = product.id
-		const item = await cart.find(item => item.id === id)
+		const id = product._id
+		const item = await cart.find(item => item._id === id)
 		console.log({ item })
 		const q = item && item.quantity
 		setCart(currItems => {
 			//if not in cart, return
-			if (!currItems.find(item => item?.id === id)) {
+			if (!currItems.find(item => item?._id === id)) {
 				return currItems
 			} else {
-				const quantity = currItems?.find(item => item?.id === id).quantity
+				const quantity = currItems?.find(item => item?._id === id).quantity
 				//if in cart, decrease quantity
 				if (quantity > 1) {
 					return currItems.map(item => {
-						if (item?.id === id) {
+						if (item?._id === id) {
 							return { ...item, quantity: item.quantity - 1 }
 						} else {
 							return item
 						}
 					})
 				} else {
-					return currItems.filter(item => item?.id !== id)
+					return currItems.filter(item => item?._id !== id)
 				}
 			}
 		})

@@ -2,12 +2,62 @@ import { useEffect, useState } from 'react'
 import { formatCurrencyString } from 'use-shopping-cart'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
+import ColorThief from '../../node_modules/colorthief/dist/color-thief.mjs'
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
+export const RadioGroup = RadioGroupPrimitive.Root
+export const RadioGroupRadio = RadioGroupPrimitive.Item
+export const RadioGroupIndicator = RadioGroupPrimitive.Indicator
+function getAverageRGB(imgEl) {
+	var blockSize = 5, // only visit every 5 pixels
+		defaultRGB = { r: 0, g: 0, b: 0 }, // for non-supporting envs
+		canvas = document.createElement('canvas'),
+		context = canvas.getContext && canvas.getContext('2d'),
+		data,
+		width,
+		height,
+		i = -4,
+		length,
+		rgb = { r: 0, g: 0, b: 0 },
+		count = 0
 
+	if (!context) {
+		return defaultRGB
+	}
+
+	height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height
+	width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width
+
+	context.drawImage(imgEl, 0, 0)
+
+	try {
+		data = context.getImageData(0, 0, width, height)
+	} catch (e) {
+		/* security error, img on diff domain */
+		return defaultRGB
+	}
+
+	length = data.data.length
+
+	while ((i += blockSize * 4) < length) {
+		++count
+		rgb.r += data.data[i]
+		rgb.g += data.data[i + 1]
+		rgb.b += data.data[i + 2]
+	}
+
+	// ~~ used to floor values
+	rgb.r = ~~(rgb.r / count)
+	rgb.g = ~~(rgb.g / count)
+	rgb.b = ~~(rgb.b / count)
+
+	return rgb
+}
 export const Product = ({ product, isValidating }) => {
 	const [currentVariant, setCurrentVariant] = useState(0)
 	const { increaseQuantity, message, status } = useShoppingCart()
 
 	const [addButtonState, setAddButtonState] = useState('default')
+
 	useEffect(() => {
 		let timer = setTimeout(() => {
 			if (addButtonState !== 'waiting') {
@@ -34,7 +84,12 @@ export const Product = ({ product, isValidating }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img src={`${product?.images[0]}`} alt={'product_image'} layout={'fill'} />
+				<img
+					id={`${product?.variants[currentVariant]?.featured_image}`}
+					src={`${product?.variants[currentVariant]?.featured_image}`}
+					alt={'product_image'}
+					layout={'fill'}
+				/>
 			</div>
 			<div
 				style={{
@@ -63,10 +118,10 @@ export const Product = ({ product, isValidating }) => {
 						style={{
 							fontWeight: '500',
 						}}>
-						{/* {formatCurrencyString({
-							value: product?.variants[currentVariant].price,
+						{formatCurrencyString({
+							value: product?.variants[currentVariant]?.price,
 							currency: 'usd',
-						})} */}
+						})}
 					</h4>
 				</div>
 				<div
@@ -78,32 +133,49 @@ export const Product = ({ product, isValidating }) => {
 						gap: '0.3em',
 					}}>
 					size
-					<p>{product?.variants[currentVariant].dimensions.length}</p>x
-					<p>{product?.variants[currentVariant].dimensions.width}</p>x
-					<p>{product?.variants[currentVariant].dimensions.height}</p>
-					<p>{product?.variants[currentVariant].dimensions.unit}</p>
+					<p>{product?.variants[currentVariant]?.dimensions.length}</p>x
+					<p>{product?.variants[currentVariant]?.dimensions.width}</p>x
+					<p>{product?.variants[currentVariant]?.dimensions.height}</p>
+					<p>{product?.variants[currentVariant]?.dimensions.unit}</p>
 				</div>
-				<div>
-					colors:
-					{product?.variants
-						.filter(v => !v.is_default)
-						.map((variant, index) => (
-							<div key={index}>
-								<input
-									type='radio'
-									name='color'
-									value={index}
-									onChange={event => setCurrentVariant(parseInt(event.target.value) + 1)}
-									checked={currentVariant === index + 1}
-								/>
-							</div>
-						))}
-				</div>
+
+				{product.variants.length > 1 && (
+					<div
+						style={{
+							display: 'flex',
+							gap: '1em',
+							flexDirection: 'row',
+						}}>
+						<RadioGroup
+							className={styles.radioGroup}
+							name='color'
+							defaultValue={currentVariant}
+							value={currentVariant}
+							aria-label='View density'
+							onValueChange={value => setCurrentVariant(value)}>
+							{product?.variants.map((variant, index) => {
+								console.log({ variant })
+								const name = Object.values(variant.attributes).join(', ')
+								console.log(name)
+								return (
+									<ColorAttribute
+										index={index}
+										key={index}
+										name={name}
+										variant={variant}
+										currentVariant={currentVariant}
+										setCurrentVariant={setCurrentVariant}
+									/>
+								)
+							})}
+						</RadioGroup>
+					</div>
+				)}
 				<div
 					style={{
 						height: '32.2969px',
 					}}>
-					{product?.variants[currentVariant].inventory > 0 ? (
+					{product?.variants[currentVariant]?.inventory > 0 ? (
 						<button
 							type={'button'}
 							onClick={handleCartAdd}
@@ -160,5 +232,41 @@ export const Product = ({ product, isValidating }) => {
 				</div>
 			</div>
 		</div>
+	)
+}
+const ColorAttribute = ({ variant, name, index, currentVariant, setCurrentVariant }) => {
+	// get dominant color from variant.featured_image
+	const [color, setColor] = useState('')
+	useEffect(() => {
+		if (variant.featured_image) {
+			const img = new Image()
+			img.src = variant.featured_image.src
+			img.onload = () => {
+				ColorThief.getColor(img, color => {
+					setColor(color)
+				}).catch(err => {
+					console.log(err)
+				})
+			}
+		}
+	}, [variant.featured_image])
+
+	return (
+		<>
+			<div className={styles.radioButtonGroup}>
+				<RadioGroupRadio
+					style={{
+						backgroundColor: name,
+						zIndex: '3',
+					}}
+					data-color={name}
+					value={index}
+					id={index}
+					className={styles.radioButton}>
+					<RadioGroupIndicator data-color={name} className={`${styles.radioIndicator}`} />
+				</RadioGroupRadio>
+				<label htmlFor={index}>{name}</label>
+			</div>
+		</>
 	)
 }

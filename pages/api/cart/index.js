@@ -14,33 +14,13 @@ router.post(async (req, res) => {
 	const quantity = req.body.q
 	console.log({ id, quantity })
 	try {
-		//get order from database
-		// console.log('completed order: ', id)
-
-		// const { db } = await connectToDatabase()
-
-		// const order = await db
-		// 	.collection('orders')
-		// 	.findOne(ObjectId(checkout_session.client_reference_id))
-		// // console.log({ order }
 		const product = await getProductById(id)
-		// compare quantity to inventory
-		// if quantity > inventory, throw error
+		const { variants, ...rest } = product
 		console.log({ product })
-		//filter products.variants to find variant_id
 		const variant = product.variants.find(variant => variant._id === variant_id)
 		console.log({ variant })
-		res.status(200).json({ ...variant })
-		// const ee = data.inventory - quantity
-		// console.log(ee)
-		// if (ee === 0 || data['max-allowed'] <= quantity) {
-		// 	console.log(ee)
-		// 	res.status(400).json({ message: 'maximum', inventory: data.inventory })
-		// } else if (data.inventory === 0) {
-		// 	res.status(400).json({ message: 'no stock', inventory: data.inventory })
-		// } else {
-		// 	res.status(200).json({ message: 'added!', inventory: data.inventory })
-		// }
+		const variant_name = Object.values(variant.attributes).join(', ')
+		res.status(200).json({ ...rest, ...variant, variant_name })
 	} catch (err) {
 		res.status(500).json({ statusCode: 500, message: 'svr err', serverMessage: err.message })
 	}

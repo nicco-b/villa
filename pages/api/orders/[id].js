@@ -2,8 +2,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
 	apiVersion: '2020-08-27',
 })
 import { connectToDatabase } from '../../../utils/mongodb'
-
-import { NextApiRequest, NextApiResponse } from 'next'
 import { createRouter } from 'next-connect'
 
 // Default Req and Res are IncomingMessage and ServerResponse

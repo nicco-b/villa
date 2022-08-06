@@ -1,10 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-	apiVersion: '2020-08-27',
-})
-import { products } from './productList'
 import { connectToDatabase } from '../../../utils/mongodb'
-import { ObjectId } from 'mongodb'
 
 export async function getProducts(req, res) {
 	const { db } = await connectToDatabase()
@@ -38,9 +32,39 @@ export async function getProducts(req, res) {
 		{
 			$lookup: {
 				from: 'product_variants',
-				localField: 'pid',
-				foreignField: 'product_id',
+				let: {
+					pid: '$pid',
+				},
+				pipeline: [
+					{
+						$match: {
+							$expr: {
+								$eq: ['$product_id', '$$pid'],
+							},
+						},
+					},
+				],
 				as: 'variants',
+			},
+		},
+		{
+			$addFields: {
+				variants: {
+					//if variants_size is greater than 1 , then dont return variants where is_default is true
+					$cond: {
+						if: {
+							$gt: [{ $size: '$variants' }, 1],
+						},
+						then: {
+							$filter: {
+								input: '$variants',
+								as: 'variant',
+								cond: { $ne: ['$$variant.is_default', true] },
+							},
+						},
+						else: '$variants',
+					},
+				},
 			},
 		},
 
