@@ -170,20 +170,6 @@ router.post(async (req, res) => {
 				message: {
 					to: 'njbufalino@gmail.com',
 				},
-				locals: {
-					name: customer_details.name,
-					order: orderDoc.value,
-					customer: customer_details,
-					shipping: shipping,
-					products: products,
-					formatPrice: price => {
-						formatCurrencyString({
-							currency: 'USD',
-							value: price,
-						})
-					},
-					date: orderDoc.value.created_at,
-				},
 			})
 			.then(() => {
 				console.log('email sent')
@@ -193,7 +179,6 @@ router.post(async (req, res) => {
 			})
 		console.log({ t })
 		//send email to admin
-		res.send({ received: true })
 	}
 	res.send({ received: true })
 
