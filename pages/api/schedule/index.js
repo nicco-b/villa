@@ -73,13 +73,35 @@ export const getScheduledSales = async query => {
 								as: 'variants',
 							},
 						},
+
 						{
 							$unset: ['pid', 'status_history'],
+						},
+						{
+							$addFields: {
+								variants: {
+									//if variants_size is greater than 1 , then dont return variants where is_default is true
+									$cond: {
+										if: {
+											$gt: [{ $size: '$variants' }, 1],
+										},
+										then: {
+											$filter: {
+												input: '$variants',
+												as: 'variant',
+												cond: { $ne: ['$$variant.is_default', true] },
+											},
+										},
+										else: '$variants',
+									},
+								},
+							},
 						},
 					],
 					as: 'included_products',
 				},
 			},
+
 			{
 				$addFields: {
 					start_date: {
