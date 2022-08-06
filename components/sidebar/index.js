@@ -61,7 +61,11 @@ export const SideBar = ({ columns }) => {
 }
 const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen, cartTotal }) => {
 	return (
-		<div className={`${cN > 1 ? styles.right : styles.rightClosed} ${cartOpen ? styles.right : ''}`}>
+		<div
+			className={`${cN > 1 ? styles.right : styles.rightClosed} ${cartOpen ? styles.right : ''}`}
+			style={{
+				overflowX: 'hidden',
+			}}>
 			<div
 				style={{
 					display: 'flex',

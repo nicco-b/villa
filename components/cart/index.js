@@ -117,7 +117,7 @@ export const Cart = () => {
 				overflow: 'hidden',
 				height: '100%',
 				display: 'grid',
-				backgroundColor: 'var(--bgAlt)',
+				backgroundColor: '#e9d6bf90',
 			}}>
 			<div
 				style={{
@@ -184,7 +184,12 @@ export const Cart = () => {
 										padding: '0.5em 0',
 									}}>
 									<div className={styles.quantitySelectorWrapper}>
-										<button className='smallButton' onClick={() => handleDecrement(product)}>
+										<button
+											style={{
+												backgroundColor: '#DACBB730',
+											}}
+											className='smallButton'
+											onClick={() => handleDecrement(product)}>
 											-
 										</button>
 										<div className={styles.quantitySelector}>
@@ -196,6 +201,8 @@ export const Cart = () => {
 											onClick={() => handleIncrement(product)}
 											disabled={addButtonState === 'waiting'}
 											style={{
+												backgroundColor: '#DACBB730',
+
 												color:
 													addButtonState === 'maximum'
 														? 'red'
