@@ -126,6 +126,7 @@ const MobileBar = ({ cN, children, setInfoOpen, infoOpen, cartOpen, setCartOpen,
 		</div>
 	)
 }
+
 const Footer = () => {
 	return (
 		<div
