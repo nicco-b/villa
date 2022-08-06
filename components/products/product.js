@@ -134,9 +134,7 @@ export const Product = ({ product, isValidating }) => {
 					}}>
 					size
 					<p>{product?.variants[currentVariant]?.dimensions.length}</p>x
-					<p>{product?.variants[currentVariant]?.dimensions.width}</p>x
-					<p>{product?.variants[currentVariant]?.dimensions.height}</p>
-					<p>{product?.variants[currentVariant]?.dimensions.unit}</p>
+					<p>{product?.variants[currentVariant]?.dimensions.width}</p>
 				</div>
 
 				{product.variants.length > 1 && (
