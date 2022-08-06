@@ -131,6 +131,7 @@ export const Product = ({ product, isValidating }) => {
 						justifyContent: 'space-between',
 						alignItems: 'center',
 						gap: '0.3em',
+						padding: '1em',
 					}}>
 					size
 					<p>{product?.variants[currentVariant]?.dimensions.length}</p>x
@@ -263,7 +264,7 @@ const ColorAttribute = ({ variant, name, index, currentVariant, setCurrentVarian
 					className={styles.radioButton}>
 					<RadioGroupIndicator data-color={name} className={`${styles.radioIndicator}`} />
 				</RadioGroupRadio>
-				<label htmlFor={index}>{name}</label>
+				{/* <label htmlFor={index}>{name}</label> */}
 			</div>
 		</>
 	)
