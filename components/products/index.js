@@ -35,22 +35,20 @@ export const Products = ({ products, isValidating }) => {
 					</div>
 				)}
 				{products?.map((product, i) => (
-					<Link href={`/product/${product._id}`} key={product._id}>
-						<a>
-							<div className={styles.product}>
-								<Product key={product.id} product={product} isValidating={isValidating} />
-								{/* if not last item */}
-							</div>
-							{products.length - 1 !== i && (
-								<div
-									style={{
-										margin: ' 1em 0 0 0',
-										height: '1px',
-										backgroundColor: 'var(--border-color-alt)',
-									}}></div>
-							)}
-						</a>
-					</Link>
+					<div>
+						<div className={styles.product}>
+							<Product key={product.id} product={product} isValidating={isValidating} />
+							{/* if not last item */}
+						</div>
+						{products.length - 1 !== i && (
+							<div
+								style={{
+									margin: ' 1em 0 0 0',
+									height: '1px',
+									backgroundColor: 'var(--border-color-alt)',
+								}}></div>
+						)}
+					</div>
 				))}
 			</div>
 		</div>

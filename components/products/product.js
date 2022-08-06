@@ -235,27 +235,13 @@ export const Product = ({ product, isValidating }) => {
 }
 const ColorAttribute = ({ variant, name, index, currentVariant, setCurrentVariant }) => {
 	// get dominant color from variant.featured_image
-	const [color, setColor] = useState('')
-	useEffect(() => {
-		if (variant.featured_image) {
-			const img = new Image()
-			img.src = variant.featured_image.src
-			img.onload = () => {
-				ColorThief.getColor(img, color => {
-					setColor(color)
-				}).catch(err => {
-					console.log(err)
-				})
-			}
-		}
-	}, [variant.featured_image])
 
 	return (
 		<>
 			<div className={styles.radioButtonGroup}>
 				<RadioGroupRadio
 					style={{
-						backgroundColor: name,
+						backgroundColor: variant.hex,
 						zIndex: '3',
 					}}
 					data-color={name}
