@@ -154,7 +154,7 @@ export const Product = ({ product, isValidating }) => {
 							onValueChange={value => setCurrentVariant(value)}>
 							{product?.variants.map((variant, index) => {
 								// console.log({ variant })
-								const name = Object.values(variant.attributes).join(', ')
+								const name = variant?.attributes && Object.values(variant.attributes).join(', ')
 								// console.log(name)
 								return (
 									<ColorAttribute
