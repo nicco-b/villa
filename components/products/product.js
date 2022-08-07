@@ -78,6 +78,16 @@ export const Product = ({ product, isValidating }) => {
 	useEffect(() => {
 		console.log({ message })
 	}, [message])
+	//sort product.variants by if inventory is 0 or not
+	const variantsS = product.variants.sort((a, b) => {
+		if (a.inventory > 0 && b.inventory === 0) {
+			return -1
+		} else if (a.inventory === 0 && b.inventory > 0) {
+			return 1
+		} else {
+			return 0
+		}
+	})
 	return (
 		<div
 			style={{
@@ -169,31 +179,21 @@ export const Product = ({ product, isValidating }) => {
 							})} */}
 							{
 								// sort product variants where inventory === 0 last
-								product.variants
-									.sort((a, b) => {
-										if (a.inventory === 0 && b.inventory > 0) {
-											return 1
-										} else if (a.inventory > 0 && b.inventory === 0) {
-											return -1
-										} else {
-											return 0
-										}
-									})
-									.map((variant, index) => {
-										// console.log({ variant })
-										const name = variant?.attributes && Object.values(variant.attributes).join(', ')
-										// console.log(name)
-										return (
-											<ColorAttribute
-												index={index}
-												key={index}
-												name={name}
-												variant={variant}
-												currentVariant={currentVariant}
-												setCurrentVariant={setCurrentVariant}
-											/>
-										)
-									})
+								variantsS.map((variant, index) => {
+									// console.log({ variant })
+									const name = variant?.attributes && Object.values(variant.attributes).join(', ')
+									// console.log(name)
+									return (
+										<ColorAttribute
+											index={index}
+											key={index}
+											name={name}
+											variant={variant}
+											currentVariant={currentVariant}
+											setCurrentVariant={setCurrentVariant}
+										/>
+									)
+								})
 							}
 						</RadioGroup>
 					</div>
@@ -252,7 +252,7 @@ export const Product = ({ product, isValidating }) => {
 					}}>
 					<p
 						style={{
-							color: '#F59F00',
+							color: 'rgba(246, 147, 40, 1.0)',
 						}}>
 						{product?.inventory <= 3 && product?.inventory > 0 && 'low stock'}
 					</p>
