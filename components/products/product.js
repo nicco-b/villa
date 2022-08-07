@@ -152,7 +152,7 @@ export const Product = ({ product, isValidating }) => {
 							value={currentVariant}
 							aria-label='View density'
 							onValueChange={value => setCurrentVariant(value)}>
-							{product?.variants.map((variant, index) => {
+							{/* {product?.variants.map((variant, index) => {
 								// console.log({ variant })
 								const name = variant?.attributes && Object.values(variant.attributes).join(', ')
 								// console.log(name)
@@ -166,7 +166,35 @@ export const Product = ({ product, isValidating }) => {
 										setCurrentVariant={setCurrentVariant}
 									/>
 								)
-							})}
+							})} */}
+							{
+								// sort product variants where inventory === 0 last
+								product.variants
+									.sort((a, b) => {
+										if (a.inventory === 0 && b.inventory > 0) {
+											return 1
+										} else if (a.inventory > 0 && b.inventory === 0) {
+											return -1
+										} else {
+											return 0
+										}
+									})
+									.map((variant, index) => {
+										// console.log({ variant })
+										const name = variant?.attributes && Object.values(variant.attributes).join(', ')
+										// console.log(name)
+										return (
+											<ColorAttribute
+												index={index}
+												key={index}
+												name={name}
+												variant={variant}
+												currentVariant={currentVariant}
+												setCurrentVariant={setCurrentVariant}
+											/>
+										)
+									})
+							}
 						</RadioGroup>
 					</div>
 				)}
