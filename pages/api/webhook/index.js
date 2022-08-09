@@ -30,7 +30,7 @@ const transporter = nodemailer.createTransport({
 	secure: true,
 	auth: {
 		user: 'shop.duairak@gmail.com',
-		pass: 'itwmzqesqblsblih',
+		pass: 'iftncjcnvjggguvn',
 	},
 })
 // Default Req and Res are IncomingMessage and ServerResponse
