@@ -13,26 +13,23 @@ import { formatCurrencyString } from 'use-shopping-cart'
 const nodemailer = require('nodemailer')
 const Email = require('email-templates')
 const path = require('path')
-let aws = require('@aws-sdk/client-ses')
-process.env.AWS_ACCESS_KEY_ID = 'AKIA5Q535WPJT3QNTVXY'
-process.env.AWS_SECRET_ACCESS_KEY = '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'
-const ses = new aws.SES({
-	apiVersion: '2010-12-01',
-	region: 'us-east-1',
-	credentials: {
-		accessKeyId: 'AKIA5Q535WPJT3QNTVXY',
-		secretAccessKey: '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',
-	},
-})
+const senderEmail =
+	process.env.NODE_ENV === 'production' ? 'shop.duairak@gmail.com' : 'njbufalino@gmail.com'
 const transporter = nodemailer.createTransport({
 	host: 'smtp.gmail.com',
 	port: 465,
 	secure: true,
 	auth: {
-		user: 'shop.duairak@gmail.com',
-		pass: 'itwmzqesqblsblih',
+		user: process.env.SENDER_EMAIL,
+		pass: process.env.SENDER_PASSWORD,
 	},
 })
+// user: 'shop.duairak@gmail.com',
+// pass: 'iftncjcnvjggguvn',
+// user: 'shop.duairak@gmail.com',
+// pass: 'iftncjcnvjggguvn',
+// pass: 'itwmzqesqblsblih',
+
 // Default Req and Res are IncomingMessage and ServerResponse
 // You may want to pass in NextApiRequest and NextApiResponse
 const router = createRouter()
@@ -122,7 +119,7 @@ router.post(async (req, res) => {
 
 			const customerEmail = await new Email({
 				message: {
-					from: 'shop.duairak@gmail.com',
+					from: process.env.SENDER_EMAIL,
 				},
 				transport: transporter,
 				views: {
@@ -152,7 +149,7 @@ router.post(async (req, res) => {
 			const adminTemplate = path.join(process.cwd(), 'templates', 'order-success', 'admin')
 			const adminEmail = new Email({
 				message: {
-					from: 'shop.duairak@gmail.com',
+					from: process.env.SENDER_EMAIL,
 				},
 
 				transport: transporter,
@@ -183,7 +180,7 @@ router.post(async (req, res) => {
 				.send({
 					template: adminTemplate,
 					message: {
-						to: 'duairak@gmail.com', // list of receivers
+						to: process.env.SENDER_EMAIL, // list of receivers
 					},
 				})
 				.then(() => {

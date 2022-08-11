@@ -5,7 +5,7 @@ check inventory on add to cart button
 
 
 
-
+fix add to cart/checkout check inventory better
 ready
 
 # pk_test_51LCRU1HFFw3ZIEqvhU8JmL5ssCnh2FLMBncyjPtgE0e2JV33C6lo4dAPqQ03szs5gajTAPqwKODAyDsGEtgc3wcJ00DsVnHRyA
