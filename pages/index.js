@@ -21,7 +21,7 @@ export default function Index({ fallback }) {
 Index.getLayout = function getLayout(page) {
 	return <MainLayout>{page}</MainLayout>
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const scheduled_sales = await getScheduledSales()
 	//
 	const products = await getProducts()
