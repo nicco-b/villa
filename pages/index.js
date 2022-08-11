@@ -23,7 +23,7 @@ Index.getLayout = function getLayout(page) {
 }
 export async function getServerSideProps() {
 	const scheduled_sales = await getScheduledSales()
-	//
+
 	const products = await getProducts()
 	const ss = JSON.parse(JSON.stringify(scheduled_sales))
 
