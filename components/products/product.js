@@ -96,11 +96,10 @@ export const Product = ({ product, isValidating }) => {
 			}}>
 			<div className={styles.productImg}>
 				<Image
-					width={500}
-					height={500}
 					id={`${product?.variants[currentVariant]?.featured_image}`}
 					src={`${product?.variants[currentVariant]?.featured_image}`}
 					alt={'product_image'}
+					layout='fill'
 				/>
 			</div>
 			<div
