@@ -4,6 +4,7 @@ import cartStyles from '../../styles/cart.module.css'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import { useEffect, useState } from 'react'
 import LoadingIcon from '../utils/LoadingIcon'
+import Image from 'next/image'
 
 export const CartItem = ({ product }) => {
 	return (
@@ -12,7 +13,7 @@ export const CartItem = ({ product }) => {
 				<div className={cartStyles.cartItem}>
 					<div className={cartStyles.cartItemImg}>
 						<div className={styles.productImg}>
-							<img src={`${product?.featured_image}`} width={35} height={35} alt={product.name} />
+							<Image src={`${product?.featured_image}`} layout='fill' alt={product.name} />
 						</div>
 					</div>
 

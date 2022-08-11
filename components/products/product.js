@@ -4,6 +4,7 @@ import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
 import ColorThief from '../../node_modules/colorthief/dist/color-thief.mjs'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
+import Image from 'next/image'
 export const RadioGroup = RadioGroupPrimitive.Root
 export const RadioGroupRadio = RadioGroupPrimitive.Item
 export const RadioGroupIndicator = RadioGroupPrimitive.Indicator
@@ -94,11 +95,11 @@ export const Product = ({ product, isValidating }) => {
 				padding: '1em',
 			}}>
 			<div className={styles.productImg}>
-				<img
+				<Image
+					layout='fill'
 					id={`${product?.variants[currentVariant]?.featured_image}`}
 					src={`${product?.variants[currentVariant]?.featured_image}`}
 					alt={'product_image'}
-					layout={'fill'}
 				/>
 			</div>
 			<div
