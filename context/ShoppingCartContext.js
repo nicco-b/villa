@@ -53,7 +53,7 @@ export const ShoppingCartProvider = ({ children }) => {
 
 		setCart(currItems => {
 			const message = data.message
-			const inventory = data.inventory
+			const inventory = data.product.inventory
 			//if not in cart, add one
 			console.log({ data })
 			//if product inventory is greater than or equal to current product quantity in cart
@@ -62,7 +62,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				if (!currItems.find(item => item?._id === id)) {
 					setMessage(message)
 
-					return [...currItems, { ...product, ...data, quantity: 1 }]
+					return [...currItems, { ...item, ...data.product, quantity: 1 }]
 				} else {
 					const quantity = currItems?.find(item => item?._id === id).quantity
 					const productInventory = inventory
@@ -73,7 +73,7 @@ export const ShoppingCartProvider = ({ children }) => {
 							if (item?._id === id) {
 								setMessage(message)
 
-								return { ...item, ...data, quantity: item.quantity + 1 }
+								return { ...item, ...data.product, quantity: item.quantity + 1 }
 							} else {
 								setMessage(message)
 

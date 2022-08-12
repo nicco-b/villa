@@ -14,17 +14,50 @@ router.post(async (req, res) => {
 	const quantity = req.body.q
 	try {
 		const product = await getProductById(id)
-		const { variants, ...rest } = product
+		const { variants, status, description, max_allowed, ...rest } = product
+		const { schedule_id } = status
 		console.log({ product })
 		const variant = product.variants.find(variant => variant._id === variant_id)
 		console.log({ variant })
 		const variant_name = variant?.attributes && Object.values(variant.attributes).join(',')
 		console.log({ quantity }, product.max_allowed)
 
-		if (quantity < product.max_allowed) {
-			res.status(200).json({ ...rest, ...variant, variant_name, message: 'added', quantity })
-		} else if (quantity >= rest.max_allowed) {
-			res.status(404).json({ ...rest, ...variant, variant_name, message: 'maximum', quantity })
+		if (quantity < variant.inventory) {
+			if (quantity < product.max_allowed) {
+				res.status(200).json({
+					product: {
+						...rest,
+						...variant,
+						completed: false,
+						schedule_id,
+						variant_name,
+						quantity,
+					},
+					message: 'added',
+				})
+			} else {
+				res.status(404).json({
+					product: {
+						...rest,
+						...variant,
+						variant_name,
+					},
+					quantity,
+
+					message: 'maximum',
+				})
+			}
+		} else {
+			res.status(404).json({
+				product: {
+					...rest,
+					...variant,
+					variant_name,
+				},
+				quantity,
+
+				message: 'maximum',
+			})
 		}
 	} catch (err) {
 		res.status(500).json({ statusCode: 500, message: 'svr err', serverMessage: err.message })
