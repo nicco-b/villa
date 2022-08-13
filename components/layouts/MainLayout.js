@@ -25,7 +25,7 @@ export default function MainLayout({ children, animate }) {
 				<>
 					<TopBar animate={animate} />
 					<div className={styles.twoColumn}>
-						<div>{children}</div>
+						<div style={{ width: '100%' }}>{children}</div>
 						<SideBar columns={columns} />
 					</div>
 				</>
