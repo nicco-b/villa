@@ -72,6 +72,7 @@ export default function Home() {
 													isValidating={scheduleValidating}
 												/>
 												{sale?.included_products.map((s, i) => {
+													console.log(sale?.included_products?.length - 1 !== i)
 													return (
 														data?.length > 0 &&
 														sale?.included_products?.length - 1 !== i && (
