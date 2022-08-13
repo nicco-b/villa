@@ -50,7 +50,7 @@ export default function Home() {
 							}}>
 							{scheduled_sales && (
 								<>
-									{scheduled_sales.map(sale => {
+									{scheduled_sales.map((sale, i) => {
 										return (
 											<>
 												<div
@@ -71,11 +71,20 @@ export default function Home() {
 													products={sale?.included_products?.length > 0 ? sale.included_products : []}
 													isValidating={scheduleValidating}
 												/>
+												{sale?.included_products.length - 1 !== i && (
+													<div
+														style={{
+															margin: ' 1.5em 0 1.5em 0',
+															height: '1px',
+															backgroundColor: 'var(--border-color-alt)',
+														}}></div>
+												)}
 											</>
 										)
 									})}
 								</>
 							)}
+
 							<Products products={data} isValidating={isValidating} />
 						</div>
 					</div>

@@ -4,14 +4,7 @@ import { Product } from './product'
 import Image from 'next/image'
 export const Products = ({ products, isValidating }) => {
 	return (
-		<div
-			style={
-				{
-					// display: 'grid',
-					// gridTemplateRows: 'auto 1fr',
-					// position: 'relative',
-				}
-			}>
+		<>
 			{/* <h3>products</h3> */}
 			<div
 				style={{
@@ -53,6 +46,6 @@ export const Products = ({ products, isValidating }) => {
 					</>
 				))}
 			</div>
-		</div>
+		</>
 	)
 }
