@@ -37,7 +37,7 @@ export const Products = ({ products, isValidating }) => {
 					</div>
 				)}
 				{products?.map((product, i) => (
-					<div>
+					<>
 						<div className={styles.product}>
 							<Product key={product.id} product={product} isValidating={isValidating} />
 							{/* if not last item */}
@@ -50,7 +50,7 @@ export const Products = ({ products, isValidating }) => {
 									backgroundColor: 'var(--border-color-alt)',
 								}}></div>
 						)}
-					</div>
+					</>
 				))}
 			</div>
 		</div>
