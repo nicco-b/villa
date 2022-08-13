@@ -41,22 +41,15 @@ export default function Home() {
 						style={{
 							width: '100%',
 							height: '100%',
-							// display: 'grid',
+							display: 'grid',
 							padding: '1em',
 						}}>
 						<div
 							style={{
 								width: '100%',
-
-								// padding: '2em',
 							}}>
 							{scheduled_sales && (
-								<div
-									style={{
-										display: 'flex',
-										flexDirection: 'column',
-										gap: '1.5em',
-									}}>
+								<>
 									{scheduled_sales.map(sale => {
 										return (
 											<>
@@ -81,10 +74,10 @@ export default function Home() {
 											</>
 										)
 									})}
-								</div>
+								</>
 							)}
+							<Products products={data} isValidating={isValidating} />
 						</div>
-						<Products products={data} isValidating={isValidating} />
 					</div>
 				</div>
 			</div>

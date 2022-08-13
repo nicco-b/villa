@@ -15,7 +15,7 @@ export const Products = ({ products, isValidating }) => {
 			{/* <h3>products</h3> */}
 			<div
 				style={{
-					padding: '0em 0em 2em 0em',
+					// padding: '0em 0em 2em 0em',
 
 					gap: '1em',
 					display: 'grid',
@@ -45,7 +45,7 @@ export const Products = ({ products, isValidating }) => {
 						{products.length - 1 !== i && (
 							<div
 								style={{
-									margin: ' 1em 0 0 0',
+									margin: ' 0.5em 0 0.5em 0',
 									height: '1px',
 									backgroundColor: 'var(--border-color-alt)',
 								}}></div>
