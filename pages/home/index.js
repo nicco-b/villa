@@ -59,6 +59,7 @@ export default function Home() {
 														display: 'flex',
 														flexDirection: 'column',
 														lineHeight: '1.5',
+														padding: countdownFinished ? '0' : '0 0 1em 0',
 													}}>
 													<CountdownTimer
 														date={sale.start_date}
