@@ -36,7 +36,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<div className={styles.container}>
-				<div className={styles.main}>
+				<div>
 					<div
 						style={{
 							width: '100%',
