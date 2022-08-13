@@ -36,7 +36,8 @@ router.post(async (req, res) => {
 				},
 			},
 			tracking: {
-				carrier: '',
+				url: '',
+				email_sent: false,
 				tracking_number: '',
 			},
 			shipping_label: '',
