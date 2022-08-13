@@ -21,7 +21,7 @@ export default function Home() {
 	useEffect(() => {
 		if (countdownFinished) {
 			//fetch scheduled_sales
-			console.log('fetching scheduled_sales')
+			console.log('fetching sales')
 			mutate('/api/schedule', fetcher, false)
 		}
 	}, [countdownFinished])

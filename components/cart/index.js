@@ -24,9 +24,6 @@ export const Cart = () => {
 		}
 	})
 
-	useEffect(() => {
-		console.log({ message })
-	}, [message])
 	const handleDecrement = async product => {
 		await decreaseQuantity(product)
 	}

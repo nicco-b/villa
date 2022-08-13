@@ -76,9 +76,7 @@ export const Product = ({ product, isValidating }) => {
 		await increaseQuantity(product.variants[currentVariant])
 		setAddButtonState(message)
 	}
-	useEffect(() => {
-		console.log({ message })
-	}, [message])
+
 	//sort product.variants by if inventory is 0 or not
 	const variantsS = product.variants.sort((a, b) => {
 		if (a.inventory > 0 && b.inventory === 0) {

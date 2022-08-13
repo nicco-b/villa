@@ -10,7 +10,7 @@ export const ShoppingCartProvider = ({ children }) => {
 	//increaseQuantity
 
 	const getProduct = async (product, q) => {
-		console.log(q)
+		// console.log(q)
 
 		//throttle the request
 
@@ -21,7 +21,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				q: !q ? 0 : q,
 			})
 			.then(res => {
-				console.log(res)
+				// console.log(res)
 
 				return {
 					data: res.data,
@@ -29,7 +29,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				}
 			})
 			.catch(err => {
-				console.log(err)
+				// console.log(err)
 
 				return {
 					data: err.response.data,
@@ -40,10 +40,10 @@ export const ShoppingCartProvider = ({ children }) => {
 	}
 
 	const increaseQuantity = async product => {
-		console.log('pp', product)
+		// console.log('pp', product)
 		const id = product._id
 		const item = await cart.find(item => item._id === id)
-		console.log({ item })
+		// console.log({ item })
 		const q = item && item.quantity
 
 		//check database for product
@@ -55,7 +55,7 @@ export const ShoppingCartProvider = ({ children }) => {
 			const message = data.message
 			const inventory = data.product.inventory
 			//if not in cart, add one
-			console.log({ data })
+			// console.log({ data })
 			//if product inventory is greater than or equal to current product quantity in cart
 			//if message is not 'maximum'
 			if (status === 200) {
@@ -94,7 +94,7 @@ export const ShoppingCartProvider = ({ children }) => {
 	const decreaseQuantity = async product => {
 		const id = product._id
 		const item = await cart.find(item => item._id === id)
-		console.log({ item })
+		// console.log({ item })
 		const q = item && item.quantity
 		setCart(currItems => {
 			//if not in cart, return
