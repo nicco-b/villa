@@ -39,18 +39,16 @@ export default function Home() {
 				<div className={styles.main}>
 					<div
 						style={{
-							width: '100%',
 							height: '100%',
 							display: 'grid',
 							padding: '1em',
 						}}>
 						<div
-							style={{
-								width: '100%',
-								height: '100%',
-								display: 'grid',
-								// padding: '2em',
-							}}>
+							style={
+								{
+									// padding: '2em',
+								}
+							}>
 							{scheduled_sales && (
 								<div
 									style={{

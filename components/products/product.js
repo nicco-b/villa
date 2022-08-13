@@ -91,14 +91,16 @@ export const Product = ({ product, isValidating }) => {
 		<div
 			style={{
 				padding: '1em',
+				width: '100%',
 			}}>
 			<div className={styles.productImg}>
 				<Image
 					id={`${product?.variants[currentVariant]?.featured_image}`}
 					src={`${product?.variants[currentVariant]?.featured_image}`}
 					alt={'product_image'}
-					height='1000'
-					width='1000'
+					layout='fill'
+					// width='1000'
+					// height='1000'
 				/>
 			</div>
 			<div
