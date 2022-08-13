@@ -12,7 +12,7 @@ export const SideBar = ({ columns }) => {
 	const cN = columns
 	// console.log(cN)
 	const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
-	useIsomorphicLayoutEffect(() => {
+	useLayoutEffect(() => {
 		if (columns === 2) {
 			setInfoOpen(true)
 		}

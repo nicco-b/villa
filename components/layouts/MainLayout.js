@@ -10,7 +10,7 @@ export default function MainLayout({ children, animate }) {
 	const [columns, setColumns] = useState(undefined)
 	// detect window screen width function
 	const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
-	useIsomorphicLayoutEffect(() => {
+	useLayoutEffect(() => {
 		if (size.width > 680) {
 			setColumns(2)
 		} else {
