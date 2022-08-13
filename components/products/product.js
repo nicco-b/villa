@@ -97,7 +97,8 @@ export const Product = ({ product, isValidating }) => {
 					id={`${product?.variants[currentVariant]?.featured_image}`}
 					src={`${product?.variants[currentVariant]?.featured_image}`}
 					alt={'product_image'}
-					layout='fill'
+					height='1000'
+					width='1000'
 				/>
 			</div>
 			<div
