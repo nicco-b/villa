@@ -71,14 +71,19 @@ export default function Home() {
 													products={sale?.included_products?.length > 0 ? sale.included_products : []}
 													isValidating={scheduleValidating}
 												/>
-												{sale?.included_products.length - 1 !== i && (
-													<div
-														style={{
-															margin: ' 1.5em 0 1.5em 0',
-															height: '1px',
-															backgroundColor: 'var(--border-color-alt)',
-														}}></div>
-												)}
+												{sale?.included_products.map((s, i) => {
+													return (
+														data.length > 0 &&
+														sale?.included_products.length - 1 !== i && (
+															<div
+																style={{
+																	margin: ' 1.5em 0 1.5em 0',
+																	height: '1px',
+																	backgroundColor: 'var(--border-color-alt)',
+																}}></div>
+														)
+													)
+												})}
 											</>
 										)
 									})}
