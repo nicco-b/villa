@@ -39,6 +39,7 @@ export default function Home() {
 				<div className={styles.main}>
 					<div
 						style={{
+							width: '100%',
 							height: '100%',
 							display: 'grid',
 							padding: '1em',
