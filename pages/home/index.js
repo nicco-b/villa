@@ -50,7 +50,7 @@ export default function Home() {
 							}}>
 							{scheduled_sales && (
 								<>
-									{scheduled_sales.map((sale, i) => {
+									{scheduled_sales.map((sale, index) => {
 										return (
 											<>
 												<div
