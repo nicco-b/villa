@@ -45,11 +45,11 @@ export default function Home() {
 							padding: '1em',
 						}}>
 						<div
-							style={
-								{
-									// padding: '2em',
-								}
-							}>
+							style={{
+								width: '100%',
+
+								// padding: '2em',
+							}}>
 							{scheduled_sales && (
 								<div
 									style={{
