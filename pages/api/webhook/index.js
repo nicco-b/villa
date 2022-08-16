@@ -127,7 +127,7 @@ router.post(async (req, res) => {
 						extension: 'ejs', // <---- HERE
 					},
 					locals: {
-						name: customer_details.name,
+						name: shipping.name,
 						order: orderDoc.value,
 						customer: customer_details,
 						shipping: shipping,
@@ -158,7 +158,7 @@ router.post(async (req, res) => {
 						extension: 'ejs', // <---- HERE
 					},
 					locals: {
-						name: customer_details.name,
+						name: shipping.name,
 						order: orderDoc.value,
 						customer: customer_details,
 						shipping: shipping,

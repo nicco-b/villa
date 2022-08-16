@@ -15,6 +15,7 @@ router.post(async (req, res) => {
 	try {
 		// Create Checkout Sessions from body params.
 		const { db } = await connectToDatabase()
+		//for each variant in the cart, check inventory and max allowed
 
 		const orderWithDate = {
 			...order,
