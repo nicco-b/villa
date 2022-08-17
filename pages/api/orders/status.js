@@ -8,17 +8,31 @@ const router = createRouter()
 export const getOrderStatus = async ({ id, email }) => {
 	const { db } = await connectToDatabase()
 	console.log(id, email)
-	const order = await db
-		.collection('orders')
-		.findOne({ _id: ObjectId(id), 'customer_details.email': email })
-	return order
+	if (id && email) {
+		const order = await db
+			.collection('orders')
+			.findOne({ _id: ObjectId(id), 'customer_details.email': email })
+		return order
+	}
+	return null
 }
 
 router.get(async (req, res) => {
 	const { db } = await connectToDatabase()
 
-	const order = await db.collection('orders').findOne(req.query.id)
-	res.status(200).json(order)
+	try {
+		const order = await getOrderStatus({
+			id: req.query?.id,
+			email: req.query?.email,
+		})
+
+		if (order) {
+			res.status(200).json(order)
+		}
+		res.status(404).json({ message: 'Order not found' })
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
 export default router.handler({
 	onError: (err, req, res) => {
