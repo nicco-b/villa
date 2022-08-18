@@ -27,7 +27,16 @@ router.get(async (req, res) => {
 		})
 
 		if (order) {
-			res.status(200).json(order)
+			const { _id, status, tracking, status_history, completed_at } = order
+			const newOrder = {
+				_id,
+				status,
+				tracking,
+				status_history,
+				completed_at,
+			}
+
+			res.status(200).json(newOrder)
 		} else {
 			res.status(404).json({ message: 'Order not found' })
 		}
