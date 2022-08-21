@@ -243,7 +243,7 @@ const changeStatusMessage = (status, tracking) => {
 						style={{
 							color: '#2e152d70',
 						}}
-						href={`https://google.com/search?q=${tracking.tracking_number}`}>
+						href={`https://www.dhl.com/th-en/home/tracking/tracking-express.html?submit=1&tracking-id=${tracking.tracking_number}`}>
 						{tracking.tracking_number}
 					</a>
 				</div>
