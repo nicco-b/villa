@@ -94,7 +94,7 @@ const OrderStatusDetails = ({ order }) => {
 							width: '100%',
 							maxHeight: '400px',
 
-							aspectRatio: '1',
+							// aspectRatio: '1',s
 							justifyContent: 'center',
 						}}>
 						<Image width={400} height={400} src={changeStatusImage(order.status)} />
