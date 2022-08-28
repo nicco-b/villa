@@ -95,16 +95,26 @@ const OrderStatusDetails = ({ order }) => {
 							aspectRatio: '1',
 							justifyContent: 'center',
 						}}>
-						<img src='lunloaderstatic.png' />
+						<img src={changeStatusImage(order.status)} />
 					</div>
+
 					<div
 						style={{
 							display: 'flex',
-							padding: '2em 0 2em 0',
+							padding: '2em 0 0em 0',
 							justifyContent: 'center',
 							fontSize: '1.2em',
 						}}>
 						order #{order?._id?.slice(-5)}
+					</div>
+					<div
+						style={{
+							display: 'flex',
+							padding: '2em 0 1em 0',
+							justifyContent: 'center',
+							fontSize: '1.2em',
+						}}>
+						current: {order?.status}
 					</div>
 					<div
 						style={{
@@ -138,7 +148,8 @@ const OrderStatusDetails = ({ order }) => {
 									<div
 										key={status.status}
 										style={{
-											display: 'flex',
+											display: 'grid',
+											gridTemplateColumns: '1fr auto 1fr',
 											gap: '1em',
 											width: '100%',
 											// overflow: 'hidden',
@@ -178,7 +189,7 @@ const OrderStatusDetails = ({ order }) => {
 												alignItems: 'end',
 												// margin: '0 0 0.5em 0',
 												// padding: '1em 0',
-												justifyContent: 'end',
+												// justifyContent: 'end',
 											}}>
 											{changeStatusMessage(status.status, order.tracking)}
 										</div>
@@ -236,7 +247,9 @@ const changeStatusMessage = (status, tracking) => {
 				<div
 					style={{
 						display: 'flex',
+						justifyContent: 'start',
 						flexDirection: 'column',
+						width: '100%',
 					}}>
 					<span>Order is on its way!</span>
 					<a
@@ -253,7 +266,9 @@ const changeStatusMessage = (status, tracking) => {
 				<div
 					style={{
 						display: 'flex',
+						justifyContent: 'start',
 						flexDirection: 'column',
+						width: '100%',
 					}}>
 					<span>Order Delivered</span>
 					<span>Thank you!</span>
@@ -268,13 +283,13 @@ const changeStatusMessage = (status, tracking) => {
 const changeStatusImage = status => {
 	switch (status) {
 		case 'paid':
-			return 'order-received.png'
+			return 'order-shipped.gif'
 		case 'processing':
-			return 'order-processing.png'
+			return 'order-shipped.gif'
 		case 'shipped':
-			return 'order-shipped.png'
+			return 'order-shipped.gif'
 		case 'complete':
-			return 'order-complete.png'
+			return 'order-shipped.gif'
 		case 'cancelled':
 			return 'order-cancelled.png'
 		default:
