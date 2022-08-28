@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import useSWR, { SWRConfig } from 'swr'
 import SecondaryLayout from '../../components/layouts/SecondaryLayout'
@@ -92,10 +93,11 @@ const OrderStatusDetails = ({ order }) => {
 							display: 'flex',
 							width: '100%',
 							maxHeight: '400px',
+
 							aspectRatio: '1',
 							justifyContent: 'center',
 						}}>
-						<img src={changeStatusImage(order.status)} />
+						<Image width={400} height={400} src={changeStatusImage(order.status)} />
 					</div>
 
 					<div
@@ -283,13 +285,13 @@ const changeStatusMessage = (status, tracking) => {
 const changeStatusImage = status => {
 	switch (status) {
 		case 'paid':
-			return 'order-shipped.gif'
+			return '/order-shipped.gif'
 		case 'processing':
-			return 'order-shipped.gif'
+			return '/order-shipped.gif'
 		case 'shipped':
-			return 'order-shipped.gif'
+			return '/order-shipped.gif'
 		case 'complete':
-			return 'order-shipped.gif'
+			return '/order-shipped.gif'
 		case 'cancelled':
 			return 'order-cancelled.png'
 		default:
