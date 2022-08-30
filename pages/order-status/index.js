@@ -287,11 +287,11 @@ const changeStatusImage = status => {
 		case 'paid':
 			return '/order-shipped.gif'
 		case 'processing':
-			return '/order-shipped.gif'
+			return '/order-processing.png'
 		case 'shipped':
 			return '/order-shipped.gif'
 		case 'complete':
-			return '/order-shipped.gif'
+			return '/order-complete.png'
 		case 'cancelled':
 			return 'order-cancelled.png'
 		default:
