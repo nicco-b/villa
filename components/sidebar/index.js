@@ -188,14 +188,10 @@ const Information = () => {
 						// fontWeight: '450',
 					}}>
 					<span>
-						Each item is handmade one at a time so please allow slight differences from the images. Be
-						patient while the product is being made as this is one person production. The product may take
-						up to 4 weeks to be complete depending on the amout of orders I receive at the time.
+						Each item is handmade one at a time, please allow slight differences from the images. It may
+						take up to 4 weeks to be complete depending on the amout of orders I receive at the time.
 					</span>
-					<span>
-						You will receive update emails while the product is being made and when it’s ready to be ship
-						out to you.
-					</span>
+					<span>You will receive an email when your order ships</span>
 				</div>
 
 				<div
