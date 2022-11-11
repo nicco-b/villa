@@ -22,8 +22,8 @@
 	height: 100%;
 }
 .pname {
-	maxwidth: 100%;
-	minwidth: 25px;
+	max-width: 140px;
+	min-width: 25px;
 	justifyself: start;
 }
 .pname h4 {
