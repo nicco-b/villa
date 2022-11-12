@@ -48,6 +48,26 @@ export default function Home() {
 							style={{
 								width: '100%',
 							}}>
+							{isValidating && scheduleValidating && (
+								<div
+									style={{
+										display: 'flex',
+										// height: '55px',/
+										width: '100%',
+										justifyContent: 'center',
+										position: 'relative',
+										zIndex: '2',
+										// backgroundColor: '#f5f5f5',
+									}}>
+									<div
+										style={{
+											// top: '-50px',
+											position: 'absolute',
+										}}>
+										<Image src={'/red_loader.webp'} alt='loading' width={55} height={55} />
+									</div>
+								</div>
+							)}
 							{scheduled_sales && (
 								<>
 									{scheduled_sales.map((sale, index) => {

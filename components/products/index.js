@@ -15,20 +15,6 @@ export const Products = ({ products, isValidating }) => {
 					// overflow: 'auto',
 					gridTemplateRows: 'repeat(auto-fit, minmax(100px, 1fr))',
 				}}>
-				{isValidating && (
-					<div
-						style={{
-							position: 'absolute',
-							display: 'flex',
-							height: '25px',
-							width: '100%',
-							justifyContent: 'end',
-							// zIndex: '-1',
-							// backgroundColor: '#f5f5f5',
-						}}>
-						<Image src={'/red_loader.webp'} alt='loading' width={25} height={25} />
-					</div>
-				)}
 				{products?.map((product, i) => (
 					<>
 						<div className={styles.product}>
