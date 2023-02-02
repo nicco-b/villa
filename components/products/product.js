@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { formatCurrencyString } from 'use-shopping-cart'
 import { useShoppingCart } from '../../context/ShoppingCartContext'
 import styles from '../../styles/Home.module.css'
-import ColorThief from '../../node_modules/colorthief/dist/color-thief.mjs'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import Image from 'next/image'
 export const RadioGroup = RadioGroupPrimitive.Root
@@ -185,15 +184,38 @@ export const Product = ({ product, isValidating }) => {
 									// console.log({ variant })
 									const name = variant?.attributes && Object.values(variant.attributes).join(', ')
 									// console.log(name)
+									if (variant.attributes.color) {
+										return (
+											<ColorAttribute
+												index={index}
+												key={index}
+												name={name}
+												variant={variant}
+												currentVariant={currentVariant}
+												setCurrentVariant={setCurrentVariant}
+											/>
+										)
+									}
+
 									return (
-										<ColorAttribute
-											index={index}
-											key={index}
-											name={name}
-											variant={variant}
-											currentVariant={currentVariant}
-											setCurrentVariant={setCurrentVariant}
-										/>
+										// <ColorAttribute
+										// 	index={index}
+										// 	key={index}
+										// 	name={name}
+										// 	variant={variant}
+										// 	currentVariant={currentVariant}
+										// 	setCurrentVariant={setCurrentVariant}
+										// />
+										<>
+											<DefualtAttribute
+												index={index}
+												key={index}
+												name={name}
+												variant={variant}
+												currentVariant={currentVariant}
+												setCurrentVariant={setCurrentVariant}
+											/>
+										</>
 									)
 								})
 							}
@@ -281,6 +303,26 @@ const ColorAttribute = ({ variant, name, index, currentVariant, setCurrentVarian
 					<RadioGroupIndicator data-color={name} className={`${styles.radioIndicator}`} />
 				</RadioGroupRadio>
 				{/* <label htmlFor={index}>{name}</label> */}
+			</div>
+		</>
+	)
+}
+const DefualtAttribute = ({ variant, name, index, currentVariant, setCurrentVariant }) => {
+	// get dominant color from variant.featured_image
+
+	return (
+		<>
+			<div className={styles.radioDefaultButtonGroup}>
+				<RadioGroupRadio
+					data-color={name}
+					value={index}
+					id={index}
+					className={styles.radioDefaultButton}>
+					<RadioGroupIndicator data-color={name} className={`${styles.radioDefaultIndicator}`} />
+				</RadioGroupRadio>
+				<label className={`${styles.radioDefaultLabel}`} htmlFor={index}>
+					{name}
+				</label>
 			</div>
 		</>
 	)
