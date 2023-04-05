@@ -24,11 +24,6 @@ const transporter = nodemailer.createTransport({
 		pass: process.env.SENDER_PASSWORD,
 	},
 })
-// user: 'shop.duairak@gmail.com',
-// pass: 'iftncjcnvjggguvn',
-// user: 'shop.duairak@gmail.com',
-// pass: 'iftncjcnvjggguvn',
-// pass: 'itwmzqesqblsblih',
 
 // Default Req and Res are IncomingMessage and ServerResponse
 // You may want to pass in NextApiRequest and NextApiResponse
