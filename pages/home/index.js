@@ -7,6 +7,7 @@ import MainLayout from '../../components/layouts/MainLayout'
 import { Products } from '../../components/products'
 import styles from '../../styles/Home.module.css'
 import { CountDown, CountdownTimer } from './Countdown'
+import { LogoHoverSwap } from '../../components/topbar'
 const fetcher = () => axios.get('/api/schedule').then(res => res.data)
 const fetcher2 = () => axios.get('/api/products/products').then(res => res.data)
 
@@ -36,7 +37,7 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<div className={styles.container}>
-				<div>
+				<>
 					<div
 						style={{
 							width: '100%',
@@ -44,10 +45,9 @@ export default function Home() {
 							display: 'grid',
 							padding: '1em',
 						}}>
-						<div
-							style={{
-								width: '100%',
-							}}>
+						<>
+							<LogoHoverSwap animate={false} />
+
 							{/* {isValidating && scheduleValidating && (
 								<div
 									style={{
@@ -68,7 +68,7 @@ export default function Home() {
 									</div>
 								</div>
 							)} */}
-							{scheduled_sales && (
+							{/* {scheduled_sales && (
 								<>
 									{scheduled_sales.map((sale, index) => {
 										return (
@@ -111,10 +111,10 @@ export default function Home() {
 								</>
 							)}
 
-							<Products products={data} isValidating={isValidating} />
-						</div>
+							<Products products={data} isValidating={isValidating} /> */}
+						</>
 					</div>
-				</div>
+				</>
 			</div>
 		</>
 	)

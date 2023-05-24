@@ -23,10 +23,10 @@ export default function MainLayout({ children, animate }) {
 			<div className={styles.sideSpacer}></div>
 			<div className={styles.twoRow}>
 				<>
-					<TopBar animate={animate} />
+					{/* <TopBar animate={animate} /> */}
 					<div className={styles.twoColumn}>
 						<div style={{ width: '100%' }}>{children}</div>
-						<SideBar columns={columns} />
+						{/* <SideBar columns={columns} /> */}
 					</div>
 				</>
 			</div>

@@ -304,22 +304,22 @@ option {
 
 .logoHoverSwap {
 	position: relative;
-	width: 100px;
-	height: 40px;
+	/* width: 100px;
+	height: 40px; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .still {
 	transition: opacity 2s;
 	opacity: 1;
 
 	position: absolute;
-	top: 0;
 	z-index: 2;
 }
 .moving {
 	opacity: 1;
 	position: absolute;
-	top: 0;
-	left: 0;
 	z-index: 1;
 }
 
