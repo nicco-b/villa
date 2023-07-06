@@ -46,9 +46,9 @@ export default function Home() {
 							padding: '1em',
 						}}>
 						<>
-							<LogoHoverSwap animate={false} />
+							{/* <LogoHoverSwap animate={false} /> */}
 
-							{/* {isValidating && scheduleValidating && (
+							{isValidating && scheduleValidating && (
 								<div
 									style={{
 										display: 'flex',
@@ -67,8 +67,8 @@ export default function Home() {
 										<Image src={'/red_loader.webp'} alt='loading' width={55} height={55} />
 									</div>
 								</div>
-							)} */}
-							{/* {scheduled_sales && (
+							)}
+							{scheduled_sales && (
 								<>
 									{scheduled_sales.map((sale, index) => {
 										return (
@@ -111,7 +111,7 @@ export default function Home() {
 								</>
 							)}
 
-							<Products products={data} isValidating={isValidating} /> */}
+							<Products products={data} isValidating={isValidating} />
 						</>
 					</div>
 				</>

@@ -5,11 +5,12 @@ import styles from '../../styles/Home.module.css'
 export const TopBar = ({ animate }) => {
 	return (
 		<>
-			<>
-				<>
-					<LogoHoverSwap animate={animate} />
-				</>
-
+			<div className={styles.topBar}>
+				<Link href='/'>
+					<a href='/'>
+						<LogoHoverSwap animate={animate} />
+					</a>
+				</Link>
 				<div
 					style={{
 						display: 'flex',
@@ -46,20 +47,20 @@ export const TopBar = ({ animate }) => {
 						<Image src='/totems/cloudtotem.png' alt='totem6' height={40} width={40} />
 					</div>
 				</div>
-			</>
+			</div>
 		</>
 	)
 }
 
-export const LogoHoverSwap = ({ animate }) => {
+const LogoHoverSwap = ({ animate }) => {
 	return (
 		<>
 			<div className={'logoHoverSwap'}>
 				<div className={'still'}>
-					<Image src='/lun.png' alt='logo' width={360} height={160} />
+					<Image src='/lun.png' alt='logo' width={90} height={40} />
 				</div>
 				<div className={'moving'}>
-					<img src='/logoAnimated.gif' alt='logo' width={360} height={160} />
+					<img src='/logoAnimated.gif' alt='logo' width={90} height={40} />
 				</div>
 			</div>
 		</>

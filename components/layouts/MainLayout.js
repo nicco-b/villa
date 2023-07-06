@@ -20,7 +20,17 @@ export default function MainLayout({ children, animate }) {
 
 	return (
 		<div className={styles.centered}>
-			<div>{children}</div>
+			<div className={styles.sideSpacer}></div>
+			<div className={styles.twoRow}>
+				<>
+					<TopBar animate={animate} />
+					<div className={styles.twoColumn}>
+						<div style={{ width: '100%' }}>{children}</div>
+						<SideBar columns={columns} />
+					</div>
+				</>
+			</div>
+			<div className={styles.sideSpacer}></div>
 		</div>
 	)
 }
