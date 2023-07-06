@@ -30,7 +30,7 @@ export default function MainLayout({ children, animate }) {
 					</div>
 				</>
 			</div>
-			<div className={styles.sideSpacer}></div>
+			{/* <div className={styles.sideSpacer}></div> */}
 		</div>
 	)
 }

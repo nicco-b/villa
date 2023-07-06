@@ -304,8 +304,8 @@ option {
 
 .logoHoverSwap {
 	position: relative;
-	/* width: 100px;
-	height: 40px; */
+	width: 100px;
+	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
