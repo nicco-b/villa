@@ -20,7 +20,7 @@ export default function MainLayout({ children, animate }) {
 
 	return (
 		<div className={styles.centered}>
-			<div className={styles.sideSpacer}></div>
+			{/* <div className={styles.sideSpacer}></div> */}
 			<div className={styles.twoRow}>
 				<>
 					<TopBar animate={animate} />
